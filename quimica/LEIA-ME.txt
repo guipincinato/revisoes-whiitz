@@ -1,0 +1,1 @@
+Abra index.html no navegador. Nenhuma instalação necessária; funciona offline.
