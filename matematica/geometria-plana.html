@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Geometria plana: demonstrações passo a passo</title>
+<style>
+:root{--bg:#f3f6fb;--card:#fff;--ink:#14213d;--mut:#586380;--pri:#3b4fd8;--acc:#e0245e;--hi:#f2a900;--line:#d9e0ee;--soft:#e9eefb}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1326;--card:#151d38;--ink:#e9eeff;--mut:#9aa6c8;--pri:#8d9bff;--acc:#ff5c8f;--hi:#ffc233;--line:#27325a;--soft:#1d2848}}
+:root[data-theme="dark"]{--bg:#0d1326;--card:#151d38;--ink:#e9eeff;--mut:#9aa6c8;--pri:#8d9bff;--acc:#ff5c8f;--hi:#ffc233;--line:#27325a;--soft:#1d2848}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1000px;margin:0 auto;padding:28px 16px 60px}
+h1{font:700 clamp(1.7rem,5vw,2.6rem)/1.15 Georgia,"Times New Roman",serif;margin:0 0 8px}
+.sub{color:var(--mut);margin:0 0 20px;max-width:60ch}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:18px}
+summary{font-weight:700;cursor:pointer}
+details ul{margin:12px 0 0;padding-left:18px}details li{margin:6px 0}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+nav button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:99px;cursor:pointer}
+nav button.on{background:var(--pri);border-color:var(--pri);color:#fff}
+button:focus-visible{outline:3px solid var(--hi);outline-offset:2px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:26px}
+h2{font:700 1.4rem/1.25 Georgia,"Times New Roman",serif;margin:0 0 12px}
+.rule{background:var(--soft);border-left:5px solid var(--acc);border-radius:8px;padding:12px 14px;margin:0 0 20px;font-weight:600}
+.body{display:grid;grid-template-columns:minmax(220px,310px) 1fr;gap:28px;align-items:start}
+@media(max-width:720px){.body{grid-template-columns:1fr}}
+.fig{background:var(--soft);border-radius:14px;padding:10px}
+.teo{border:1px dashed var(--line);border-radius:12px;padding:4px 16px;margin:0 0 22px}
+.teo p{margin:10px 0}.teo b{color:var(--pri)}
+details.base{margin-bottom:14px}
+.ctl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 18px}
+.ctl button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:10px;cursor:pointer}
+.ctl button.go{background:var(--pri);border-color:var(--pri);color:#fff;font-weight:600}
+.ctl button:disabled{opacity:.4;cursor:default}
+.ctl .st{color:var(--mut);font-size:.92rem;flex:1;min-width:160px}
+.fig svg *{transition:opacity .5s}
+.fig .hid{opacity:0}
+.fig .new{filter:drop-shadow(0 0 3px var(--hi))}
+li.fut{display:none}
+li.cur .e{color:var(--acc)}
+li.cur::before{background:var(--acc)}
+ol{list-style:none;padding:0;margin:0;counter-reset:n}
+li{counter-increment:n;position:relative;padding:0 0 24px 46px}
+li::before{content:counter(n);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--pri);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.9rem}
+li:not(:last-child)::after{content:"";position:absolute;left:14px;top:36px;bottom:6px;width:2px;background:var(--line)}
+.e{font-size:1.1rem;font-weight:700}
+.w{color:var(--mut);margin-top:4px;font-size:.95rem}
+.w::before{content:"de onde vem: ";color:var(--pri);font-weight:600}
+svg{width:100%;height:auto;display:block}
+.c{fill:none;stroke:var(--mut);stroke-width:1.5}
+.l{stroke:var(--ink);stroke-width:1.8;fill:none}
+.d{stroke-dasharray:5 4;stroke-width:1.3}
+.h{stroke:var(--acc);stroke-width:5;fill:none;stroke-linecap:round}
+.h2{stroke:var(--hi);stroke-width:5;fill:none;stroke-linecap:round}
+.a{stroke:var(--pri);stroke-width:2.2;fill:none}
+.p{fill:var(--ink)}
+.t{fill:var(--ink);font:600 12px system-ui,sans-serif}
+.m{fill:var(--pri);font:700 11px system-ui,sans-serif}
+</style>
+</head>
+<body>
+<main>
+<h1>Geometria plana: de onde vem cada regra</h1>
+<p class="sub">Cada regra vem com a figura e a demonstração em passos curtos. Entendendo a origem, não precisa decorar. Cada demonstração começa só com o enunciado: toque em “Próxima etapa” e a figura vai ganhando as informações, como em um exercício resolvido. Em vermelho e amarelo estão os arcos usados em cada conta.</p>
+<div class="ctl"><button id="mode" class="go">Mostrar tudo de uma vez</button></div>
+<div id="res"></div>
+<nav id="nav" aria-label="Filtrar por assunto"></nav>
+<div id="app"></div>
+</main>
+<script>
+const R=80,O=[100,100],C=a=>[100+R*Math.cos(a*Math.PI/180),100-R*Math.sin(a*Math.PI/180)];
+const ln=(p,q,c='l')=>`<path class="${c}" d="M${p}L${q}"/>`;
+const tx=(p,s,dx=0,dy=0,c='t')=>`<text class="${c}" x="${p[0]+dx}" y="${p[1]+dy}" text-anchor="middle">${s}</text>`;
+const pt=(p,s,dx=0,dy=0)=>`<circle class="p" cx="${p[0]}" cy="${p[1]}" r="2.6"/>`+tx(p,s,dx,dy);
+const q=(p,s)=>pt(p,s,(p[0]-100)*.17,(p[1]-100)*.17+4);
+const arc=(a,b,c='h')=>`<path class="${c}" d="M${C(a)}A${R} ${R} 0 ${(b-a+360)%360>180?1:0} 0 ${C(b)}"/>`;
+const mk=(V,P,Q,s,r=18)=>{const t=X=>Math.atan2(X[1]-V[1],X[0]-V[0]);let a=t(P),d=t(Q)-a;d-=2*Math.PI*Math.round(d/(2*Math.PI));const f=(x,k)=>[V[0]+k*Math.cos(x),V[1]+k*Math.sin(x)];return `<path class="a" d="M${f(a,r)}A${r} ${r} 0 0 ${d>0?1:0} ${f(a+d,r)}"/>`+tx(f(a+d/2,r+9),s,0,4,'m')};
+const X=(p,q,r,s)=>{const a=q[0]-p[0],b=q[1]-p[1],c=s[0]-r[0],d=s[1]-r[1],k=((r[0]-p[0])*d-(r[1]-p[1])*c)/(a*d-b*c);return [p[0]+k*a,p[1]+k*b]};
+const S=(i,vb='-14 -14 228 228')=>`<svg viewBox="${vb}" role="img">${i}</svg>`;
+const K='<circle class="c" cx="100" cy="100" r="80"/>';
+
+// 1 e 2: triângulos
+let A=[30,160],B=[170,160],T=[120,50];
+const f1=S(ln(A,B)+ln(A,T)+ln(B,T)+ln([5,50],[195,50],'l d')+mk(A,B,T,'α',24)+mk(B,T,A,'β',24)+mk(T,[5,50],A,'α',18)+mk(T,B,[195,50],'β',18)+mk(T,A,B,'γ',18)+pt(A,'A',-10,14)+pt(B,'B',10,14)+pt(T,'C',0,-9),'-5 25 210 160');
+A=[20,160];B=[120,160];T=[80,50];const D=[200,160];
+const f2=S(ln(A,D)+ln(A,T)+ln(B,T)+mk(A,B,T,'α',26)+mk(T,A,B,'γ',18)+mk(B,A,T,'β',16)+mk(B,D,T,'e',30)+pt(A,'A',-8,14)+pt(B,'B',2,16)+pt(T,'C',0,-9)+pt(D,'D',6,14),'-5 30 220 160');
+
+// 3: inscrito = metade do arco
+A=C(180);B=C(0);let Cp=C(60);
+const f3=S(K+ln(A,B)+ln(A,Cp)+ln(O,Cp)+arc(0,60)+mk(A,B,Cp,'x',30)+mk(Cp,A,O,'x',16)+mk(O,B,Cp,'2x',22)+q(A,'A')+q(B,'B')+q(Cp,'C')+pt(O,'O',0,16));
+// 4: semicírculo
+Cp=C(115);
+const f4=S(K+ln(A,B)+ln(A,Cp)+ln(B,Cp)+ln(O,Cp,'l d')+mk(A,B,Cp,'α',24)+mk(B,A,Cp,'β',24)+mk(Cp,A,O,'α',14)+mk(Cp,O,B,'β',14)+q(A,'A')+q(B,'B')+q(Cp,'C')+pt(O,'O',0,16));
+// 5: mesmo arco
+let a1=C(210),d1=C(300),b1=C(20),c1=C(100);
+const f5=S(K+arc(20,100)+ln(a1,b1)+ln(a1,c1)+ln(d1,b1)+ln(d1,c1)+mk(a1,b1,c1,'θ',26)+mk(d1,b1,c1,'θ',26)+q(a1,'A')+q(d1,'D')+q(b1,'B')+q(c1,'C'));
+// 6: quadrilátero inscrito
+const qD=C(70),qA=C(150),qB=C(240),qC=C(330);
+const f6=S(K+arc(240,70)+arc(70,240,'h2')+ln(qA,qB)+ln(qB,qC)+ln(qC,qD)+ln(qD,qA)+mk(qA,qB,qD,'α',22)+mk(qC,qD,qB,'γ',22)+q(qA,'A')+q(qB,'B')+q(qC,'C')+q(qD,'D'));
+// 7: tangente e corda
+A=C(270);const Bt=C(20),Dt=C(90),TR=[210,180];
+const f7=S(K+arc(270,20)+ln([-10,180],TR)+ln(A,Bt)+ln(A,Dt,'l d')+mk(A,TR,Bt,'x',30)+mk(A,Bt,Dt,'y',42)+mk(A,TR,Dt,'90°',14)+pt(A,'A',0,16)+q(Bt,'B')+q(Dt,'D'),'-14 -14 228 232');
+// 8: duas cordas
+const pB=C(40),pA=C(150),pD=C(230),pC=C(330),P=X(pA,pC,pB,pD);
+const f8=S(K+arc(40,150)+arc(230,330,'h2')+ln(pA,pC)+ln(pB,pD)+ln(pA,pD,'l d')+mk(P,pA,pB,'x+y',22)+mk(pD,pA,pB,'x',24)+mk(pA,pD,pC,'y',24)+q(pA,'A')+q(pB,'B')+q(pC,'C')+q(pD,'D')+pt(P,'P',8,16));
+// 9: duas secantes
+const sB=C(110),sA=C(20),sD=C(250),sC=C(340),SP=X(sB,sA,sD,sC);
+const f9=S(K+arc(110,250)+arc(340,20,'h2')+ln(SP,sB)+ln(SP,sD)+ln(sB,sC,'l d')+mk(SP,sB,sD,'θ',34)+mk(sC,sB,sD,'u',20)+mk(sB,sA,sC,'v',34)+q(sA,'A')+q(sB,'B')+q(sC,'C')+q(sD,'D')+pt(SP,'P',8,16),'-14 -14 285 228');
+// 10: tangentes
+const tA=C(57.8),tB=C(-57.8),tP=[250,100];
+const f10=S(K+ln(tP,tA)+ln(tP,tB)+ln(O,tA)+ln(O,tB)+ln(O,tP,'l d')+mk(tA,O,tP,'90°',12)+mk(tB,O,tP,'90°',12)+q(tA,'A')+q(tB,'B')+pt(O,'O',-4,16)+pt(tP,'P',10,4),'-14 -14 285 228');
+// 11: produto de cordas
+const f11=S(K+ln(pA,pC)+ln(pB,pD)+ln(pA,pD,'l d')+ln(pB,pC,'l d')+mk(pA,pD,pC,'θ',24)+mk(pB,pD,pC,'θ',24)+mk(P,pA,pD,'φ',14)+mk(P,pB,pC,'φ',14)+q(pA,'A')+q(pB,'B')+q(pC,'C')+q(pD,'D')+pt(P,'P',8,16));
+
+const md=(p,q)=>[(p[0]+q[0])/2,(p[1]+q[1])/2],lp=(p,q,t)=>[p[0]+t*(q[0]-p[0]),p[1]+t*(q[1]-p[1])],dist=(p,q)=>Math.hypot(p[0]-q[0],p[1]-q[1]);
+const pe=(p,a,b)=>[p[0]-(b[1]-a[1]),p[1]+(b[0]-a[0])],ft=(p,a,b)=>lp(a,b,((p[0]-a[0])*(b[0]-a[0])+(p[1]-a[1])*(b[1]-a[1]))/((b[0]-a[0])**2+(b[1]-a[1])**2));
+const hit=(P,g)=>{const u=[-Math.cos(g*Math.PI/180),-Math.sin(g*Math.PI/180)],w=[P[0]-100,P[1]-100],b=u[0]*w[0]+u[1]*w[1],c=w[0]*w[0]+w[1]*w[1]-6400,s=Math.sqrt(b*b-c);return [-b-s,-b+s].map(t=>[P[0]+t*u[0],P[1]+t*u[1]])};
+const nA=[20,165],nB=[185,165],nC=[75,30],tri=ln(nA,nB)+ln(nB,nC)+ln(nC,nA),tl=pt(nA,'A',-9,14)+pt(nB,'B',9,14)+pt(nC,'C',0,-9),ta=pt(nC,'A',0,-9)+pt(nA,'B',-9,14)+pt(nB,'C',9,14);
+// Tales
+const tD=lp(nC,nA,.45),tE=lp(nC,nB,.45);
+const g3=S(tri+ln(tD,tE)+ln(nA,tE,'l d')+ln(nB,tD,'l d')+ta+pt(tD,'D',-10,4)+pt(tE,'E',10,4));
+// base média
+const mM=md(nA,nB),mN=md(nA,nC);
+const g1=S(tri+ln(mM,mN,'l d')+mk(mM,nA,mN,'θ',16)+mk(nB,nA,nC,'θ',22)+tl+pt(mM,'M',0,14)+pt(mN,'N',-10,0));
+// baricentro
+const G=X(nB,mN,nC,mM);
+const g2=S(tri+ln(nB,mN)+ln(nC,mM)+ln(nA,md(nB,nC),'l d')+ln(mM,mN,'l d')+tl+pt(mM,'M',0,14)+pt(mN,'N',-10,0)+pt(G,'G',10,14));
+// circuncentro
+const cA=C(100),cB=C(215),cC=C(320);
+const g5=S(K+ln(cA,cB)+ln(cB,cC)+ln(cC,cA)+ln(md(cA,cB),O,'l d')+ln(md(cB,cC),O,'l d')+ln(md(cC,cA),O,'l d')+mk(md(cA,cB),cB,O,'90°',10)+q(cA,'A')+q(cB,'B')+q(cC,'C')+pt(O,'O',8,14));
+// incentro
+const ia=dist(nB,nC),ib=dist(nA,nC),ic=dist(nA,nB),ip=ia+ib+ic,I=[(ia*nA[0]+ib*nB[0]+ic*nC[0])/ip,(ia*nA[1]+ib*nB[1]+ic*nC[1])/ip],ir=165-I[1];
+const g6=S(tri+`<circle class="c" cx="${I[0]}" cy="${I[1]}" r="${ir}"/>`+ln(nA,I)+ln(nB,I)+ln(nC,I)+ln(I,[I[0],165],'l d')+tx(I,'r',8,26,'m')+tl+pt(I,'I',-9,-5));
+// bissetriz interna
+const bD=lp(nA,nB,dist(nC,nA)/(dist(nC,nA)+dist(nC,nB))),bF=ft(bD,nC,nA),bG=ft(bD,nC,nB);
+const g4=S(tri+ln(nC,bD)+ln(bD,bF,'l d')+ln(bD,bG,'l d')+ln(nC,[nC[0],165],'l d')+mk(nC,nA,bD,'α',26)+mk(nC,bD,nB,'α',26)+ta+pt(bD,'D',0,15)+tx(bF,'F',-8,0)+tx(bG,'G',8,0));
+// ortocentro
+const oA=[90,70],oB=[60,120],oC=[140,130],oH=X(oA,pe(oA,oB,oC),oB,pe(oB,oA,oC));
+const g7=S(ln([110,180],[170,80],'l d')+ln([170,80],[10,60],'l d')+ln([10,60],[110,180],'l d')+ln(oA,oB)+ln(oB,oC)+ln(oC,oA)+ln(oA,oH,'a')+ln(oB,oH,'a')+ln(oC,oH,'a')+pt(oA,'A',0,-8)+pt(oB,'B',-9,10)+pt(oC,'C',10,10)+pt(oH,'H',10,-4)+pt([110,180],'A′',8,12)+pt([170,80],'B′',12,0)+pt([10,60],'C′',-10,0));
+// Pitágoras
+const yB=[15,165],yC=[190,165],yA=[52,93],yH=[52,165];
+const g8=S(ln(yB,yC)+ln(yB,yA)+ln(yA,yC)+ln(yA,yH,'l d')+mk(yH,yA,yC,'90°',9)+mk(yB,yA,yC,'β',24)+mk(yC,yA,yB,'γ',24)+mk(yA,yB,yH,'γ',14)+mk(yA,yH,yC,'β',14)+pt(yA,'A',-8,-6)+pt(yB,'B',-9,14)+pt(yC,'C',9,14)+pt(yH,'H',0,15)+tx(md(yA,yB),'c',-9,0)+tx(md(yA,yC),'b',9,-3)+tx(md(yA,yH),'h',-7,4)+tx(md(yB,yH),'m',0,30)+tx(md(yH,yC),'n',0,30));
+// polígonos
+const hv=[0,1,2,3,4,5].map(i=>C(90+60*i));
+const g9=S(hv.map((p,i)=>ln(p,hv[(i+1)%6])).join('')+[2,3,4].map(i=>ln(hv[0],hv[i],'l d')).join('')+hv.map((p,i)=>q(p,'ABCDEF'[i])).join(''));
+// áreas
+const rA=[20,150],rB=[150,150],rC=[190,60],rD=[60,60],rF=[60,150];
+const g10=S(ln(rA,rB)+ln(rB,rC)+ln(rC,rD)+ln(rD,rA)+ln(rA,rC,'l d')+ln(rD,rF,'a')+mk(rF,rD,rB,'90°',9)+tx(rF,'h',-8,-35,'m')+tx(md(rA,rB),'b',0,18,'m')+pt(rA,'A',-8,14)+pt(rB,'B',8,14)+pt(rC,'C',8,-4)+pt(rD,'D',-8,-4),'-5 40 215 140');
+// tangente-secante
+const [sa,sb]=hit(tP,12);
+const g11=S(K+ln(tP,tA)+ln(tP,sb)+ln(tA,sa,'l d')+ln(tA,sb,'l d')+mk(tA,tP,sa,'θ',18)+mk(sb,tA,tP,'θ',22)+mk(tP,tA,sa,'φ',34)+q(tA,'T')+pt(sa,'A',4,-8)+pt(sb,'B',-10,-6)+pt(tP,'P',10,4),'-14 -14 285 228');
+// Pitot
+const tt=[15,95,200,290],vx=(a,b)=>{const m=(a+b)/2*Math.PI/180,k=R/Math.cos((b-a)/2*Math.PI/180);return [100+k*Math.cos(m),100-k*Math.sin(m)]};
+const pv=tt.map((a,i)=>vx(a,tt[(i+1)%4]+(i==3?360:0))),pn=tt.map(a=>C(a)),lb=(m,L)=>tx(m,L,(m[0]-100)*.1,(m[1]-100)*.1+4,'m');
+const g12=S(K+pv.map((p,i)=>ln(p,pv[(i+1)%4])).join('')+pv.map((p,i)=>lb(md(p,pn[i]),'pqrs'[i])+lb(md(p,pn[(i+1)%4]),'pqrs'[i])+pt(p,'ABCD'[i],(p[0]-100)*.12,(p[1]-100)*.12+4)).join(''),'-45 -45 290 290');
+const T1='Triângulos',T2='Ângulos na circunferência',T3='Segmentos',T4='Semelhança e Pitágoras',T5='Pontos notáveis',T6='Polígonos e áreas',T7='Trigonometria no triângulo',T8='Teoremas clássicos';
+const f21=S(tri+tl+mk(nC,nA,nB,'γ',20)+tx(md(nB,nC),'a',12,0,'m')+tx(md(nA,nC),'b',-10,0,'m')+tx(md(nA,nB),'c',0,28,'m'));
+const mD=[-40,165],mF=lp(nC,nA,.65),mE=X(mD,mF,nC,nB),mL=lp(mD,mE,1.15),mA=ft(nC,mD,mE),mB=ft(nA,mD,mE),mC=ft(nB,mD,mE);
+const f22=S(tri+ln(mD,nA,'l d')+ln(mD,mL)+ln(nC,mA,'l d')+ln(nA,mB,'l d')+ln(nB,mC,'l d')+ta+pt(mD,'D',-4,16)+pt(mF,'F',-10,-3)+pt(mE,'E',-10,-6)+tx(md(nC,mA),'a₁',10,-4,'m')+tx(md(nA,mB),'b₁',-10,2,'m')+tx(md(nB,mC),'c₁',10,10,'m'),'-55 -14 280 228');
+const lA=[100,20],lB=[170,100],lC=[100,180],lD=[30,100],lM=[100,100];
+const f23=S(ln(lA,lB)+ln(lB,lC)+ln(lC,lD)+ln(lD,lA)+ln(lA,lC,'l d')+ln(lB,lD,'l d')+mk(lM,lB,lA,'90°',10)+pt(lA,'A',0,-8)+pt(lB,'B',10,4)+pt(lC,'C',0,16)+pt(lD,'D',-10,4)+pt(lM,'M',-10,-6)+tx(md(lA,lM),'e÷2',-18,0,'m')+tx(md(lM,lB),'f÷2',0,-6,'m'));
+const sbp=C(35),hF=[nC[0],165];
+const f12=S(K+ln(cA,cB)+ln(cB,cC)+ln(cC,cA)+ln(cB,sbp,'l d')+ln(cC,sbp,'l d')+mk(cA,cB,cC,'α',18)+mk(sbp,cB,cC,'α',18)+mk(cC,cB,sbp,'90°',10)+q(cA,'A')+q(cB,'B')+q(cC,'C')+q(sbp,'B′')+pt(O,'O',8,14));
+const f13=S(tri+ln(nC,hF,'l d')+mk(nA,nB,nC,'α',26)+mk(hF,nC,nB,'90°',9)+tl+pt(hF,'H',0,15)+tx(md(nB,nC),'a',12,0,'m')+tx(md(nA,nC),'b',-10,0,'m')+tx(md(nA,nB),'c',0,28,'m')+tx(md(nC,hF),'h',-8,4,'m'));
+const rM=X(rA,rC,rB,rD);
+const f14=S(ln(rA,rB)+ln(rB,rC)+ln(rC,rD)+ln(rD,rA)+ln(rA,rC)+ln(rB,rD)+mk(rA,rB,rC,'x',22)+mk(rC,rD,rA,'x',22)+mk(rA,rC,rD,'y',32)+mk(rC,rA,rB,'y',32)+pt(rA,'A',-8,14)+pt(rB,'B',8,14)+pt(rC,'C',8,-4)+pt(rD,'D',-8,-4)+pt(rM,'M',10,16),'-5 40 215 140');
+const zA=[20,150],zB=[180,150],zC=[140,60],zD=[60,60],zM=md(zA,zD),zN=md(zB,zC),zP=md(zA,zC);
+const f15=S(ln(zA,zB)+ln(zB,zC)+ln(zC,zD)+ln(zD,zA)+ln(zA,zC,'l d')+ln(zM,zN,'a')+pt(zA,'A',-8,14)+pt(zB,'B',8,14)+pt(zC,'C',8,-4)+pt(zD,'D',-8,-4)+pt(zM,'M',-9,4)+pt(zN,'N',9,4)+pt(zP,'P',2,-8),'-5 40 215 140');
+const f16=S(K+arc(0,60)+ln(C(180),C(0),'l d')+ln(O,C(60))+mk(O,C(0),C(60),'θ',24)+tx(md(O,C(60)),'r',-6,-3,'m')+tx(md(O,C(180)),'d',0,-5,'m')+pt(O,'O',0,16));
+const hm=md(hv[0],hv[1]);
+const f17=S(hv.map((p,i)=>ln(p,hv[(i+1)%6])).join('')+ln(O,hv[0])+ln(O,hv[1])+ln(O,hm,'l d')+mk(O,hv[0],hv[1],'θ',24)+tx(md(O,hm),'a',-8,4,'m')+tx(hm,'ℓ',-10,-4,'m')+pt(O,'O',0,16)+hv.map((p,i)=>q(p,'ABCDEF'[i])).join(''));
+const bxa=Math.atan2(qA[1]-qB[1],qA[0]-qB[0]),bxd=Math.atan2(qD[1]-qB[1],qD[0]-qB[0]),bxc=Math.atan2(qC[1]-qB[1],qC[0]-qB[0]),bxe=bxa+(bxc-bxd),pE=X(qA,qC,qB,[qB[0]+Math.cos(bxe),qB[1]+Math.sin(bxe)]);
+const f18=S(K+ln(qA,qB)+ln(qB,qC)+ln(qC,qD)+ln(qD,qA)+ln(qA,qC)+ln(qB,qD)+ln(qB,pE,'l d')+mk(qB,qA,pE,'x',22)+mk(qB,qD,qC,'x',34)+q(qA,'A')+q(qB,'B')+q(qC,'C')+q(qD,'D')+pt(pE,'E',8,-6));
+const eA=[20,160],eB=[190,150],eC=[70,30],eO=X(md(eA,eB),pe(md(eA,eB),eA,eB),md(eA,eC),pe(md(eA,eC),eA,eC)),eH=X(eA,pe(eA,eB,eC),eB,pe(eB,eA,eC)),eG=[(eA[0]+eB[0]+eC[0])/3,(eA[1]+eB[1]+eC[1])/3];
+const f19=S(ln(eA,eB)+ln(eB,eC)+ln(eC,eA)+ln(eO,eH,'a')+pt(eA,'A',-9,14)+pt(eB,'B',9,12)+pt(eC,'C',0,-9)+pt(eO,'O',10,12)+pt(eG,'G',10,-6)+pt(eH,'H',-10,-6));
+const cD=X(nA,I,nB,nC),cE=X(nB,I,nA,nC),cF=X(nC,I,nA,nB);
+const f20=S(tri+ln(nA,cD)+ln(nB,cE)+ln(nC,cF)+tl+pt(cD,'D',10,4)+pt(cE,'E',-10,4)+pt(cF,'F',0,15)+pt(I,'P',9,-5));
+const TH=[
+{g:T1,t:'Soma dos ângulos internos do triângulo = 180°',r:'α + β + γ = 180°',f:f1,s:[
+['Traçar por C uma reta paralela a AB','Construção auxiliar: é ela que "move" os ângulos α e β para o vértice C.'],
+['O ângulo à esquerda de C vale α','Ângulos alternos internos entre paralelas cortadas pela transversal AC são iguais.'],
+['O ângulo à direita de C vale β','Mesma ideia, agora com a transversal BC.'],
+['α + γ + β = 180°','Os três ângulos juntos em C formam um ângulo raso (meia-volta sobre a reta).']]},
+{g:T1,t:'Ângulo externo do triângulo',r:'Ângulo externo = soma dos dois internos não adjacentes: e = α + γ',f:f2,s:[
+['e + β = 180°','e e β estão lado a lado sobre a reta AD, formando um ângulo raso.'],
+['α + β + γ = 180°','Soma dos ângulos internos do triângulo (demonstração anterior).'],
+['e = 180° − β','Isolando e na primeira igualdade.'],
+['e = α + γ','Pela segunda igualdade, 180° − β = α + γ. Substituindo, chega-se ao resultado.']]},
+{g:T2,t:'Ângulo inscrito = metade do arco (e do ângulo central)',r:'Ângulo inscrito (vértice na circunferência) = arco que ele enxerga ÷ 2.',f:f3,s:[
+['OA = OC','São dois raios da mesma circunferência. Caso base: o centro O está sobre o lado AB.'],
+['∠OAC = ∠OCA = x','Triângulo isósceles: ângulos da base são iguais.'],
+['∠BOC = x + x = 2x','∠BOC é ângulo externo do triângulo AOC (demonstração anterior).'],
+['∠BOC = arco BC','Definição: o ângulo central tem a mesma medida do arco que ele abrange.'],
+['x = ∠BAC = arco BC ÷ 2','Da etapa 3: 2x = arco BC. Dividindo por 2, o inscrito é a metade do arco.'],
+['Outras posições do centro','Se O está dentro do ângulo, traça-se o diâmetro por A e somam-se os dois pedaços. Se está fora, subtrai-se. Cada pedaço cai no caso base.']]},
+{g:T2,t:'Ângulo inscrito no semicírculo = 90°',r:'Todo ângulo que enxerga um diâmetro vale 90°.',f:f4,s:[
+['OA = OB = OC','Todos são raios. Isso cria os isósceles AOC e BOC.'],
+['∠OCA = α e ∠OCB = β','Em triângulo isósceles, ângulos da base são iguais (o ângulo em C repete os de A e B).'],
+['∠ACB = α + β','É a soma dos dois ângulos que ficam em C.'],
+['α + β + (α + β) = 180°','Soma dos ângulos internos do triângulo ABC: A = α, B = β, C = α + β.'],
+['α + β = 90°, logo ∠ACB = 90°','Dividindo a etapa 4 por 2. Outra forma: o arco AB é meia-volta (180°), e inscrito = arco ÷ 2 = 90°.']]},
+{g:T2,t:'Ângulos inscritos no mesmo arco são iguais',r:'Se enxergam o mesmo arco, valem o mesmo: ∠A = ∠D.',f:f5,s:[
+['∠BAC = arco BC ÷ 2','Ângulo inscrito é metade do arco que enxerga.'],
+['∠BDC = arco BC ÷ 2','Mesmo motivo, e é o mesmo arco BC.'],
+['∠BAC = ∠BDC','Os dois são iguais à mesma quantidade (arco BC ÷ 2). Vale para qualquer ponto do arco maior.']]},
+{g:T2,t:'Quadrilátero inscrito: ângulos opostos somam 180°',r:'∠A + ∠C = 180° e ∠B + ∠D = 180°',f:f6,s:[
+['∠A = arco BCD ÷ 2','Inscrito = arco ÷ 2. O arco que A enxerga é o BCD (o que não contém A).'],
+['∠C = arco DAB ÷ 2','Mesma regra: C enxerga o arco DAB.'],
+['arco BCD + arco DAB = 360°','Os dois arcos juntos completam a circunferência inteira.'],
+['∠A + ∠C = (360° ÷ 2) = 180°','Soma das etapas 1 e 2 e substituição pela etapa 3. O par B e D segue o mesmo raciocínio.']]},
+{g:T2,t:'Ângulo de segmento: tangente + corda',r:'Ângulo entre tangente e corda = arco ÷ 2 (igual ao inscrito no mesmo arco).',f:f7,s:[
+['Traçar o diâmetro AD','Construção auxiliar a partir do ponto de tangência A.'],
+['Tangente ⟂ AD, ou seja, 90° = x + y','A tangente é perpendicular ao raio no ponto de contato.'],
+['y = ∠DAB = arco DB ÷ 2','Ângulo inscrito é metade do arco.'],
+['arco AB = 180° − arco DB','AD é diâmetro: o arco AD é meia-volta, e AB é o que sobra depois de tirar DB.'],
+['x = 90° − y = 90° − arco DB ÷ 2','Isolando x na etapa 2 e usando a etapa 3.'],
+['x = (180° − arco DB) ÷ 2 = arco AB ÷ 2','Colocando ÷ 2 em evidência e usando a etapa 4.']]},
+{g:T2,t:'Duas cordas que se cruzam (vértice dentro)',r:'Ângulo = (arco do ângulo + arco do oposto pelo vértice) ÷ 2',f:f8,s:[
+['Traçar AD (pontilhada) e formar o triângulo APD','Construção auxiliar para criar um ângulo externo.'],
+['∠APB é externo ao triângulo APD','B está no prolongamento de DP, então ∠APB é suplementar de ∠APD.'],
+['∠APB = x + y','Ângulo externo = soma dos dois internos não adjacentes (∠ADB = x e ∠DAC = y).'],
+['x = ∠ADB = arco AB ÷ 2','Inscrito em D, que enxerga o arco AB (vermelho).'],
+['y = ∠DAC = arco CD ÷ 2','Inscrito em A, que enxerga o arco CD (amarelo).'],
+['∠APB = (arco AB + arco CD) ÷ 2','Trocando x e y pelas etapas 4 e 5. O ângulo oposto pelo vértice (CPD) vale o mesmo.']]},
+{g:T2,t:'Duas secantes (vértice fora)',r:'Ângulo = (arco maior − arco menor) ÷ 2',f:f9,s:[
+['Traçar BC e formar o triângulo PBC','Construção auxiliar para criar um ângulo externo.'],
+['∠BCD = θ + ∠PBC','∠BCD é externo ao triângulo PBC (P, C e D estão alinhados). Externo = soma dos internos não adjacentes.'],
+['θ = ∠BCD − ∠PBC','Isolando θ na etapa 2.'],
+['∠BCD = arco BD ÷ 2','Inscrito em C que enxerga o arco BD (vermelho, o maior).'],
+['∠PBC = ∠ABC = arco AC ÷ 2','A está sobre PB. Inscrito em B que enxerga o arco AC (amarelo, o menor).'],
+['θ = (arco BD − arco AC) ÷ 2','Substituindo as etapas 4 e 5 na etapa 3.']]},
+{g:T3,t:'Tangentes por um ponto externo',r:'PA = PB, e OP é bissetriz do ângulo APB.',f:f10,s:[
+['∠OAP = ∠OBP = 90°','A tangente é perpendicular ao raio no ponto de contato. Os triângulos OAP e OBP são retângulos.'],
+['OA = OB','São raios da mesma circunferência.'],
+['OP = OP','Lado comum, que é a hipotenusa dos dois triângulos.'],
+['△OAP ≅ △OBP','Caso cateto-hipotenusa: hipotenusa igual e um cateto igual (etapas 2 e 3).'],
+['PA = PB','Lados correspondentes de triângulos congruentes são iguais.']]},
+{g:T3,t:'Cordas que se cruzam: PA · PC = PB · PD',r:'Produto das partes de uma corda = produto das partes da outra.',f:f11,s:[
+['Traçar AD e BC (pontilhadas)','Construção auxiliar para formar os triângulos APD e BPC.'],
+['∠PAD = ∠PBC = θ','Inscritos que enxergam o mesmo arco CD.'],
+['∠APD = ∠BPC = φ','Ângulos opostos pelo vértice.'],
+['△APD ∼ △BPC','Caso AA: dois ângulos iguais (etapas 2 e 3).'],
+['PA ÷ PB = PD ÷ PC','Em triângulos semelhantes, lados correspondentes são proporcionais (A↔B, P↔P, D↔C).'],
+['PA · PC = PB · PD','Multiplicação cruzada da proporção anterior.']]},
+{g:T4,t:'Teorema de Tales',r:'DE ∥ BC ⇒ AD ÷ DB = AE ÷ EC. Paralelas cortam as transversais em segmentos proporcionais.',f:g3,s:[
+['Traçar BE e CD (pontilhadas)','Construção auxiliar para comparar áreas de triângulos.'],
+['área(ADE) ÷ área(BDE) = AD ÷ DB','Os dois têm a mesma altura (de E até AB). Com altura igual, a área é proporcional à base.'],
+['área(ADE) ÷ área(CED) = AE ÷ EC','Mesma ideia, com a altura de D até AC.'],
+['área(BDE) = área(CED)','Mesma base DE e mesma altura, pois BC ∥ DE mantém a distância constante.'],
+['AD ÷ DB = AE ÷ EC','As etapas 2 e 3 têm o mesmo numerador, e os denominadores (áreas) são iguais pela etapa 4.']]},
+{g:T4,t:'Base média do triângulo',r:'Segmento entre os pontos médios de dois lados é paralelo ao terceiro e vale metade dele: MN ∥ BC e MN = BC ÷ 2.',f:g1,s:[
+['AM ÷ AB = AN ÷ AC = 1 ÷ 2','M e N são pontos médios.'],
+['∠A é comum a AMN e ABC','O ângulo em A pertence aos dois triângulos.'],
+['△AMN ∼ △ABC','Caso LAL: dois lados proporcionais com o ângulo entre eles igual.'],
+['∠AMN = ∠ABC, logo MN ∥ BC','Ângulos correspondentes de triângulos semelhantes são iguais. Correspondentes iguais significam paralelas.'],
+['MN = BC ÷ 2','A razão de semelhança é 1 ÷ 2 e vale para todos os lados.']]},
+{g:T4,t:'Pitágoras e relações métricas',r:'a² = b² + c². Também: c² = a·m, b² = a·n, h² = m·n, b·c = a·h.',f:g8,s:[
+['Traçar a altura AH até a hipotenusa','Ela divide o triângulo em dois menores.'],
+['△HBA ∼ △ABC e △HAC ∼ △ABC','Todos têm ângulo reto, e cada par divide um ângulo agudo (B ou C): caso AA.'],
+['c ÷ a = m ÷ c, logo c² = a·m','No par △HBA ∼ △ABC, a hipotenusa AB corresponde a BC e o cateto BH corresponde a AB.'],
+['b ÷ a = n ÷ b, logo b² = a·n','No par △HAC ∼ △ABC, AC corresponde a BC e HC corresponde a AC.'],
+['b² + c² = a·n + a·m = a·(m + n)','Soma das etapas 3 e 4, com a em evidência.'],
+['m + n = a, logo b² + c² = a²','H está entre B e C, então os dois pedaços formam a hipotenusa.'],
+['h² = m·n e b·c = a·h','△HBA ∼ △HAC dá h ÷ m = n ÷ h. A área do triângulo ABC é bc ÷ 2 (pelos catetos) e também a·h ÷ 2 (pela hipotenusa e a altura). Igualando, bc = ah.']]},
+{g:T5,t:'Baricentro: as medianas se cruzam e dividem 2 : 1',r:'As três medianas se cruzam em G. G divide cada mediana em 2 : 1 (o 2 fica do lado do vértice): BG = 2·GN.',f:g2,s:[
+['MN ∥ BC e MN = BC ÷ 2','M e N são pontos médios: base média (demonstração anterior).'],
+['∠GMN = ∠GCB e ∠GNM = ∠GBC','Alternos internos entre as paralelas MN e BC.'],
+['△GMN ∼ △GCB','Caso AA com os ângulos da etapa 2.'],
+['GN ÷ GB = MN ÷ CB = 1 ÷ 2','Lados correspondentes na razão 1 : 2. Logo BG = 2·GN e CG = 2·GM.'],
+['A terceira mediana também passa por G','Sobre a mediana BN só existe um ponto a 2 ÷ 3 de B. A terceira mediana, pela mesma conta, corta BN justamente nele.']]},
+{g:T5,t:'Circuncentro: as mediatrizes se cruzam',r:'As mediatrizes dos lados se cruzam em O, centro da circunferência que passa pelos três vértices: OA = OB = OC.',f:g5,s:[
+['Mediatriz = pontos equidistantes das pontas do segmento','Se P está na mediatriz de AB, os triângulos PMA e PMB são congruentes (LAL: AM = MB, ângulo de 90° e PM comum), logo PA = PB. A volta também vale.'],
+['O na mediatriz de AB ⇒ OA = OB','Etapa 1.'],
+['O na mediatriz de BC ⇒ OB = OC','Etapa 1.'],
+['OA = OC, então O está na mediatriz de AC','Transitividade e a volta da etapa 1.'],
+['OA = OB = OC = R','O é o centro e R é o raio da circunferência circunscrita.']]},
+{g:T5,t:'Incentro: as bissetrizes se cruzam',r:'As bissetrizes internas se cruzam em I, centro da circunferência inscrita. I está a mesma distância r dos três lados.',f:g6,s:[
+['Bissetriz = pontos equidistantes dos lados do ângulo','Das perpendiculares de um ponto da bissetriz aos lados saem dois triângulos retângulos com mesma hipotenusa e mesmo ângulo agudo (caso LAA): são congruentes e as distâncias são iguais.'],
+['I na bissetriz de A ⇒ dist(I, AB) = dist(I, AC)','Etapa 1.'],
+['I na bissetriz de B ⇒ dist(I, AB) = dist(I, BC)','Etapa 1.'],
+['dist(I, AC) = dist(I, BC), logo I está na bissetriz de C','Transitividade e a volta da etapa 1.'],
+['As três distâncias valem r','A circunferência de centro I e raio r toca os três lados: é a inscrita.']]},
+{g:T4,t:'Teorema da bissetriz interna',r:'BD ÷ DC = AB ÷ AC. A bissetriz divide o lado oposto na razão dos lados vizinhos.',f:g4,s:[
+['DF = DG = d (F e G: pés das perpendiculares de D a AB e AC)','D está na bissetriz de A, que é equidistante dos lados (demonstração do incentro).'],
+['área(ABD) = AB·d ÷ 2 e área(ACD) = AC·d ÷ 2','Base AB (ou AC) e altura d.'],
+['área(ABD) = BD·h ÷ 2 e área(ACD) = DC·h ÷ 2','Base BD (ou DC) sobre BC, com a mesma altura h vinda de A.'],
+['área(ABD) ÷ área(ACD) = AB ÷ AC','Dividindo as igualdades da etapa 2: d e ÷ 2 se cancelam.'],
+['área(ABD) ÷ área(ACD) = BD ÷ DC','Dividindo as igualdades da etapa 3: h e ÷ 2 se cancelam.'],
+['BD ÷ DC = AB ÷ AC','As etapas 4 e 5 igualam a mesma razão de áreas a duas razões de lados.']]},
+{g:T5,t:'Ortocentro: as alturas se cruzam',r:'As três alturas do triângulo passam por um mesmo ponto H.',f:g7,s:[
+['Por cada vértice, traçar a paralela ao lado oposto','Isso forma o triângulo maior A′B′C′ (pontilhado).'],
+['AB′ = BC = AC′','ABCB′ e ACBC′ são paralelogramos (lados opostos paralelos), então lados opostos são iguais. Logo A é ponto médio de B′C′.'],
+['A altura de A é perpendicular a B′C′','Ela é perpendicular a BC, e B′C′ ∥ BC.'],
+['A altura de A é a mediatriz de B′C′','Passa pelo ponto médio A (etapa 2) e é perpendicular (etapa 3).'],
+['As três alturas são mediatrizes de A′B′C′','Mesmo raciocínio nos vértices B e C.'],
+['Elas se cruzam em um ponto H','Mediatrizes de um triângulo se cruzam no circuncentro (demonstração anterior). Esse ponto é o ortocentro de ABC.']]},
+{g:T6,t:'Soma dos ângulos, ângulos externos e diagonais de um polígono',r:'Internos: (n − 2)·180°. Externos: 360°. Diagonais: n·(n − 3) ÷ 2.',f:g9,s:[
+['Fixar um vértice e traçar as diagonais a partir dele','Isso divide o polígono em triângulos.'],
+['Saem n − 3 diagonais e surgem n − 2 triângulos','O vértice não faz diagonal com ele mesmo nem com os 2 vizinhos.'],
+['Soma interna = (n − 2)·180°','Os ângulos dos triângulos preenchem os do polígono, e cada triângulo soma 180°.'],
+['interno + externo = 180° em cada vértice','Eles formam um ângulo raso.'],
+['Soma externa = n·180° − (n − 2)·180° = 360°','Soma dos n pares menos a soma dos internos.'],
+['Diagonais = n·(n − 3) ÷ 2','Cada vértice emite n − 3. Divide-se por 2 porque cada diagonal foi contada pelas duas pontas.']]},
+{g:T6,t:'Áreas: paralelogramo, triângulo e trapézio',r:'Paralelogramo: b·h. Triângulo: b·h ÷ 2. Trapézio: (B + b)·h ÷ 2.',f:g10,s:[
+['Retângulo: área = base · altura','Ponto de partida: contar quadradinhos.'],
+['Paralelogramo: área = b·h','Cortando o triângulo da ponta e colando do outro lado, forma-se um retângulo b × h com a mesma área.'],
+['A diagonal divide o paralelogramo em dois triângulos congruentes','Caso LLL: lados opostos iguais e a diagonal em comum.'],
+['Triângulo: área = b·h ÷ 2','Cada triângulo tem metade da área do paralelogramo.'],
+['Trapézio = dois triângulos de altura h','Uma diagonal separa um triângulo de base B e outro de base b.'],
+['Trapézio: B·h ÷ 2 + b·h ÷ 2 = (B + b)·h ÷ 2','Soma das áreas, com h ÷ 2 em evidência.']]},
+{g:T3,t:'Tangente e secante: PT² = PA · PB',r:'Por um ponto P fora do círculo, com tangente PT e secante PAB: PT² = PA·PB.',f:g11,s:[
+['Traçar TA e TB (pontilhadas)','Construção auxiliar para formar triângulos semelhantes.'],
+['∠PTA = ∠TBA = θ','O de segmento (tangente + corda) e o inscrito enxergam o mesmo arco TA. Os dois valem arco TA ÷ 2.'],
+['∠P (φ) é comum a △PTA e △PBT','Os dois triângulos têm vértice em P.'],
+['△PTA ∼ △PBT','Caso AA (etapas 2 e 3).'],
+['PT ÷ PB = PA ÷ PT','Lados correspondentes (T↔B, A↔T) são proporcionais.'],
+['PT² = PA · PB','Multiplicação cruzada da etapa 5.']]},
+{g:T3,t:'Quadrilátero circunscrito (Pitot)',r:'Se os quatro lados são tangentes a uma circunferência: AB + CD = BC + DA.',f:g12,s:[
+['p, q, r, s: segmentos de tangente que saem de A, B, C, D','Cada vértice emite duas tangentes à circunferência.'],
+['As duas tangentes de um mesmo vértice são iguais','Tangentes por ponto externo (demonstração anterior).'],
+['AB = p + q, BC = q + r, CD = r + s, DA = s + p','Cada lado é formado por dois pedaços: do vértice ao ponto de toque e deste ao outro vértice.'],
+['AB + CD = p + q + r + s','Soma das igualdades de AB e CD.'],
+['BC + DA = q + r + s + p','Soma das igualdades de BC e DA.'],
+['AB + CD = BC + DA','Mesmas quatro letras nos dois lados.']]},
+{g:T7,t:'Lei dos senos',r:'a ÷ sen A = b ÷ sen B = c ÷ sen C = 2R, onde R é o raio da circunferência circunscrita.',f:f12,th:['Em qualquer triângulo, o maior lado fica oposto ao maior ângulo. A lei dos senos mede isso com exatidão: a razão lado ÷ seno do ângulo oposto é constante e igual ao diâmetro da circunferência circunscrita. Se A é obtuso, B′ cai do outro lado, mas sen(180° − A) = sen A e a conta continua valendo.','Lado ÷ seno do ângulo oposto = 2R. Use quando conhece um lado e o ângulo oposto a ele.'],s:[
+['Traçar o diâmetro BB′ e o segmento B′C','Construção auxiliar: cria um triângulo retângulo com a hipotenusa igual a 2R.'],
+['∠BCB′ = 90°','Ângulo inscrito que enxerga um diâmetro (semicírculo).'],
+['∠BB′C = ∠BAC = α','Inscritos que enxergam o mesmo arco BC.'],
+['sen α = BC ÷ BB′ = a ÷ 2R','No triângulo retângulo BCB′: seno = cateto oposto ÷ hipotenusa.'],
+['a ÷ sen A = 2R','Isolando 2R na etapa 4.'],
+['b ÷ sen B = c ÷ sen C = 2R também','A mesma construção vale para os outros dois lados, e o raio R é o mesmo da circunferência.']]},
+{g:T7,t:'Lei dos cossenos',r:'a² = b² + c² − 2bc·cos A',f:f13,th:['É o Pitágoras com um ajuste. Se A = 90°, cos A = 0 e sobra a² = b² + c². Se A é agudo, o termo −2bc·cos A diminui a²; se é obtuso, o cosseno é negativo e a² aumenta.','Pitágoras com correção. Use quando conhece dois lados e o ângulo entre eles, ou os três lados.'],s:[
+['Traçar a altura CH, com h = CH','Cria dois triângulos retângulos, onde dá para usar Pitágoras.'],
+['AH = b·cos α','No △AHC, cos α = cateto adjacente ÷ hipotenusa = AH ÷ b.'],
+['h² + AH² = b²','Pitágoras no △AHC.'],
+['a² = h² + (c − AH)²','Pitágoras no △CHB, com HB = c − AH.'],
+['a² = h² + c² − 2c·AH + AH²','Desenvolvendo o quadrado da diferença.'],
+['a² = b² + c² − 2bc·cos α','Trocando h² + AH² por b² (etapa 3) e AH por b·cos α (etapa 2). Se A é obtuso, H cai fora do lado AB e o resultado é o mesmo.']]},
+{g:T6,t:'Paralelogramo: lados, ângulos e diagonais',r:'Lados opostos iguais, ângulos opostos iguais e diagonais que se cortam ao meio.',f:f14,th:['A palavra-chave é paralelas, porque elas copiam ângulos (alternos internos). A diagonal divide a figura em dois triângulos iguais, e o resto sai dessa congruência.','Paralelogramo: opostos iguais e diagonais que se cortam ao meio. Cada uma dessas propriedades, sozinha, já garante que o quadrilátero é paralelogramo.'],s:[
+['AB ∥ DC e AD ∥ BC','Definição de paralelogramo.'],
+['∠BAC = ∠DCA (x) e ∠CAD = ∠ACB (y)','Alternos internos entre paralelas cortadas pela diagonal AC.'],
+['△ABC ≅ △CDA','Caso ALA: dois ângulos iguais (etapa 2) e o lado AC comum.'],
+['AB = CD, BC = DA e ∠B = ∠D','Lados e ângulos correspondentes de triângulos congruentes.'],
+['△ABM ≅ △CDM','AB = CD (etapa 4) e os ângulos alternos internos das duas diagonais são iguais (caso ALA).'],
+['AM = MC e BM = MD','Lados correspondentes da etapa 5: as diagonais se cortam ao meio.']]},
+{g:T6,t:'Base média do trapézio',r:'MN ∥ bases e MN = (AB + CD) ÷ 2, com M e N pontos médios dos lados não paralelos.',f:f15,th:['É a base média do triângulo aplicada duas vezes. A diagonal AC corta o trapézio em dois triângulos, e cada um tem uma base média que vale metade de uma das bases.','Base média do trapézio = média aritmética das bases, e é paralela a elas.'],s:[
+['P = ponto médio da diagonal AC','Construção auxiliar.'],
+['MP ∥ DC e MP = DC ÷ 2','Base média do △ADC (M e P são pontos médios de AD e AC).'],
+['PN ∥ AB e PN = AB ÷ 2','Base média do △CAB (P e N são pontos médios de AC e BC).'],
+['M, P e N estão alinhados e MN ∥ bases','MP e PN são paralelas às bases (que são paralelas entre si) e passam por P: é a mesma reta.'],
+['MN = MP + PN = (DC + AB) ÷ 2','Soma das etapas 2 e 3.']]},
+{g:T6,t:'Círculo: comprimento, área e setor',r:'C = 2πr. Área = πr². Setor de θ°: arco = (θ ÷ 360)·2πr e área = (θ ÷ 360)·πr².',f:f16,th:['π não foi inventado: é a razão entre o comprimento de qualquer circunferência e seu diâmetro, igual para todas (cerca de 3,14159). Para a área, imagine o círculo cortado em fatias finas e reencaixadas: quanto mais fatias, mais ele parece um retângulo de base πr e altura r.','C = 2πr. A = πr². Arco e setor são a fração θ ÷ 360 do círculo inteiro.'],s:[
+['π = C ÷ d','Definição: em qualquer círculo, comprimento ÷ diâmetro dá o mesmo número.'],
+['C = π·d = 2πr','Isolando C, com d = 2r.'],
+['Fatiar o círculo e alternar as fatias','Formam quase um paralelogramo de base πr (metade do comprimento) e altura r.'],
+['A = πr · r = πr²','Área do paralelogramo = base × altura.'],
+['O setor de θ° é a fração θ ÷ 360 do círculo','Regra de três: 360° está para o círculo inteiro como θ° está para o setor.'],
+['Arco = (θ ÷ 360)·2πr e área = (θ ÷ 360)·πr²','Multiplicando a fração da etapa 5 pelo comprimento (etapa 2) e pela área (etapa 4).']]},
+{g:T6,t:'Polígono regular: ângulo central, apótema e área',r:'Ângulo central = 360° ÷ n. Área = perímetro × apótema ÷ 2.',f:f17,th:['Um polígono regular tem lados e ângulos iguais, então cabe em uma circunferência e tem um centro. Ligando o centro aos vértices nascem n triângulos isósceles iguais, e o apótema é a altura de cada um. Somando as áreas aparece a fórmula do triângulo, com o perímetro no lugar da base.','Central = 360° ÷ n. Área = perímetro × apótema ÷ 2.'],s:[
+['Ligar o centro O a todos os vértices','Surgem n triângulos isósceles (dois lados são raios).'],
+['Os n triângulos são congruentes','Caso LLL: raios iguais e lados do polígono iguais.'],
+['Ângulo central θ = 360° ÷ n','n ângulos iguais completam uma volta.'],
+['Cada triângulo tem base ℓ e altura a (o apótema)','O apótema é a perpendicular de O até o lado.'],
+['Área de cada triângulo = ℓ·a ÷ 2','Área do triângulo.'],
+['Área total = n·ℓ·a ÷ 2 = p·a ÷ 2','n·ℓ é o perímetro p.']]},
+{g:T8,t:'Teorema de Ptolomeu',r:'Em quadrilátero inscrito: AC·BD = AB·CD + AD·BC.',f:f18,th:['Em um quadrilátero que cabe em uma circunferência, o produto das diagonais é igual à soma dos produtos dos lados opostos. Em um retângulo, cai no Pitágoras. Foi usado por Cláudio Ptolomeu (séc. II) em sua tabela de cordas, base da trigonometria antiga.','Diagonal × diagonal = soma de lado × lado oposto. Só vale em quadrilátero inscrito.'],s:[
+['Marcar E em AC com ∠ABE = ∠DBC (x)','Construção auxiliar.'],
+['∠BAE = ∠BAC = ∠BDC','Inscritos que enxergam o mesmo arco BC.'],
+['△ABE ∼ △DBC','Caso AA (x e etapa 2).'],
+['AE ÷ DC = AB ÷ DB, logo AE·BD = AB·CD','Lados correspondentes de triângulos semelhantes.'],
+['∠ABD = ∠EBC','Tirando ∠DBE de ∠ABE e de ∠DBC, que valem x, sobram ∠ABD e ∠EBC.'],
+['∠ADB = ∠ACB','Inscritos que enxergam o mesmo arco AB.'],
+['△ABD ∼ △EBC','Caso AA (etapas 5 e 6).'],
+['AD ÷ EC = BD ÷ BC, logo EC·BD = AD·BC','Lados correspondentes de triângulos semelhantes.'],
+['AC·BD = (AE + EC)·BD = AB·CD + AD·BC','Somando as etapas 4 e 8, com AC = AE + EC.']]},
+{g:T8,t:'Reta de Euler',r:'Circuncentro O, baricentro G e ortocentro H estão alinhados, e HG = 2·GO.',f:f19,th:['Três pontos que parecem não ter relação, O, G e H, ficam sempre na mesma reta. Em um triângulo equilátero os três coincidem. A prova usa uma homotetia, que é uma redução (ou ampliação) em torno de um ponto, mantendo o formato.','Ordem na reta: H, G, O. G fica a 2 ÷ 3 do caminho de H até O.'],s:[
+['G divide cada mediana em 2 : 1','Propriedade do baricentro (demonstração anterior).'],
+['Homotetia de centro G e razão −1 ÷ 2','Ela leva A, B, C aos pontos médios dos lados opostos (GA′ = GA ÷ 2, do outro lado). O △ABC vira o triângulo formado pelos pontos médios.'],
+['A altura de A vira a mediatriz de BC','A reta fica paralela à original (perpendicular a BC) e passa a atravessar o ponto médio de BC.'],
+['H vira O','H é o cruzamento das alturas e O é o cruzamento das mediatrizes. A homotetia leva um no outro.'],
+['O, G e H estão alinhados e HG = 2·GO','Em uma homotetia de centro G, ponto e imagem ficam alinhados com G, e a razão 1 ÷ 2 dá o 2 : 1.']]},
+{g:T8,t:'Teorema de Ceva',r:'Se AD, BE e CF se cruzam em P: (AF ÷ FB)·(BD ÷ DC)·(CE ÷ EA) = 1. A volta também vale.',f:f20,th:['Giovanni Ceva (1678) deu uma condição para três cevianas (segmentos de um vértice ao lado oposto) se cruzarem em um ponto: o produto de três razões deve valer 1. A prova mostra que cada razão é uma razão de áreas, e as áreas se cancelam em cadeia. Nas medianas, cada razão vale 1.','Dá a volta no triângulo: AF÷FB · BD÷DC · CE÷EA = 1. Se o produto é 1, as cevianas concorrem.'],s:[
+['AF ÷ FB = [AFC] ÷ [BFC] = [AFP] ÷ [BFP]','Pares de triângulos com mesma altura (de C, e de P, até AB): a área é proporcional à base. [XYZ] indica a área.'],
+['AF ÷ FB = [APC] ÷ [BPC]','Se a ÷ b = c ÷ d, então a ÷ b = (a − c) ÷ (b − d). Subtrai-se a etapa de P da etapa de C.'],
+['BD ÷ DC = [APB] ÷ [APC]','Mesma conta com a ceviana AD.'],
+['CE ÷ EA = [BPC] ÷ [APB]','Mesma conta com a ceviana BE.'],
+['Produto = [APC]÷[BPC] · [APB]÷[APC] · [BPC]÷[APB] = 1','Cada área aparece uma vez no numerador e uma no denominador, então tudo se cancela.']]},
+{g:T7,t:'Área do triângulo pelo seno',r:'Área = ½ · b · c · sen A (dois lados e o ângulo entre eles).',f:f13,th:['A fórmula “base × altura ÷ 2” exige conhecer a altura. O seno é justamente o que transforma um lado inclinado em altura: h = lado × seno do ângulo. Com dois lados e o ângulo entre eles, não é preciso achar a altura.','½ · lado · lado · seno do ângulo entre eles. Se o ângulo for 90°, o seno é 1 e volta a fórmula dos catetos.','b = 6, c = 8 e A = 30°: área = ½·6·8·0,5 = 12.'],s:[
+['Área = c · h ÷ 2','Fórmula básica: base c e altura h (traçada de C até AB).'],
+['sen α = h ÷ b','No triângulo retângulo AHC, seno = cateto oposto ÷ hipotenusa.'],
+['h = b · sen α','Isolando h na etapa 2.'],
+['Área = ½ · b · c · sen α','Trocando h por b·sen α na etapa 1. Se A é obtuso, vale o mesmo porque sen(180° − A) = sen A.']]},
+{g:T7,t:'Fórmula de Herão (área pelos três lados)',r:'Área = √[s·(s − a)·(s − b)·(s − c)], com s = (a + b + c) ÷ 2.',f:f21,th:['Quando só se conhecem os três lados, não há altura nem ângulo à vista. Herão de Alexandria (século I) mostrou que mesmo assim a área sai só dos lados. A prova usa a lei dos cossenos para achar o ângulo e a fórmula ½·a·b·sen γ para chegar na área.','s é o semiperímetro (metade do perímetro). Área = √[s(s − a)(s − b)(s − c)].','Lados 13, 14 e 15: s = 21 e área = √(21·8·7·6) = √7056 = 84.'],s:[
+['cos γ = (a² + b² − c²) ÷ (2ab)','Lei dos cossenos, isolando cos γ.'],
+['sen² γ = (1 − cos γ)·(1 + cos γ)','Vem de sen² + cos² = 1, escrito como diferença de quadrados.'],
+['1 + cos γ = (a + b + c)(a + b − c) ÷ (2ab) = 2s · 2(s − c) ÷ (2ab)','Soma-se 1 à etapa 1 e (a + b)² − c² vira diferença de quadrados. Repare que a + b + c = 2s e a + b − c = 2(s − c).'],
+['1 − cos γ = (c − a + b)(c + a − b) ÷ (2ab) = 2(s − a) · 2(s − b) ÷ (2ab)','Mesma ideia: c² − (a − b)² é diferença de quadrados.'],
+['sen² γ = 4 · s(s − a)(s − b)(s − c) ÷ (a²b²)','Multiplicando as etapas 3 e 4: o numerador fica 16·s(s − a)(s − b)(s − c) e o denominador 4a²b².'],
+['sen γ = 2 · √[s(s − a)(s − b)(s − c)] ÷ (ab)','Tirando a raiz quadrada (sen γ é positivo).'],
+['Área = ½ · a · b · sen γ = √[s(s − a)(s − b)(s − c)]','Fórmula da área pelo seno (demonstração anterior). O 2 e o ½ se cancelam, e o ab também.']]},
+{g:T6,t:'Quadriláteros notáveis: losango, retângulo e quadrado',r:'Losango: diagonais perpendiculares e área = e·f ÷ 2. Retângulo: diagonais iguais. Quadrado reúne as duas coisas.',f:f23,th:['Os quadriláteros especiais são paralelogramos com uma condição extra. Lados iguais dão o losango, ângulos retos dão o retângulo e os dois juntos dão o quadrado. Tudo o que vale para o paralelogramo continua valendo, e cada um ganha propriedades novas.','Losango: diagonais perpendiculares (e são bissetrizes dos ângulos). Retângulo: diagonais iguais. Quadrado: tudo isso.','Losango com diagonais 10 e 6: área = 10·6 ÷ 2 = 30 e lado = √(5² + 3²) = √34. Quadrado de lado 4: diagonal = 4√2.'],s:[
+['Losango = paralelogramo com AB = BC','Definição: os quatro lados são iguais.'],
+['AM = MC','As diagonais de um paralelogramo se cortam ao meio (demonstração anterior).'],
+['△ABC é isósceles e BM é mediana da base AC','AB = BC e M é ponto médio de AC.'],
+['BM ⟂ AC, e BM divide o ângulo B ao meio','Em um triângulo isósceles, a mediana da base também é altura e bissetriz. O mesmo vale para os outros vértices.'],
+['As diagonais formam 4 triângulos retângulos de catetos e÷2 e f÷2','Elas são perpendiculares (etapa 4) e se cortam ao meio (etapa 2).'],
+['Área = 4 · (e÷2)(f÷2) ÷ 2 = e·f ÷ 2','Soma das áreas dos 4 triângulos, cada um com área (cateto × cateto) ÷ 2.'],
+['Retângulo: AC = BD','△ABC ≅ △DCB (LAL: AB = DC, ângulo reto e BC comum), então as diagonais são lados correspondentes.']]},
+{g:T8,t:'Teorema de Menelau',r:'Se uma reta corta os lados (ou prolongamentos) de ABC em F, D e E: (AF ÷ FB)·(BD ÷ DC)·(CE ÷ EA) = 1.',f:f22,th:['É o parente do teorema de Ceva. Ceva trata de três retas que se cruzam em um ponto dentro do triângulo. Menelau trata de três pontos alinhados sobre uma reta que atravessa o triângulo. Os dois dão um produto de razões igual a 1.','Ceva: 3 retas concorrentes. Menelau: 3 pontos colineares. Em ambos, o produto das razões é 1.','AF = 2, FB = 4, CE = 3 e EA = 6: (2÷4)·(BD÷DC)·(3÷6) = 1, logo BD ÷ DC = 4.'],s:[
+['Traçar de A, B e C as perpendiculares à reta: a₁, b₁, c₁','São as distâncias de cada vértice à reta (pontilhadas).'],
+['AF ÷ FB = a₁ ÷ b₁','Os triângulos retângulos de A e de B têm o ângulo em F igual (opostos pelo vértice): caso AA, semelhantes.'],
+['BD ÷ DC = b₁ ÷ c₁','Mesma ideia, agora com os triângulos retângulos de B e de C, que dividem o ângulo em D.'],
+['CE ÷ EA = c₁ ÷ a₁','Mesma ideia com C e A, usando o ângulo em E.'],
+['Produto = (a₁÷b₁)·(b₁÷c₁)·(c₁÷a₁) = 1','Cada distância aparece uma vez em cima e uma vez embaixo, e tudo se cancela.']]}
+];
+
+const TEO=[
+['Em um plano, uma reta paralela “copia” ângulos de um lugar para outro (alternos internos). Ao copiar α e β para o vértice C, os três ângulos ficam lado a lado e completam uma meia-volta, que mede 180°. Por isso a soma não depende do formato do triângulo.','Triângulo = meia-volta. Se rasgar os três cantos e juntar, eles formam uma linha reta.'],
+['O ângulo externo é o que falta no interno vizinho para chegar a 180°. Como os três internos também somam 180°, o que sobra depois de tirar β é exatamente α + γ.','Externo = soma dos dois internos “de longe” (os que não encostam nele).'],
+['O ângulo central “enxerga” o arco inteiro. Quando o vértice está na própria circunferência, o mesmo arco é visto de mais longe e o ângulo fica pela metade. A ponte entre os dois é o triângulo isósceles formado pelos raios.','No centro: o arco todo. Na borda (inscrito): metade do arco.'],
+['Um diâmetro é um arco de 180°, e a metade de 180° é 90°. Por isso todo triângulo com um lado no diâmetro e o terceiro vértice na circunferência é retângulo. Essa regra também permite achar o centro de um círculo com um esquadro.','Viu o diâmetro de longe? Ângulo de 90°.'],
+['O ângulo inscrito depende só do arco que enxerga, e não de onde o vértice está. Andar com A pelo arco maior não muda o arco visto, então o ângulo não muda.','Mesmo arco, mesmo ângulo (com o vértice do mesmo lado do arco).'],
+['Dois ângulos opostos enxergam arcos que juntos fecham a circunferência (360°). Metade de cada um soma metade de 360°.','Opostos somam 180°. A volta também vale: se os opostos somam 180°, o quadrilátero cabe em uma circunferência.'],
+['É o caso limite do inscrito: gire a secante em torno de A até ela virar tangente. O ângulo continua valendo metade do arco que enxerga.','Tangente + corda segue a regra do inscrito: metade do arco.'],
+['Com o vértice dentro do círculo, o ângulo “olha” para dois arcos ao mesmo tempo: o dele e o do ângulo oposto pelo vértice. Por isso entra a média dos dois.','Dentro: soma dos arcos ÷ 2. Fora: diferença dos arcos ÷ 2.'],
+['Com o vértice fora do círculo, o ângulo enxerga um arco grande e “perde” o arco pequeno que fica no meio. Por isso entra a diferença.','Fora: (maior − menor) ÷ 2. Dentro: (soma) ÷ 2.'],
+['A figura é simétrica (espelhada) em relação à reta OP. Por isso os dois segmentos de tangente têm o mesmo comprimento e OP divide o ângulo ao meio.','As duas tangentes de um mesmo ponto formam um “chapéu” simétrico.'],
+['É a ideia de potência de um ponto: por qualquer reta que passe por P e corte o círculo, o produto das distâncias de P aos dois cortes é o mesmo. Esse número depende só de P.','Parte × parte de uma corda = parte × parte da outra.'],
+['Atribuído a Tales de Mileto (cerca de 600 a.C.), que usou proporção entre sombras para medir a altura de pirâmides. A ideia: retas paralelas mantêm a inclinação, então preservam proporções.','Paralelas implicam proporção. Confira sempre quais segmentos estão do mesmo lado.'],
+['É o Tales com razão 1 ÷ 2. Cortar nos pontos médios de dois lados gera uma cópia do triângulo reduzida à metade, com o lado menor paralelo à base.','Ligou pontos médios? Paralelo ao terceiro lado e metade dele.'],
+['Em a² = b² + c², os quadrados são áreas. Pela semelhança, cada cateto é a média geométrica entre a hipotenusa e a projeção dele sobre ela. A relação já era usada na Babilônia e ficou associada a Pitágoras (séc. VI a.C.).','Cateto² = hipotenusa × projeção. Altura² = projeção × projeção.'],
+['O baricentro é o centro de massa: uma chapa triangular fica equilibrada na ponta de um lápis em G. A mediana liga o vértice ao ponto médio, e G fica a 2 ÷ 3 do vértice.','Bari = peso. Divide a mediana em 2 : 1, com o pedaço maior no lado do vértice.'],
+['É o centro da circunferência que passa pelos três vértices. Fica dentro no acutângulo, no ponto médio da hipotenusa no retângulo e fora no obtusângulo.','Circuncentro = circunferência ao redor = mediatrizes.'],
+['É o centro da circunferência que cabe dentro do triângulo, tocando os três lados. Fica sempre dentro. Vale r = área ÷ semiperímetro.','Incentro = circunferência dentro = bissetrizes.'],
+['A bissetriz “empurra” o ponto D para perto do vértice cujo lado vizinho é menor. Se AB < AC, então BD < DC.','Bissetriz: divide o lado oposto na mesma razão dos lados vizinhos.'],
+['Altura é a perpendicular de um vértice ao lado oposto. O ortocentro fica dentro no acutângulo, no vértice do ângulo reto no retângulo e fora no obtusângulo.','Orto = reto. Ortocentro = alturas.'],
+['Todo polígono pode ser fatiado em triângulos a partir de um vértice. Como cada triângulo vale 180°, basta contar quantos há.','(n − 2)·180° por dentro e 360° por fora, para qualquer n. Polígono regular: cada interno = (n − 2)·180° ÷ n.'],
+['A ideia central é que recortar e colar não muda a área. O paralelogramo vira retângulo, o triângulo é metade de um paralelogramo e o trapézio é feito de dois triângulos.','Triângulo = metade do retângulo b × h.'],
+['É o caso limite da potência de ponto: gire a secante até virar tangente, de modo que A e B se juntam em T. O produto PA·PB vira PT·PT.','Tangente² = parte externa × secante inteira.'],
+['Dá para descobrir se um quadrilátero admite circunferência inscrita só somando lados opostos. A prova usa apenas que tangentes de um mesmo ponto são iguais.','Lados opostos somam o mesmo valor.']
+];
+const EX=['Triângulo com ângulos de 50° e 60°: o terceiro mede 180° − 50° − 60° = 70°.','Internos não adjacentes de 40° e 65°: o externo vale 40° + 65° = 105°. Conferindo: 180° − 75° = 105°.','Se o arco BC mede 80°, todo inscrito que o enxerga mede 40° e o central mede 80°.','Se AB é diâmetro e ∠A = 35°, então ∠C = 90° e ∠B = 55°.','Se o arco BC mede 70°, todo ponto do arco maior enxerga BC sob 35°.','Se ∠A = 110°, então ∠C = 70°. Se ∠B = 95°, então ∠D = 85°.','Tangente e corda cortando um arco de 100°: o ângulo entre elas mede 50°.','Arcos de 70° e 50°: o ângulo mede (70° + 50°) ÷ 2 = 60°.','Arcos de 130° (maior) e 50° (menor): o ângulo mede (130° − 50°) ÷ 2 = 40°.','Se PA = 7 cm, então PB = 7 cm. Se ∠APB = 50°, cada metade vale 25°.','PA = 6, PC = 4 e PB = 3: PD = (6·4) ÷ 3 = 8.','AD = 3, DB = 6 e AE = 4: 3 ÷ 6 = 4 ÷ EC, logo EC = 8.','Se BC = 14 cm, a base média MN mede 7 cm.','Catetos 6 e 8: hipotenusa = √(36 + 64) = 10. A altura é h = (6·8) ÷ 10 = 4,8.','Mediana de 12 cm: G fica a 8 cm do vértice e a 4 cm do ponto médio.','Triângulo retângulo com hipotenusa 10: O é o ponto médio dela e R = 5.','Triângulo 3-4-5: área 6, semiperímetro 6, então r = 6 ÷ 6 = 1.','AB = 6, AC = 9 e BC = 10: BD = 10·6 ÷ 15 = 4 e DC = 6.','Em um triângulo retângulo, H é o próprio vértice do ângulo reto.','Hexágono: soma interna = 4·180° = 720° e 9 diagonais. Cada externo, se regular, vale 60°.','Base 10 e altura 6: paralelogramo = 60 e triângulo = 30. Trapézio com B = 10, b = 6, h = 4: (10 + 6)·4 ÷ 2 = 32.','PT = 6 e PA = 4: PB = 36 ÷ 4 = 9, e a corda AB mede 5.','AB = 7, BC = 5 e CD = 6: DA = 7 + 6 − 5 = 8.','a = 10, A = 30° e B = 45°: b = 10·sen 45° ÷ sen 30° ≈ 14,1.','b = 3, c = 4 e A = 60°: a² = 9 + 16 − 2·3·4·0,5 = 13, logo a ≈ 3,6.','AB = 8 e AD = 5: CD = 8 e BC = 5. Diagonais de 12 e 10 se cortam em pedaços de 6 e 5.','Bases 10 e 6: a base média vale (10 + 6) ÷ 2 = 8.','r = 5: C = 10π ≈ 31,4 e A = 25π ≈ 78,5. Setor de 72°: área = (72 ÷ 360)·25π = 5π.','Hexágono de lado 4: apótema = 2√3, perímetro 24 e área = 24·2√3 ÷ 2 = 24√3.','Retângulo 3 por 4: diagonais 5 e 5, e 5·5 = 3·3 + 4·4 = 25.','Se GO = 3, então HG = 6 e HO = 9.','AF = 2, FB = 3, BD = 4 e DC = 5: CE ÷ EA = (3·5) ÷ (2·4) = 15 ÷ 8.'];
+TH.forEach((x,i)=>{x.th=x.th||TEO[i];if(EX[i])x.th[2]=EX[i]});
+const BASE='<details class="base"><summary>Ferramentas básicas (leia primeiro)</summary><ul><li><b>Alternos internos</b> (formato de Z) e <b>correspondentes</b> (formato de F) são iguais quando há paralelas cortadas por uma transversal.</li><li><b>Opostos pelo vértice</b> são iguais. <b>Suplementares</b> (lado a lado sobre uma reta) somam 180°.</li><li><b>Triângulo isósceles</b>: dois lados iguais implicam dois ângulos da base iguais.</li><li><b>Congruência</b> (LAL, ALA, LLL, cateto-hipotenusa): mesmo tamanho e formato. Lados e ângulos correspondentes são iguais.</li><li><b>Semelhança</b> (AA, LAL, LLL): mesmo formato. Ângulos iguais e lados proporcionais.</li><li><b>Ângulo central</b> mede o arco que enxerga.</li><li><b>Tangente</b> é perpendicular ao raio no ponto de contato.</li><li><b>Mediatriz</b>: perpendicular que passa pelo ponto médio. <b>Bissetriz</b>: divide o ângulo ao meio. <b>Mediana</b>: liga vértice e ponto médio. <b>Altura</b>: perpendicular do vértice ao lado oposto.</li></ul></details>';
+const app=document.getElementById('app'),nav=document.getElementById('nav'),res=document.getElementById('res');
+const gs=['Todos',...new Set(TH.map(x=>x.g))];let cur='Todos';
+res.innerHTML=BASE+'<details open><summary>Resumo para decorar</summary><ul>'+TH.map(x=>`<li><b>${x.t}:</b> ${x.r}</li>`).join('')+'</ul></details>';
+function draw(){app.innerHTML=TH.filter(x=>cur=='Todos'||x.g==cur).map(x=>`<article class="card" data-n="${x.s.length}" data-k="0"><h2>${x.t}</h2><p class="rule">${x.r}</p>${x.th?`<div class="teo"><p><b>Ideia por trás.</b> ${x.th[0]}</p><p><b>Para lembrar.</b> ${x.th[1]}</p>${x.th[2]?`<p><b>Exemplo.</b> ${x.th[2]}</p>`:''}</div>`:''}<div class="ctl"><button data-a="p">◀ Anterior</button><button class="go" data-a="n">Próxima etapa ▶</button><button data-a="a">Ver tudo</button><span class="st"></span></div><div class="body"><div class="fig">${x.f}</div><ol>${x.s.map(s=>`<li><div class="e">${s[0]}</div><div class="w">${s[1]}</div></li>`).join('')}</ol></div></article>`).join('');document.querySelectorAll('.card').forEach(c=>{prep(c);setK(c,MODE)})}
+nav.innerHTML=gs.map(g=>`<button>${g}</button>`).join('');
+nav.children[0].classList.add('on');
+nav.onclick=e=>{if(e.target.tagName=='BUTTON'){cur=e.target.textContent;[...nav.children].forEach(b=>b.classList.toggle('on',b==e.target));draw()}};
+let MODE=0;
+function prep(card){card.querySelectorAll('.fig svg').forEach(svg=>{const U=[];let last=null;[...svg.children].forEach((e,i)=>{const c=' '+(e.getAttribute('class')||'')+' ',h=k=>c.includes(' '+k+' ');if(h('m')&&last){last.push(e);return}if(h('c')||h('p')||h('t')||(h('l')&&!h('d')))return;last=[e];U.push({e:last,r:h('d')?0:(h('h')||h('h2'))?1:2,i})});U.sort((a,b)=>a.r-b.r||a.i-b.i);svg._u=U.map(u=>u.e)})}
+function setK(card,k){const n=+card.dataset.n;k=Math.max(-1,Math.min(n,k));card.dataset.k=k;const old=card._ps;card.querySelectorAll('.fig svg').forEach(svg=>{const U=svg._u||[],M=U.length,show=k<0?M:Math.ceil(M*k/n),o=old??M;U.forEach((g,j)=>g.forEach(e=>{e.classList.toggle('hid',j>=show);e.classList.toggle('new',k>0&&show>o&&j>=o&&j<show)}));card._ps=show});card.querySelectorAll('li').forEach((li,i)=>{li.classList.toggle('fut',k>=0&&i>=k);li.classList.toggle('cur',k>0&&i==k-1)});const b=card.querySelectorAll('.ctl button');b[0].disabled=k<=0;b[1].disabled=k<0||k>=n;b[2].textContent=k<0?'Recomeçar do enunciado':'Ver tudo';card.querySelector('.st').textContent=k<0?'Mostrando todas as etapas.':k==0?'Enunciado: observe a figura e toque em Próxima etapa.':'Etapa '+k+' de '+n}
+app.onclick=e=>{const b=e.target.closest('.ctl button');if(!b)return;const c=b.closest('.card'),k=+c.dataset.k,a=b.dataset.a;setK(c,a=='p'?k-1:a=='n'?k+1:k<0?0:-1)};
+const modeBtn=document.getElementById('mode');modeBtn.onclick=()=>{MODE=MODE<0?0:-1;modeBtn.textContent=MODE<0?'Voltar ao passo a passo':'Mostrar tudo de uma vez';document.querySelectorAll('.card').forEach(c=>setK(c,MODE))};
+draw();
+</script>
+<div style="position:fixed;left:max(12px,env(safe-area-inset-left));bottom:max(12px,env(safe-area-inset-bottom));z-index:9999;display:flex;gap:6px;font:600 13px/1 system-ui,sans-serif"><a href="../index.html" style="background:#14213d;color:#fff;padding:9px 13px;border-radius:20px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.3)">← Revisões WhiiTz</a><a href="index.html" style="background:#14213d;color:#fff;padding:9px 13px;border-radius:20px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.3)">Matemática</a></div></body>
+</html>

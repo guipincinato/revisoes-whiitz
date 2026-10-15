@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Leituras obrigatórias: anotações</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  --bg: #E6EBE6;
+  --panel: #F2F5F1;
+  --ink: #192A2D;
+  --muted: #55665F;
+  --accent: #256B5D;
+  --accent-soft: #CFE1DA;
+  --rule: #BFCAC3;
+  --serif: "Spectral", Georgia, "Times New Roman", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F1618;
+    --panel: #172123;
+    --ink: #E0E8E4;
+    --muted: #9BAAA4;
+    --accent: #7FC7B3;
+    --accent-soft: #1F3631;
+    --rule: #2B3A37;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F1618;
+  --panel: #172123;
+  --ink: #E0E8E4;
+  --muted: #9BAAA4;
+  --accent: #7FC7B3;
+  --accent-soft: #1F3631;
+  --rule: #2B3A37;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+*, *::before, *::after { box-sizing: inherit; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  -webkit-text-size-adjust: 100%;
+}
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Abertura */
+.hero { max-width: 42rem; margin: 0 auto; padding: 2rem 1.1rem 1.2rem; text-align: center; }
+.byline { font-family: var(--sans); font-size: .9rem; color: var(--muted); margin: 0 0 .5rem; }
+h1 { font-size: clamp(2rem, 9vw, 3.1rem); line-height: 1.08; font-weight: 600; margin: 0 0 .6rem; text-wrap: balance; }
+.sub { margin: 0; color: var(--muted); font-style: italic; }
+.epitaph {
+  max-width: 21rem;
+  margin: 1.8rem auto 0;
+  border: 1.5px solid var(--accent);
+  border-radius: 999px 999px 10px 10px;
+  padding: 6rem 1.5rem 1.5rem;
+  background: var(--panel);
+}
+.epitaph blockquote { margin: 0; font-style: italic; font-size: 1.12rem; line-height: 1.5; text-wrap: balance; }
+.epitaph figcaption { margin-top: 1rem; font-family: var(--sans); font-size: .82rem; color: var(--muted); }
+
+/* Navegação */
+.toc {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 5;
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+}
+.toc ul { display: flex; gap: .4rem; margin: 0; padding: .55rem 1rem; list-style: none; overflow-x: auto; white-space: nowrap; }
+.toc a {
+  display: block;
+  font-family: var(--sans);
+  font-size: .85rem;
+  color: var(--ink);
+  text-decoration: none;
+  padding: .35rem .8rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+}
+.toc a:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Conteúdo */
+main { max-width: 42rem; margin: 0 auto; padding: 0 1.1rem 3rem; }
+section { padding-top: 2.4rem; scroll-margin-top: 3.4rem; }
+h2 { font-size: 1.55rem; line-height: 1.2; font-weight: 600; margin: 0 0 1rem; border-left: 4px solid var(--accent); padding-left: .7rem; }
+h3 { font-size: 1.08rem; font-weight: 600; margin: 1.2rem 0 .15rem; }
+p { margin: 0 0 .8rem; }
+.lead { color: var(--muted); }
+strong { font-weight: 600; }
+
+dl { margin: 0; }
+.ficha dt { font-family: var(--sans); font-size: .8rem; color: var(--muted); margin-top: .85rem; }
+.ficha dd { margin: .1rem 0 0; }
+
+.quote { border-left: 3px solid var(--accent); margin: 1rem 0; padding: .1rem 0 .1rem 1rem; font-style: italic; }
+.quote p { margin: 0; }
+
+.group { font-family: var(--sans); font-size: .95rem; font-weight: 600; color: var(--accent); margin: 2rem 0 .2rem; }
+.char { padding: 1rem 0; border-top: 1px solid var(--rule); }
+.char h4 { margin: 0; font-size: 1.22rem; font-weight: 600; line-height: 1.25; }
+.char .role { margin: .2rem 0 .45rem; color: var(--accent); font-style: italic; }
+.char p:last-child { margin-bottom: 0; }
+
+.timeline { list-style: none; counter-reset: passo; margin: 0; padding: 0; }
+.timeline li { counter-increment: passo; position: relative; padding: 0 0 1.2rem 2.5rem; }
+.timeline li::before {
+  content: counter(passo);
+  position: absolute; left: 0; top: .1rem;
+  width: 1.75rem; height: 1.75rem; border-radius: 50%;
+  background: var(--accent-soft); color: var(--accent);
+  font-family: var(--sans); font-size: .8rem; font-weight: 600;
+  display: grid; place-items: center;
+}
+.timeline li::after { content: ""; position: absolute; left: .87rem; top: 2rem; bottom: .2rem; width: 1px; background: var(--rule); }
+.timeline li:last-child::after { display: none; }
+.timeline li:last-child { padding-bottom: 0; }
+
+.bullets { margin: 0 0 .8rem; padding-left: 1.2rem; }
+.bullets li { margin-bottom: .45rem; }
+
+.chapters dt { font-family: var(--sans); font-size: .85rem; font-weight: 600; color: var(--accent); margin-top: 1.1rem; }
+.chapters dd { margin: .1rem 0 0; }
+
+.panel { background: var(--panel); border: 1px dashed var(--rule); border-radius: 8px; padding: .9rem 1rem; }
+.panel p:last-child, .panel ul:last-child { margin-bottom: 0; }
+
+.qa details { border-top: 1px solid var(--rule); padding: .85rem 0; }
+.qa details:last-child { border-bottom: 1px solid var(--rule); }
+.qa summary { cursor: pointer; font-weight: 600; list-style: none; position: relative; padding-right: 1.8rem; }
+.qa summary::-webkit-details-marker { display: none; }
+.qa summary::after { content: "+"; position: absolute; right: 0; top: 0; color: var(--accent); font-family: var(--sans); font-size: 1.35rem; font-weight: 400; line-height: 1.25; }
+.qa details[open] summary::after { content: "\2212"; }
+.qa .answer { margin-top: .6rem; }
+.qa .answer p { margin: 0 0 .6rem; }
+.qa .answer p:last-child { margin-bottom: 0; }
+
+footer { max-width: 42rem; margin: 0 auto; padding: 0 1.1rem 2rem; font-family: var(--sans); font-size: .82rem; color: var(--muted); }
+
+html.js .book { display: none; }
+html.js .book.active { display: block; }
+html.js.in-book .home { display: none; }
+[data-book="gonzaga"] { --accent: #2D5F8F; --accent-soft: #D2E0EE; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-book="gonzaga"] { --accent: #8DB8E6; --accent-soft: #1D2D3F; }
+}
+:root[data-theme="dark"] [data-book="gonzaga"] { --accent: #8DB8E6; --accent-soft: #1D2D3F; }
+.toc .back { border-color: var(--accent); color: var(--accent); }
+.shelf { list-style: none; margin: 1.6rem 0 0; padding: 0; }
+.shelf li { border-top: 1px solid var(--rule); }
+.shelf li:last-child { border-bottom: 1px solid var(--rule); }
+.shelf a { display: block; color: var(--ink); text-decoration: none; padding: 1.15rem 0 1.15rem 1.1rem; border-left: 10px solid var(--accent); }
+.shelf .t { display: block; font-size: 1.3rem; font-weight: 600; line-height: 1.25; }
+.shelf .m { display: block; font-family: var(--sans); font-size: .85rem; color: var(--muted); margin: .25rem 0 .45rem; }
+.shelf a:hover .t { color: var(--accent); }
+.tablewrap { overflow-x: auto; margin: 1rem 0; }
+.cmp { border-collapse: collapse; width: 100%; min-width: 19rem; font-size: .95rem; }
+.cmp th, .cmp td { border-top: 1px solid var(--rule); padding: .55rem .6rem; text-align: left; vertical-align: top; }
+.cmp thead th { font-family: var(--sans); font-size: .8rem; font-weight: 600; color: var(--muted); }
+.cmp tbody th { font-weight: 600; color: var(--accent); }
+[data-book="krenak"] { --accent: #A24A2E; --accent-soft: #EBD3C8; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-book="krenak"] { --accent: #E0987E; --accent-soft: #3A2620; }
+}
+:root[data-theme="dark"] [data-book="krenak"] { --accent: #E0987E; --accent-soft: #3A2620; }
+[data-book="evaristo"] { --accent: #8A6514; --accent-soft: #EFE2BE; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-book="evaristo"] { --accent: #E2BE6A; --accent-soft: #3A3020; }
+}
+:root[data-theme="dark"] [data-book="evaristo"] { --accent: #E2BE6A; --accent-soft: #3A3020; }
+[data-book="caio"] { --accent: #8E3A62; --accent-soft: #EBD5DF; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-book="caio"] { --accent: #E39BBD; --accent-soft: #3A2430; }
+}
+:root[data-theme="dark"] [data-book="caio"] { --accent: #E39BBD; --accent-soft: #3A2430; }
+[data-book="paes"] { --accent: #4B4F8C; --accent-soft: #DCDDF0; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-book="paes"] { --accent: #A9AEE8; --accent-soft: #262A44; }
+}
+:root[data-theme="dark"] [data-book="paes"] { --accent: #A9AEE8; --accent-soft: #262A44; }
+[data-book="pcp"] { --accent: #5E6B2F; --accent-soft: #E2E6CC; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-book="pcp"] { --accent: #C3CF8A; --accent-soft: #2A3019; }
+}
+:root[data-theme="dark"] [data-book="pcp"] { --accent: #C3CF8A; --accent-soft: #2A3019; }
+[data-book="adichie"] { --accent: #9C2F3C; --accent-soft: #F0D4D7; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-book="adichie"] { --accent: #EE9AA4; --accent-soft: #3A2024; }
+}
+:root[data-theme="dark"] [data-book="adichie"] { --accent: #EE9AA4; --accent-soft: #3A2024; }
+[data-book="ggm"] { --accent: #6B4C9A; --accent-soft: #E3DBF0; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-book="ggm"] { --accent: #C3AEE8; --accent-soft: #2C2440; }
+}
+:root[data-theme="dark"] [data-book="ggm"] { --accent: #C3AEE8; --accent-soft: #2C2440; }
+.shelf .row { display: block; padding: 1.15rem 0 1.15rem 1.1rem; border-left: 10px solid var(--rule); color: var(--muted); }
+.dates { font-family: var(--sans); font-size: .85rem; color: var(--muted); margin: 1rem 0 0; }
+</style>
+</head>
+<body>
+<div class="home">
+<header class="hero">
+  <p class="byline">Unicamp</p>
+  <h1>Leituras obrigatórias</h1>
+  <p class="sub">Anotações organizadas, obra por obra.</p>
+  <p class="dates">Lista oficial da Comvest para o Vestibular Unicamp 2027, cobrada nas duas fases. 1ª fase: 18/10/2026. 2ª fase: 29 e 30/11/2026.</p>
+</header>
+<main>
+<ul class="shelf">
+  <li data-book="bras"><a href="#/bras" data-go="bras"><span class="t">Memórias Póstumas de Brás Cubas</span><span class="m">Machado de Assis, 1881. Realismo.</span><span>Um defunto conta a própria vida e ironiza a elite do Império.</span></a></li>
+  <li data-book="gonzaga"><a href="#/gonzaga" data-go="gonzaga"><span class="t">Vida e Morte de M. J. Gonzaga de Sá</span><span class="m">Lima Barreto, 1919. Pré-Modernismo.</span><span>Um narrador negro e pobre registra a vida do amigo aristocrata e critica o Rio de Pereira Passos.</span></a></li>
+  <li data-book="krenak"><a href="#/krenak" data-go="krenak"><span class="t">A vida não é útil</span><span class="m">Ailton Krenak, 2020. Não ficção.</span><span>Textos que questionam o progresso, o dinheiro e a ideia de que a vida precisa ter utilidade.</span></a></li>
+  <li data-book="paes"><a href="#/paes" data-go="paes"><span class="t">Prosas seguidas de odes mínimas</span><span class="m">José Paulo Paes, 1992. Poesia.</span><span>Memória da família, morte e objetos do cotidiano em poemas curtos e irônicos. Inclui “À minha perna esquerda” e “Ao shopping center”.</span></a></li>
+  <li data-book="caio"><a href="#/caio" data-go="caio"><span class="t">Morangos mofados</span><span class="m">Caio Fernando Abreu, 1982. Contos (seis cobrados).</span><span>Solidão, desejo entre homens e repressão no fim da ditadura: Diálogo, Além do ponto, Terça-feira gorda, Pera, uva ou maçã?, O dia em que Júpiter encontrou Saturno e Aqueles dois.</span></a></li>
+  <li data-book="adichie"><a href="#/adichie" data-go="adichie"><span class="t">No seu pescoço</span><span class="m">Chimamanda Ngozi Adichie, 2009. Contos.</span><span>Doze contos entre a Nigéria e os Estados Unidos: imigração, choque cultural, ditadura, conflito religioso e mulheres que tomam a palavra.</span></a></li>
+  <li data-book="evaristo"><a href="#/evaristo" data-go="evaristo"><span class="t">Olhos d’água</span><span class="m">Conceição Evaristo, 2014. Contos.</span><span>Quinze contos sobre mulheres e homens negros da periferia, entre a violência que se repete e o afeto que resiste.</span></a></li>
+  <li data-book="ggm"><a href="#/ggm" data-go="ggm"><span class="t">Os funerais da Mamãe Grande</span><span class="m">Gabriel García Márquez, 1962. Contos.</span><span>Oito contos de realismo mágico num povoado colombiano: violência política, preconceito, solidão e o poder absoluto da Mamãe Grande.</span></a></li>
+  <li data-book="pcp"><a href="#/pcp" data-go="pcp"><span class="t">Canções escolhidas</span><span class="m">Paulo César Pinheiro, anos 1960 a 1990. Letras de canção.</span><span>Catorze canções: identidade brasileira, resistência à ditadura, metalinguagem, amor e os ciclos da vida. Inclui “Canto das três raças” e “Pesadelo”.</span></a></li>
+</ul>
+</main>
+</div>
+<article class="book" data-book="bras">
+<header class="hero">
+  <p class="byline">Machado de Assis, 1881</p>
+  <h1>Memórias Póstumas de Brás Cubas</h1>
+  <p class="sub">Anotações organizadas para a Unicamp</p>
+  <figure class="epitaph">
+    <blockquote>Ao verme que primeiro roeu as frias carnes do meu cadáver dedico como saudosa lembrança estas Memórias Póstumas</blockquote>
+    <figcaption>Dedicatória do livro: Brás Cubas dedica a obra a um verme.</figcaption>
+  </figure>
+</header>
+<nav class="toc" aria-label="Seções do livro"><ul><li><a class="back" href="#/" data-go="">&larr; Obras</a></li><li><a href="#/bras/ficha" data-go="bras/ficha">Ficha</a></li><li><a href="#/bras/narrativa" data-go="bras/narrativa">Narrativa</a></li><li><a href="#/bras/temas" data-go="bras/temas">Temas</a></li><li><a href="#/bras/personagens" data-go="bras/personagens">Personagens</a></li><li><a href="#/bras/enredo" data-go="bras/enredo">Enredo</a></li><li><a href="#/bras/humanitismo" data-go="bras/humanitismo">Humanitismo</a></li><li><a href="#/bras/capitulos" data-go="bras/capitulos">Capítulos</a></li><li><a href="#/bras/treino" data-go="bras/treino">Perguntas</a></li><li><a href="#/bras/conferir" data-go="bras/conferir">Conferir</a></li></ul></nav>
+
+
+
+<main>
+
+<section id="bras-ficha">
+  <h2>Ficha rápida</h2>
+  <dl class="ficha">
+    <dt>Autor</dt>
+    <dd>Machado de Assis (1839–1908)</dd>
+    <dt>Publicação</dt>
+    <dd>Em folhetim na Revista Brasileira, em 1880. Em livro, em 1881.</dd>
+    <dt>Movimento</dt>
+    <dd>Inicia o Realismo no Brasil.</dd>
+    <dt>Estrutura</dt>
+    <dd>160 capítulos, a maioria curtíssima.</dd>
+    <dt>Para a banca</dt>
+    <dd>A Comvest o considera um divisor de águas na obra de Machado e na literatura brasileira do século XIX.</dd>
+    <dt>Tempo</dt>
+    <dd>Brás nasce em 1805 e morre em 1869, aos 64 anos. A vida dele atravessa a chegada da corte (1808), a Independência (1822) e o Império.</dd>
+    <dt>Narrador</dt>
+    <dd>O próprio Brás Cubas, em 1ª pessoa, já morto.</dd>
+    <dt>Tom</dt>
+    <dd>Humor (a “galhofa”) e pessimismo (a “melancolia”).</dd>
+  </dl>
+
+  <h3>Por que é Realismo</h3>
+  <p>Faz análise psicológica do indivíduo e crítica social à elite brasileira do século XIX. Não há herói, amor idealizado nem final feliz.</p>
+  <h3>Por que antecipa o Modernismo</h3>
+  <p>Fragmenta a narrativa em capítulos curtíssimos, conversa com o leitor e fala do próprio livro (metalinguagem). Tem até um capítulo feito só de pontuação, o LV.</p>
+</section>
+
+<section id="bras-narrativa">
+  <h2>Como o livro é narrado</h2>
+
+  <h3>Defunto-autor</h3>
+  <p>Brás escreve depois de morto. Ele mesmo diz que não é um autor defunto, e sim um defunto autor, “para quem a campa foi outro berço”. Como não tem mais nada a perder, confessa, zomba dos vivos e fala sem medo de julgamento.</p>
+
+  <h3>Narrador em 1ª pessoa, cínico e não confiável</h3>
+  <p>Tem liberdade total para mentir, justifica as próprias ações e abusa da boa-fé do leitor. Quem lê precisa desconfiar do que ele conta sobre si mesmo.</p>
+  <p>Conceito útil: o crítico Roberto Schwarz fala em <strong>volubilidade</strong> do narrador, que muda de opinião e de tom conforme a conveniência. É um traço da elite que ele representa.</p>
+
+  <h3>Ironia</h3>
+  <p>O autor diz uma coisa e sugere outra. Machado critica a elite brasileira por meio de Brás, que pertence a ela e não enxerga a própria culpa. Brás exalta o que conquista e desdenha o que não conquista.</p>
+
+  <h3>Digressão e metalinguagem</h3>
+  <p>O narrador interrompe a cena para comentar o que está acontecendo, filosofar ou falar do próprio livro: dos capítulos, da forma de escrever, do leitor.</p>
+
+  <h3>Diálogo com o leitor</h3>
+  <p>Conversa o tempo todo, provoca, pede desculpas e cobra atenção. É uma marca de Machado de Assis.</p>
+
+  <h3>Intertextualidade</h3>
+  <p>Muita. O próprio Brás cita Sterne e Xavier de Maistre como modelos de uma forma livre e digressiva. Aparecem ainda a mitologia grega (Pandora, no Delírio), a Bíblia (capítulo LV, “O velho diálogo de Adão e Eva”) e outros clássicos.</p>
+
+  <h3>Narração não linear</h3>
+  <p>O livro começa pelo fim, com a morte, e depois vai e volta no tempo. Logo no início, Brás hesita se deve abrir as memórias pelo nascimento ou pela morte.</p>
+
+  <h3>Paratextos invadidos</h3>
+  <p>A dedicatória vai para um verme, e o prólogo “Ao leitor” é assinado por Brás. Ele ocupa espaços que normalmente pertencem ao autor, e por isso é folgado e debochado já nas primeiras páginas.</p>
+</section>
+
+<section id="bras-temas">
+  <h2>Temas e crítica social</h2>
+  <p>Os temas centrais são <strong>morte, tempo, dinheiro, adultério e loucura</strong>. São atemporais: valem para qualquer civilização. Dentro do Brasil do século XIX, ganham um alvo concreto:</p>
+  <ul class="bullets">
+    <li><strong>Egoísmo e vaidade.</strong> Brás só pensa em si. O Humanitismo é a justificativa teórica disso.</li>
+    <li><strong>Interesse e dinheiro.</strong> Amor, amizade e favor sempre têm um preço (Marcela, Dona Plácida).</li>
+    <li><strong>Escravidão e violência social.</strong> Prudêncio e Cotrim.</li>
+    <li><strong>Aparências e hipocrisia.</strong> Casamentos de conveniência, carreiras, a família que enfeita a própria origem.</li>
+    <li><strong>Ambição e fama.</strong> O emplasto Brás Cubas.</li>
+    <li><strong>Sentido da vida.</strong> O Delírio e “Das negativas”.</li>
+  </ul>
+</section>
+
+<section id="bras-personagens">
+  <h2>Personagens e suas funções</h2>
+  <p class="lead">Cada personagem faz duas coisas: move o enredo e carrega uma crítica.</p>
+
+  <h3 class="group">Brás e a família</h3>
+
+  <article class="char">
+    <h4>Brás Cubas</h4>
+    <p class="role">Protagonista, narrador e alvo da crítica</p>
+    <p>Bacharel em Direito formado em Coimbra, rico e herdeiro. Nunca trabalha de verdade, nunca se casa e não tem filhos. Egoísta, vaidoso e interesseiro, representa a elite brasileira do século XIX. Na infância, é um menino muito mimado. Morre aos 64 anos, de pneumonia, enquanto tenta criar o emplasto.</p>
+  </article>
+
+  <article class="char">
+    <h4>O pai (Bento Cubas)</h4>
+    <p class="role">Ambição e pressão por status</p>
+    <p>Quer ver o filho bem casado e bem colocado. Castiga a paixão de Brás por Marcela mandando-o estudar Direito em Portugal. Morre de desgosto quando o casamento planejado não vai adiante.</p>
+  </article>
+
+  <article class="char">
+    <h4>Cotrim</h4>
+    <p class="role">Hipocrisia do “homem de bem”</p>
+    <p>Cunhado de Brás, casado com Sabina, irmã dele. Disputa a herança depois da morte do pai. No capítulo CXXIII, “O verdadeiro Cotrim”, o narrador conta que ele contrabandeou escravos por muito tempo e mandava castigar os seus até sangrarem, mas era tesoureiro de uma confraria e bom pai de família. Machado ironiza ao atribuir isso a puro “efeito de relações sociais”.</p>
+  </article>
+
+  <h3 class="group">Os amores</h3>
+
+  <article class="char">
+    <h4>Marcela</h4>
+    <p class="role">O amor movido a dinheiro</p>
+    <p>Cortesã, primeiro amor de Brás, gosta de ouro, prata e presentes. Ele gasta a fortuna do pai e se endivida para sustentá-la. Reaparece anos depois marcada pela doença e sem dentes, e Brás reencontra a beleza em ruína. O caso começa em 1822, ano da Independência, o que sustenta a leitura da relação como alegoria da independência do Brasil.</p>
+  </article>
+
+  <article class="char">
+    <h4>Eugênia</h4>
+    <p class="role">O preconceito de Brás</p>
+    <p>Vizinha, a “flor da moita”: jovem coxa, filha de D. Eusébia. O livro sugere que ela é fruto do beijo de D. Eusébia com o Vilaça, homem casado. Brás se aproxima na Tijuca, mas a rejeita por causa do defeito físico e da origem. Anos depois a encontra pobre num cortiço: ela o encara com dignidade e recusa esmola. O nome é irônico: Eugênia quer dizer “bem-nascida”, e ela é o oposto disso aos olhos da sociedade.</p>
+  </article>
+  <article class="char">
+    <h4>Vilaça e D. Eusébia</h4>
+    <p class="role">O beijo na moita e a origem de Eugênia</p>
+    <p>Vilaça é um homem casado, “glosador” e amigo da casa; D. Eusébia é amiga pobre da família. No capítulo XII, “Um episódio de 1814”, o menino Brás conta aos convidados de um jantar o beijo dos dois. Eugênia é fruto dessa relação.</p>
+  </article>
+
+  <article class="char">
+    <h4>Virgília</h4>
+    <p class="role">Adultério, interesse e aparências</p>
+    <p>Grande amor de Brás. Escolhe a conveniência e se casa com Lobo Neves, mais promissor. Torna-se amante de Brás, engravida dele e perde a criança. No fim, visita Brás no leito de morte, com o filho que teve com Lobo Neves.</p>
+  </article>
+
+  <article class="char">
+    <h4>Lobo Neves</h4>
+    <p class="role">Ambição política e vaidade</p>
+    <p>Marido de Virgília, político ambicioso. Chega a convidar o próprio Brás para ser seu secretário. No capítulo XCVI, “A carta anônima”, recebe uma carta que acusa a mulher, mas Virgília o convence de que é calúnia. Depois é nomeado presidente de província e leva a família para o norte.</p>
+  </article>
+
+  <h3 class="group">Os subalternos</h3>
+
+  <article class="char">
+    <h4>Dona Plácida</h4>
+    <p class="role">A vítima silenciosa da elite</p>
+    <p>Ex-costureira de Virgília, mulher pobre que cuida da casa da Gamboa, onde os amantes se encontram. Ajuda Brás e Virgília a esconder o adultério. Morre na miséria. Mostra como os pobres dependem da elite e como Brás se justifica achando que fez o bem.</p>
+  </article>
+
+  <article class="char">
+    <h4>Prudêncio</h4>
+    <p class="role">A violência da escravidão que se reproduz</p>
+    <p>Escravo de Brás, serviu de “cavalinho” para o menino e apanhava dele. Depois de alforriado, compra um escravo e o castiga do mesmo jeito. O oprimido repete o comportamento do opressor.</p>
+  </article>
+
+  <h3 class="group">O filósofo e a Natureza</h3>
+
+  <article class="char">
+    <h4>Quincas Borba</h4>
+    <p class="role">Crítica às teorias científicas e filosóficas da época</p>
+    <p>Joaquim Borba dos Santos, colega de escola de Brás. Tem sentimento de superioridade e passa de rico a mendigo e de novo a rico (num reencontro, chega a furtar o relógio de Brás). Filósofo e louco ao mesmo tempo, cria o Humanitismo e morre louco.</p>
+  </article>
+
+  <article class="char">
+    <h4>Pandora</h4>
+    <p class="role">Alegoria da Natureza</p>
+    <p>Aparece no Delírio, no capítulo VII. Apresenta-se a Brás como sua mãe e sua inimiga e mostra a ele o desfile dos séculos. Leitura de aula: a vida não tem sentido e a eternidade é um tédio profundo.</p>
+  </article>
+</section>
+
+<section id="bras-enredo">
+  <h2>Enredo em ordem cronológica</h2>
+  <p class="lead">O livro não segue essa ordem. Aqui está a vida de Brás arrumada em sequência.</p>
+  <ol class="timeline">
+    <li><strong>Infância.</strong> Brás nasce em 1805 numa família rica e cresce como menino mimado, maltratando Prudêncio. No capítulo XII, a família dá um jantar para celebrar a queda de Napoleão (1814), e o menino Brás revela aos convidados o beijo entre o Dr. Vilaça e D. Eusébia.</li>
+    <li><strong>Marcela.</strong> Apaixona-se por ela, gasta a fortuna do pai e se endivida. Como castigo, é mandado a Portugal para estudar Direito.</li>
+    <li><strong>Volta ao Brasil.</strong> Retorna porque a mãe está morrendo.</li>
+    <li><strong>Eugênia.</strong> Tem um breve envolvimento com a vizinha, mas desiste por ela ser coxa.</li>
+    <li><strong>O noivado fracassado.</strong> Reencontra Marcela doente, antes de um jantar com a futura noiva. Chega atrasado e, ao olhar o rosto da noiva, vê o de Marcela. O casamento não acontece, Virgília se casa com Lobo Neves e o pai de Brás morre de desgosto.</li>
+    <li><strong>Herança.</strong> Disputa os bens com o cunhado Cotrim.</li>
+    <li><strong>Adultério com Virgília.</strong> Pedem ajuda a Dona Plácida para esconder o caso. Virgília engravida e perde a criança. Lobo Neves recebe uma carta e o casal vai para o norte.</li>
+    <li><strong>Carreira e Nhã-Loló.</strong> Brás vira deputado, mas fracassa ao tentar ser ministro e ao fundar um jornal de oposição. Sabina arranja-lhe um casamento com Nhã-Loló, sobrinha de Cotrim, que morre de febre amarela.</li>
+    <li><strong>Reencontros.</strong> No capítulo CLVIII, “Dous encontros”, Marcela morre num hospital e Brás reencontra Eugênia, pobre e coxa, num cortiço. Prudêncio, livre, castiga o próprio escravo. Virgília pede a Brás que ajude Dona Plácida, que morre na miséria.</li>
+    <li><strong>Quincas Borba.</strong> Volta rico, cria o Humanitismo, enlouquece e morre.</li>
+    <li><strong>O fim.</strong> Brás nunca se casou e não teve filhos. Tenta criar o emplasto, pega pneumonia e morre. Faz o balanço da vida em “Das negativas”.</li>
+  </ol>
+</section>
+
+<section id="bras-humanitismo">
+  <h2>Humanitismo</h2>
+  <p>Filosofia criada por Quincas Borba, com dois objetivos: a felicidade universal e a fama dele próprio.</p>
+
+  <h3>A teoria em três ideias (resumo de aula)</h3>
+  <ol class="bullets">
+    <li>Tudo é feito de Humanitas.</li>
+    <li>Tudo está em conflito.</li>
+    <li>Humanitas sempre vence.</li>
+  </ol>
+
+  <div class="quote"><p>Ao vencido, ódio ou compaixão; ao vencedor, as batatas.</p></div>
+
+  <p><strong>A parábola das batatas.</strong> Duas tribos famintas disputam um campo de batatas que só alimenta uma. Se dividissem, as duas passariam fome. Por isso, na lógica de Quincas, a guerra é conservação e o vencedor é quem merece as batatas.</p>
+  <p><strong>Cuidado na prova:</strong> a parábola e a frase das batatas estão no romance <em>Quincas Borba</em> (1891), capítulo VI, quando o filósofo explica a teoria a Rubião. Nas Memórias, Quincas expõe o Humanitismo a Brás no capítulo CXVII, sem essa história. Ela aparece em aula porque resume bem a ideia, mas não a atribua às Memórias.</p>
+
+  <h3>O que Machado critica</h3>
+  <p>Humanitas é egoísmo: a justificação perfeita de quem ganha sobre quem perde. É uma paródia do positivismo, do evolucionismo e das teorias científicas e filosóficas que atribuem um sentido de evolução ao ser humano mesmo diante de fatalidades. A lógica leva ao absurdo: se tudo é Humanitas, até a inveja vira virtude.</p>
+
+  <h3>O destino da ideia</h3>
+  <p>Quincas enlouquece e o Humanitismo deixa de ser filosofia para virar religião, com direito a uma dança. Quincas morre louco. A fronteira entre filósofo e louco fica propositalmente borrada.</p>
+</section>
+
+<section id="bras-capitulos">
+  <h2>Capítulos-chave e leituras</h2>
+  <dl class="chapters">
+    <dt>Cap. I, “Óbito do autor”</dt>
+    <dd>Brás começa pela morte e explica a condição de defunto-autor.</dd>
+    <dt>Cap. II, “O emplasto”</dt>
+    <dd>A ideia fixa de um remédio contra a melancolia, que também lhe daria fama. Ele pega um resfriado enquanto pensa nisso e morre.</dd>
+    <dt>Cap. III, “Genealogia”</dt>
+    <dd>A família tenta apagar a origem humilde (tanoeiros) e inventar uma linhagem nobre.</dd>
+    <dt>Cap. VII, “O delírio”</dt>
+    <dd>O capítulo mais importante. Na hora da morte, Brás encontra Pandora e atravessa os séculos.</dd>
+    <dt>Cap. XII, “Um episódio de 1814”</dt>
+    <dd>Jantar pela queda de Napoleão. O menino Brás denuncia o beijo de Vilaça e D. Eusébia.</dd>
+    <dt>Cap. LV, “O velho diálogo de Adão e Eva”</dt>
+    <dd>Um diálogo entre Brás e Virgília feito só de pontos e sinais de pontuação. Exemplo de metalinguagem que antecipa o Modernismo.</dd>
+    <dt>Cap. LXVIII, “O vergalho”</dt>
+    <dd>Prudêncio, libertado pelo pai de Brás, chicoteia na praça um escravo que comprou. Brás só pede que o perdoe, e o narrador conclui que Prudêncio passava adiante as pancadas que recebera.</dd>
+    <dt>Cap. XCVI, “A carta anônima”</dt>
+    <dd>Lobo Neves recebe uma carta que acusa Virgília, e ela o convence de que é calúnia.</dd>
+    <dt>Cap. CXVII, “O Humanitismo”</dt>
+    <dd>Quincas expõe a filosofia a Brás. A parábola das batatas não está aqui: é do romance <em>Quincas Borba</em>.</dd>
+    <dt>Cap. CXXIII, “O verdadeiro Cotrim”</dt>
+    <dd>Retrato irônico de Cotrim: contrabandista de escravos, cruel com eles e, ao mesmo tempo, homem “respeitável”.</dd>
+    <dt>Cap. CLVIII, “Dous encontros”</dt>
+    <dd>Marcela morre no hospital. Brás reencontra Eugênia num cortiço.</dd>
+    <dt>Cap. CLX, “Das negativas”</dt>
+    <dd>O balanço final da vida de Brás.</dd>
+  </dl>
+  <p class="lead" style="margin-top:.9rem;font-size:.92rem;">A numeração pode variar um pouco entre edições.</p>
+
+  <h3>O Delírio</h3>
+  <p>Leitura de aula: Pandora é uma alegoria. A vida não tem sentido e a eternidade é um tédio profundo. Durante a vida nós matamos o tempo e, no fim, por ironia, é o tempo que nos mata.</p>
+
+  <h3>“Das negativas”</h3>
+  <p>Brás faz o balanço da vida pelo que não realizou. O “saldo” final é esta frase:</p>
+  <div class="quote"><p>Não tive filhos, não transmiti a nenhuma criatura o legado da nossa miséria.</p></div>
+  <p>Duas interpretações, e as duas estão certas:</p>
+  <ol class="bullets">
+    <li>Ele não teve filhos porque a vida humana não tem sentido, então não vale a pena transmiti-la.</li>
+    <li>Ele é mesquinho e desdenha o que não conseguiu ter. Durante o enredo queria ter filhos, não conseguiu, e por isso rebaixa a ideia.</li>
+  </ol>
+  <p>A ambiguidade é muito presente no livro. Em qualquer das leituras, a vida <em>dele</em> não teve sentido.</p>
+</section>
+
+<section id="bras-treino">
+  <h2>Perguntas e respostas</h2>
+  <p class="lead">Tente responder antes de abrir. As respostas são modelos curtos para você comparar com as suas.</p>
+  <div class="qa">
+
+    <details>
+      <summary>Como a condição de defunto-autor permite a Machado criticar a elite brasileira?</summary>
+      <div class="answer">
+        <p>Como Brás já morreu, não tem reputação a proteger nem favor a pedir. Por isso confessa com naturalidade cínica o que um vivo esconderia: o adultério, o interesse em Marcela, o desprezo por Eugênia.</p>
+        <p>Machado usa essa franqueza para expor os valores da elite por dentro. Quem fala é um membro dela, e o leitor enxerga a crítica que o próprio Brás não enxerga. A visão de além-túmulo também rebaixa as vaidades: fama, dinheiro e posição acabam no mesmo verme da dedicatória.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Por que Brás é um narrador não confiável? Use o emplasto ou “Das negativas” como exemplo.</summary>
+      <div class="answer">
+        <p>Porque ele conta a própria vida e tem interesse em se mostrar bem. Abusa da boa-fé do leitor, justifica atos duvidosos e muda de opinião conforme a conveniência, a “volubilidade” de que fala Roberto Schwarz.</p>
+        <p>No capítulo do emplasto, mistura o desejo de aliviar a humanidade com o desejo de fama, e o leitor percebe qual pesa mais. Em “Das negativas”, apresenta o fato de não ter filhos como lucidez, quando pode ser só despeito. O leitor precisa ler contra o narrador.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Qual é a relação entre o Humanitismo e a crítica às teorias científicas do século XIX?</summary>
+      <div class="answer">
+        <p>Quincas cria uma teoria que explica tudo com um único princípio, Humanitas, e transforma até a guerra e a morte em etapas necessárias. É uma paródia do positivismo, do evolucionismo e das teorias que davam sentido de progresso à história mesmo diante da dor.</p>
+        <p>O resultado é que a teoria acaba justificando o vencedor e o egoísmo, ou seja, serve de desculpa para a desigualdade. (A parábola das batatas, que ilustra isso, está no romance <em>Quincas Borba</em>.) Numa sociedade escravista, isso é muito conveniente para a elite. Quincas termina louco e a filosofia vira religião, o que sugere que a fronteira entre razão científica e delírio é frágil.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>O que o episódio de Prudêncio revela sobre a escravidão e sobre a violência social?</summary>
+      <div class="answer">
+        <p>Revela que a escravidão não só explora, como deforma. Prudêncio apanhava de Brás quando criança e, depois de livre, compra um escravo e o castiga do mesmo jeito.</p>
+        <p>A liberdade formal não rompe a lógica da dominação: o único modelo de poder que ele conhece é o do senhor. Brás assiste sem se reconhecer como parte do problema, o que reforça a crítica a uma elite que se beneficia da violência e a naturaliza.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Compare as duas leituras de “Das negativas”. Por que a ambiguidade importa?</summary>
+      <div class="answer">
+        <p><strong>Leitura filosófica:</strong> a vida humana não tem sentido, então não ter filhos é um ato de lucidez, que evita passar adiante a “miséria” humana.</p>
+        <p><strong>Leitura psicológica:</strong> Brás é mesquinho e desdenha o que não conseguiu ter. Ao longo do enredo queria ter filhos e não conseguiu, e agora rebaixa o que lhe faltou, como faz com tudo que não conquista.</p>
+        <p>A ambiguidade importa porque o livro não resolve a dúvida: as duas leituras convivem e levam à mesma conclusão, a de que a vida dele não teve sentido. Essa recusa de uma explicação única é parte da ironia de Machado.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Marcela, Virgília e Eugênia: como o interesse e a aparência decidem as relações de Brás?</summary>
+      <div class="answer">
+        <p>Em todas, Brás decide por conveniência, status e vaidade, e o amor romântico é desmontado.</p>
+        <p>Com Marcela, o interesse é financeiro: o amor tem preço, e ela o amou “quinze meses e onze contos de réis”. Com Virgília, o interesse é social: ela escolhe o marido mais ambicioso, e o adultério vive de aparências, com Dona Plácida ajudando a esconder o caso. Com Eugênia, pesam a aparência e a origem: ele a rejeita por ser coxa e filha de uma traição e, anos depois, não consegue ajudá-la, porque ela recusa a esmola.</p>
+        <p>O padrão é o do livro inteiro: Brás exalta o que conquista e desdenha o que não conquista.</p>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<section id="bras-conferir">
+  <h2>Para conferir no livro</h2>
+  <div class="panel">
+    <ul class="bullets">
+      
+      <li><strong>“Eugenismo”.</strong> O termo “eugenia” foi criado em 1883, depois do livro. Na prova, é mais seguro explicar o nome Eugênia como irônico (“bem-nascida”, mas ilegítima e coxa) do que falar em movimento eugenista da época.</li>
+      <li><strong>Batatas.</strong> Confira no seu exemplar que a frase “ao vencedor, as batatas” não aparece nas Memórias. Ela é do romance <em>Quincas Borba</em>, capítulo VI.</li>
+      <li><strong>Nhã-Loló (Eulália).</strong> Sobrinha de Cotrim, noiva arranjada por Sabina, que morre de febre amarela. Não aparece nas suas notas, vale ler o trecho.</li>
+      <li><strong>O jantar atrasado.</strong> Brás reencontra Marcela marcada pela varíola, numa loja da Rua dos Ourives, e depois tem uma visão em que o rosto de Virgília parece o dela. O detalhe de chegar atrasado ao jantar vem das suas notas. Releia o trecho.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Baseado nas suas anotações, reorganizadas e ampliadas.
+</footer>
+</article>
+<article class="book" data-book="gonzaga">
+<header class="hero">
+  <p class="byline">Lima Barreto, 1919</p>
+  <h1>Vida e Morte de M. J. Gonzaga de Sá</h1>
+  <p class="sub">Um livro que finge ser biografia para falar do Rio, da elite e do Brasil.</p>
+</header>
+<nav class="toc" aria-label="Seções do livro"><ul><li><a class="back" href="#/" data-go="">&larr; Obras</a></li><li><a href="#/gonzaga/ficha" data-go="gonzaga/ficha">Ficha</a></li><li><a href="#/gonzaga/narrador" data-go="gonzaga/narrador">Narrador</a></li><li><a href="#/gonzaga/estilo" data-go="gonzaga/estilo">Estilo</a></li><li><a href="#/gonzaga/personagens" data-go="gonzaga/personagens">Personagens</a></li><li><a href="#/gonzaga/capitulos" data-go="gonzaga/capitulos">Capítulos</a></li><li><a href="#/gonzaga/rio" data-go="gonzaga/rio">O Rio</a></li><li><a href="#/gonzaga/machado" data-go="gonzaga/machado">Machado</a></li><li><a href="#/gonzaga/treino" data-go="gonzaga/treino">Perguntas</a></li><li><a href="#/gonzaga/conferir" data-go="gonzaga/conferir">Conferir</a></li></ul></nav>
+<main>
+<section id="gonzaga-ficha">
+  <h2>Ficha rápida</h2>
+  <dl class="ficha">
+    <dt>Autor</dt><dd>Lima Barreto (1881–1922), carioca, negro e funcionário público. Pré-Modernismo. Nasceu no mesmo ano das Memórias Póstumas.</dd>
+    <dt>Publicação</dt><dd>Começou a ser escrito por volta de 1906 e saiu em 1919.</dd>
+    <dt>Estrutura</dt><dd>12 capítulos quase independentes, sem relação de causa e efeito. O enredo nasce das reflexões e dos passeios dos amigos.</dd>
+    <dt>Motivo do livro</dt><dd>O narrador escreve a “biografia” de um modesto funcionário, em vez da de um ministro. É paródia de biografia e metalinguagem.</dd>
+    <dt>Narrador</dt><dd>Augusto Machado, jovem funcionário público, em 1ª pessoa, personagem e amigo de Gonzaga.</dd>
+    <dt>Protagonista</dt><dd>Manuel Joaquim Gonzaga de Sá, de família aristocrática carioca em extinção. Bacharel em letras sem título de “doutor”, com cerca de 60 anos, é amanuense (escrevente) na Secretaria dos Cultos. Mora com a tia Escolástica, que o criou.</dd>
+    <dt>Tempo</dt><dd>Lembranças do fim do século XIX. A amizade nasce nos anos 1900, na Primeira República.</dd>
+    <dt>Espaço</dt><dd>Rio de Janeiro em reforma.</dd>
+    <dt>Ritmo</dt><dd>Livro “parado”: quase não há ação. Boa parte do enredo é os amigos passeando e conversando sobre símbolos nacionais, elite, classes e outros temas.</dd>
+    <dt>Tom</dt><dd>Oscila entre a revolta e a melancolia, da ironia à sátira social, com momentos líricos diante da paisagem.</dd>
+  </dl>
+</section>
+
+<section id="gonzaga-narrador">
+  <h2>Narrador e foco narrativo</h2>
+  <h3>Narrador-personagem</h3>
+  <p>Augusto Machado conta em 1ª pessoa e participa de todos os episódios. Não é imparcial: tem opinião e um lugar social definido.</p>
+  <h3>Alter ego do autor</h3>
+  <p>Tem a mesma profissão de Lima Barreto (funcionário público) e também é negro (os resumos o chamam de mestiço ou mulato), com vinte e poucos anos. O autor usa o personagem para expor o próprio ponto de vista.</p>
+  <h3>Pseudobiógrafo</h3>
+  <p>Na “Explicação necessária”, Augusto diz que se inspirou nas biografias de ministros do doutor Pelino Guedes, uma caricatura do homem de letras tradicional e do estilo parnasiano, e resolveu fazer a dos “escribas ministeriais”. Uma biografia fala só do biografado. Aqui, o narrador usa Gonzaga para falar de si, da cidade e da sociedade.</p>
+  <h3>Por que ele não precisa mentir</h3>
+  <p>Brás Cubas e Bentinho são ricos e têm o que esconder. Augusto é pobre e não tem motivo para mentir em benefício próprio. A parcialidade dele é de ponto de vista, não de ocultação.</p>
+</section>
+
+<section id="gonzaga-estilo">
+  <h2>Características da obra</h2>
+  <ul class="bullets">
+    <li><strong>Caráter de crônica e ensaio:</strong> passeios e reflexões, sem um núcleo de conflito dramático.</li>
+    <li><strong>Romance caricato:</strong> o absurdo critica a burocracia ineficiente e os poderosos. No capítulo I, um bispo reclama que recebeu 17 tiros de salva e tinha direito a 18. O caso sobe por vários ministérios e é resolvido pelo da Guerra, com 17 tiros de canhão grande e um de canhão pequeno, “dezessete e meio”. Outro caso é o número de setas de uma imagem de São Sebastião.</li>
+    <li><strong>Tom filosófico e ironia</strong>, inclusive sobre o funcionalismo e os militares.</li>
+    <li><strong>Enredo não linear:</strong> Augusto adianta a morte de Gonzaga já no primeiro capítulo, como nas Memórias Póstumas.</li>
+    <li><strong>Crítica à sociedade hipócrita e decadente</strong>, a elite carioca.</li>
+    <li><strong>Temas da Primeira República:</strong> funcionalismo improdutivo, sociedade clientelista, racismo científico e elite com pompas de aristocracia.</li>
+    <li><strong>Literatura militante:</strong> Lima Barreto defende uma literatura comprometida com os problemas sociais. Recusa a literatura “sorriso da sociedade”, de Afrânio Peixoto, vista como recreação da elite.</li>
+    <li><strong>Crítica ao Parnasianismo e ao meio literário:</strong> linguagem de pompa e brilho postiço, de elite intelectual, que exclui escritores negros e pobres (esta última ideia vem das suas notas). É metalinguagem, porque o livro adota outra linguagem.</li>
+    <li><strong>Contemplação e idealização da natureza:</strong> o mar e as serras aparecem humanizados, como se conversassem.</li>
+  </ul>
+</section>
+
+<section id="gonzaga-personagens">
+  <h2>Personagens e suas funções</h2>
+  <article class="char"><h4>Augusto Machado</h4><p class="role">Narrador e alter ego de Lima Barreto</p>
+    <p>Negro e funcionário público. O sobrenome “Machado” faz referência a Machado de Assis. Suas notas dizem que sofre racismo no capítulo XI.</p></article>
+  <article class="char"><h4>Gonzaga de Sá</h4><p class="role">Protagonista e voz das reflexões</p>
+    <p>Amanuense culto, de família aristocrática em extinção (o “Sá” remete aos fundadores da cidade). Vive isolado e crítico, ligado à morte e à decadência, enquanto Augusto quer contato com as pessoas. Morre no primeiro capítulo, e o livro volta no tempo para contar a amizade.</p></article>
+  <article class="char"><h4>Tia Escolástica</h4><p class="role">A velha ordem imperial</p>
+    <p>Tia que criou Gonzaga e mora com ele. Representa a elite tradicional e a velha ordem imperial. Os dois têm pouca interação por causa das diferenças entre eles.</p></article>
+  <article class="char"><h4>Romualdo de Araújo</h4><p class="role">O compadre humilde que morre</p>
+    <p>Compadre de Gonzaga e servente da repartição. Seu velório e seu enterro ocupam os capítulos IX e X.</p></article>
+  <article class="char"><h4>Aleixo</h4><p class="role">O futuro que não se completa</p>
+    <p>Filho órfão e mestiço de Romualdo, afilhado de Gonzaga. Gonzaga e a tia cuidam de educá-lo, mas Gonzaga morre antes de ver o resultado dessa educação.</p></article>
+  <article class="char"><h4>O Barão</h4><p class="role">Sátira ao poder republicano</p>
+    <p>Figura que satiriza o Barão do Rio Branco. Gonzaga o chama de vaidoso e egoísta, mais interessado em aparato e cerimônia do que em melhorar a vida de todos.</p></article>
+  <article class="char"><h4>Alcmena e Xisto</h4><p class="role">Personagens secundários</p>
+    <p>Alcmena é a moça que flerta com Augusto. Xisto é o colega invejoso de Gonzaga na repartição.</p></article>
+</section>
+
+<section id="gonzaga-capitulos">
+  <h2>Capítulo a capítulo</h2>
+  <dl class="chapters">
+    <dt>I, “O inventor e a aeronave”</dt><dd>Augusto conhece Gonzaga na Secretaria dos Cultos, por causa do caso das salvas do bispo. Adianta a morte do amigo e fala de uma folha com o projeto de uma aeronave.</dd>
+    <dt>II, “Primeiras informações”</dt><dd>Dados sobre Gonzaga e sua origem nobre.</dd>
+    <dt>III, “Emblemas públicos”</dt><dd>Gonzaga ironiza os símbolos nacionais: brasões, selos e efígies.</dd>
+    <dt>IV, “Petrópolis”</dt><dd>Crítica à elite carioca. A nobreza de Gonzaga e sua decadência.</dd>
+    <dt>V, “O passeador”</dt><dd>Passeio pelo Rio. Gonzaga lamenta o saneamento, as avenidas novas e a perda de marcos históricos, como o Morro do Castelo.</dd>
+    <dt>VI, “O barão, as costureiras e outras coisas”</dt><dd>Sátira ao Barão do Rio Branco. Conversa sobre costureiras, mulheres, classes, povos e raças.</dd>
+    <dt>VII, “Pleno contato”</dt><dd>Mais ironias sobre o funcionalismo. Os dois se aproximam, e Gonzaga convida Augusto para jantar.</dd>
+    <dt>VIII, “O jantar”</dt><dd>Na casa de Gonzaga, Augusto conhece a tia Escolástica e observa os retratos de família e os ares aristocráticos da sala. Conversam sobre costumes e sobre a pouca cultura das elites.</dd>
+    <dt>IX, “O padrinho”</dt><dd>Crítica aos costumes e à classe política na Rua do Ouvidor. Augusto faz um longo comentário sobre as mulheres nas ruas durante um café, e Gonzaga o chama para um enterro.</dd>
+    <dt>X, “O enterro”</dt><dd>Velório de Romualdo, trajeto até o cemitério do Caju e forte crítica social.</dd>
+    <dt>XI, “Era feriado nacional…”</dt><dd>Gonzaga não entende o entusiasmo cívico do povo nos desfiles e vê um povo manipulado como rebanho.</dd>
+    <dt>XII, “Últimos encontros”</dt><dd>Discutem a educação de Aleixo. Gonzaga morre antes de ver o resultado.</dd>
+  </dl>
+</section>
+
+<section id="gonzaga-rio">
+  <h2>O Rio em transformação</h2>
+  <p>A história se passa durante a reforma do Rio no governo de Pereira Passos (prefeito de 1902 a 1906): modernização da infraestrutura, embelezamento e demolição de cortiços.</p>
+  <p>Os amigos passeiam pela cidade e refletem. Um dos personagens se preocupa com a arquitetura do Rio, e o outro faz a crítica social.</p>
+  <div class="quote"><p>Por meio do narrador, Lima Barreto critica o programa de Pereira Passos: a cidade foi embelezada fisicamente, mas o problema da pobreza não foi resolvido.</p></div>
+  <p>O livro oferece uma visão social do Rio, e não apenas uma paisagem. Ao fundo está a Primeira República, com a ascensão de uma nova oligarquia no lugar da ligada ao Império.</p>
+</section>
+
+<section id="gonzaga-machado">
+  <h2>Machadiano, mas diferente</h2>
+  <p>É o romance mais “machadiano” de Lima Barreto: tom filosófico, ironia, enredo não linear (a morte no capítulo I lembra as Memórias Póstumas), crítica à elite hipócrita e decadente, o nome do autor no do narrador e um narrador em 1ª pessoa não imparcial, como Bentinho em Dom Casmurro. A edição da Editora da Unicamp o vê como continuador de uma tradição crítica que vem de Machado e como precursor do Modernismo.</p>
+  <div class="tablewrap"><table class="cmp">
+    <thead><tr><th></th><th>Machado de Assis</th><th>Lima Barreto</th></tr></thead>
+    <tbody>
+      <tr><th>Linguagem</th><td>Mais formal</td><td>Mais coloquial</td></tr>
+      <tr><th>Ironia</th><td>Sutil</td><td>Explícita</td></tr>
+      <tr><th>Narrador</th><td>Rico, com motivos para distorcer (Brás, Bentinho)</td><td>Pobre, sem motivo para mentir</td></tr>
+    </tbody></table></div>
+</section>
+
+<section id="gonzaga-treino">
+  <h2>Perguntas e respostas</h2>
+  <p class="lead">Tente responder antes de abrir.</p>
+  <div class="qa">
+    <details><summary>Qual é o foco narrativo e o que o diferencia do de Brás Cubas e Bentinho?</summary><div class="answer">
+      <p>O narrador é Augusto Machado, personagem em 1ª pessoa, não imparcial e alter ego de Lima Barreto. É um pseudobiógrafo: em vez de falar só de Gonzaga, usa a amizade para falar de si, do Rio e da sociedade.</p>
+      <p>Brás Cubas e Bentinho são ricos e têm o que esconder, o que os torna narradores suspeitos. Augusto é pobre e não tem motivo para mentir em causa própria.</p></div></details>
+    <details><summary>Como tempo e espaço aparecem na obra?</summary><div class="answer">
+      <p>As lembranças remetem ao fim do século XIX, e a amizade começa nos anos 1900, na Primeira República. O espaço é o Rio de Janeiro, que os amigos percorrem a pé, refletindo sobre o que veem.</p>
+      <p>O passeio dá uma visão social da cidade e abre espaço para a contemplação da paisagem.</p></div></details>
+    <details><summary>Que crítica o livro faz às reformas de Pereira Passos?</summary><div class="answer">
+      <p>A reforma modernizou a infraestrutura e embelezou o Rio, derrubando cortiços. Pelo narrador, Lima Barreto critica o caráter apenas físico da mudança: a cidade ficou mais bonita, mas a pobreza não foi resolvida.</p>
+      <p>No capítulo V, Gonzaga lamenta as avenidas novas e a perda de marcos históricos.</p></div></details>
+    <details><summary>Que exemplo do livro mostra a sátira à burocracia?</summary><div class="answer">
+      <p>O caso das salvas do bispo, no capítulo I. Uma reclamação sobre 17 tiros em vez de 18 vira problema de Estado, passa por vários ministérios e é resolvida pelo da Guerra com a solução de “dezessete e meio”.</p>
+      <p>A ironia está na desproporção entre o esforço das autoridades e a frivolidade do problema.</p></div></details>
+    <details><summary>Em que o romance se parece com Machado de Assis e em que se afasta dele?</summary><div class="answer">
+      <p>Parece-se no tom filosófico, na ironia, no enredo não linear (a morte de Gonzaga no capítulo I), na crítica à elite hipócrita e no narrador em 1ª pessoa não imparcial, como Bentinho. O sobrenome do narrador remete a Machado.</p>
+      <p>Afasta-se na linguagem, mais coloquial, e na ironia, explícita, enquanto Machado preferia a formalidade e a ironia sutil.</p></div></details>
+    <details><summary>Que críticas o livro faz ao meio literário e cultural da época?</summary><div class="answer">
+      <p>Critica o Parnasianismo e a retórica dos bacharéis, de linguagem pomposa e feita para uma elite. Recusa a literatura “sorriso da sociedade”, vista como recreação de poucos, e defende uma literatura militante, ligada aos problemas sociais.</p>
+      <p>É metalinguagem: ao adotar uma linguagem mais direta e escrever a biografia de um funcionário comum, o livro pratica o que defende.</p></div></details>
+  </div>
+</section>
+
+<section id="gonzaga-conferir">
+  <h2>Para conferir no livro</h2>
+  <div class="panel"><ul class="bullets">
+    <li><strong>Capítulo VI.</strong> Sua anotação lista um segundo tema depois de “diferença de classes” (“feliocida”), mas a palavra ficou ilegível. O capítulo trata do Barão, das costureiras, das mulheres, das classes e das raças. Releia para ver qual é.</li>
+    <li><strong>Capítulo XI.</strong> No feriado nacional, Augusto acompanha um desfile, vê negros e mulatos obedecendo a um sistema que os oprime e conclui que a sociedade repousa sobre a resignação dos humildes. Confira no livro se o episódio de racismo contra ele está nesse capítulo.</li>
+      <li><strong>Nome do filho de Romualdo.</strong> Suas notas dizem Aleixo; o material de estudo diz Frederico. Confirme no livro.</li>
+    <li><strong>Inácio (resolvido).</strong> O material de estudo o descreve como um preto velho que trabalha para Gonzaga de Sá e o recebe em casa.</li>
+  </ul></div>
+</section>
+</main>
+<footer>Baseado nas suas anotações, conferidas e ampliadas.</footer>
+</article>
+<article class="book" data-book="krenak">
+<header class="hero">
+  <p class="byline">Ailton Krenak, 2020</p>
+  <h1>A vida não é útil</h1>
+  <p class="sub">Textos que questionam o progresso, o dinheiro e a ideia de que a vida precisa servir para algo.</p>
+</header>
+<nav class="toc" aria-label="Seções do livro"><ul><li><a class="back" href="#/" data-go="">&larr; Obras</a></li><li><a href="#/krenak/ficha" data-go="krenak/ficha">Ficha</a></li><li><a href="#/krenak/autor" data-go="krenak/autor">Autor</a></li><li><a href="#/krenak/dinheiro" data-go="krenak/dinheiro">1 Dinheiro</a></li><li><a href="#/krenak/sonhos" data-go="krenak/sonhos">2 Sonhos</a></li><li><a href="#/krenak/maquina" data-go="krenak/maquina">3 Máquina</a></li><li><a href="#/krenak/amanha" data-go="krenak/amanha">4 Amanhã</a></li><li><a href="#/krenak/util" data-go="krenak/util">5 A vida</a></li><li><a href="#/krenak/referencias" data-go="krenak/referencias">Referências</a></li><li><a href="#/krenak/conexoes" data-go="krenak/conexoes">Conexões</a></li><li><a href="#/krenak/treino" data-go="krenak/treino">Perguntas</a></li><li><a href="#/krenak/conferir" data-go="krenak/conferir">Conferir</a></li></ul></nav>
+<main>
+<section id="krenak-ficha">
+  <h2>Ficha rápida</h2>
+  <dl class="ficha">
+    <dt>Autor</dt><dd>Ailton Krenak (nascido em 1953), líder indígena do povo Krenak, ambientalista, escritor e membro da Academia Brasileira de Letras.</dd>
+    <dt>Gênero</dt><dd>Ensaio (não ficção), em prosa contemporânea. São cinco textos adaptados de palestras, entrevistas e lives de 2017 a 2020, a maioria de 2020, no começo da pandemia. Tom de conversa, com metáfora e ironia.</dd>
+    <dt>Publicação</dt><dd>2020, Companhia das Letras.</dd>
+    <dt>Os cinco textos</dt><dd>Não se come dinheiro; Sonhos para adiar o fim do mundo; A máquina de fazer coisas; O amanhã não está à venda; A vida não é útil.</dd>
+    <dt>Tema central</dt><dd>A crítica ao progresso, ao consumo e à ideia de uma humanidade separada da Terra. A vida não deve ser reduzida a utilidade.</dd>
+  </dl>
+</section>
+
+<section id="krenak-autor">
+  <h2>O autor e as duas lutas</h2>
+  <ul class="bullets">
+    <li><strong>Luta pelo direito dos povos indígenas.</strong></li>
+    <li><strong>Defesa do meio ambiente.</strong></li>
+  </ul>
+  <p>As duas se juntam no livro: defender os povos indígenas e a natureza é defender outro modo de viver, em que a humanidade não se coloca acima da Terra.</p>
+  <p class="lead">Contexto (não está nas suas notas): nos anos 1980, Krenak integrou a União das Nações Indígenas e organizou a Aliança dos Povos da Floresta. Em 1987, na Constituinte, discursou com o rosto pintado de jenipapo. O povo Krenak vive no médio Rio Doce (MG), território atingido em 2015 pelo rompimento da barragem da Samarco, em Mariana. Krenak descreve o rio, o “watu”, como em coma depois do desastre.</p>
+</section>
+
+<section id="krenak-dinheiro">
+  <h2>1. Não se come dinheiro</h2>
+  <ul class="bullets">
+    <li><strong>Humanidade:</strong> Krenak diz que, ao falar de humanidade, não fala só do Homo sapiens, mas de uma imensidão de seres.</li>
+    <li><strong>O título</strong> vem de uma fala ancestral: quando acabarem os peixes e as árvores, se perceberá que dinheiro não se come. Imagem das suas notas: seria possível trancar os dirigentes do Banco Central num cofre gigante com a economia deles, mas ninguém come dinheiro. (Suas notas diziam “os ricos”.)</li>
+    <li><strong>Crítica à economia</strong> como acúmulo de riquezas e ao progresso: estamos “viciados em modernidade”, o que desconecta o humano da Terra. Na região do Quadrilátero Ferrífero, ele brinca que “estamos ferrados”.</li>
+    <li><strong>Micropolítica:</strong> hortas, agroecologia e permacultura como saída, no lugar da desilusão com a macropolítica.</li>
+    <li><strong>O conhecimento anterior a nós</strong> é valorizado pela cultura indígena (suas notas).</li>
+    <li><strong>Terra viva:</strong> o vírus aparece como resposta do organismo Terra aos humanos. A “hipótese de Gaia” vem das suas notas.</li>
+    <li><strong>Drummond:</strong> Krenak o chama de “paraquedas colorido”, na ideia de parar de se desenvolver e começar a se envolver. Suas notas citam “O homem; as viagens” e a alegria de estar aqui.</li>
+    <li><strong>NASA, bilionários e Marte:</strong> a cópia da Terra em Marte seria tão medíocre quanto quem a imagina. Sobreviver lá exigiria um aparato tão complexo que seria mais fácil continuar aqui.</li>
+  </ul>
+</section>
+
+<section id="krenak-sonhos">
+  <h2>2. Sonhos para adiar o fim do mundo</h2>
+  <ul class="bullets">
+    <li><strong>O sonho é um aviso e um lugar de afetos.</strong> O texto parte de uma ideia de Sidarta Ribeiro: as pinturas rupestres talvez registrem sonhos.</li>
+    <li><strong>Sibupá</strong>, ancião do povo Xavante, da terra indígena Pimentel Barbosa (Mato Grosso), sonhou que o espírito da caça estava bravo. O recado era que o homem branco destruiria todos os animais.</li>
+    <li><strong>Alerta no Norte.</strong> Krenak visitou as florestas da região Norte e foi alertado sobre a invasão dos brancos.</li>
+    <li><strong>Cosmovisão.</strong> Os Krenak se filiam ao rio, à pedra e às plantas. A “qualidade humana especial” seria só uma construção histórica. “Antes de sermos pessoas, éramos outras coisas” (suas notas).</li>
+    <li><strong>Suspender o céu:</strong> ritual de dança e canto (taru ande) que renova a comunhão com a teia da vida.</li>
+  </ul>
+</section>
+
+<section id="krenak-maquina">
+  <h2>3. A máquina de fazer coisas</h2>
+  <p class="lead">Texto que faltava nas suas notas.</p>
+  <ul class="bullets">
+    <li><strong>A metáfora:</strong> a “máquina de fazer coisas” é o sistema capitalista, que transforma tudo em mercadoria e afasta o ser humano da Terra. Há o desejo de que o consumo continue sem que a máquina precise ser desligada.</li>
+    <li>Critica o desejo humano de se distinguir das outras espécies. Os povos originários tratam a natureza como organismo vivo, e protegê-la é um dever.</li>
+    <li>O capitalismo inventa desejos e vícios, sempre pelo novo.</li>
+    <li>A pandemia é um ajuste de foco: os humanos podem decidir se apertam o botão da própria extinção, mas a Terra continua.</li>
+    <li>Outro mundo não pode ser o mesmo mundo capitalista consertado. Ou se ouve a voz dos outros seres, ou se faz guerra contra a vida na Terra.</li>
+  </ul>
+</section>
+
+<section id="krenak-amanha">
+  <h2>4. O amanhã não está à venda</h2>
+  <ul class="bullets">
+    <li>Texto da época da pandemia, a partir de entrevistas de abril de 2020. Krenak volta à reserva de 4 mil hectares no médio Rio Doce e reconecta com a família.</li>
+    <li>A imagem da Mãe Terra pedindo silêncio ao filho: “filho, silêncio”.</li>
+    <li><strong>Sub-humanidade:</strong> a humanidade seria um clube seleto que não aceita novos sócios, e os povos que ficam agarrados à Terra (caiçaras, indígenas, quilombolas) seriam a sub-humanidade. Krenak se sente excluído desse clube. Suas notas colocavam isso no primeiro texto.</li>
+    <li>Voltar ao normal seria como aceitar o negacionismo. A economia é invenção humana e não pode valer mais que seu criador.</li>
+    <li>O título vem da ideia de parar de vender o amanhã. Krenak pede que se abandone o antropocentrismo. O texto circulou antes como e-book gratuito.</li>
+    <li>Cita <em>A Peste</em>, de Camus, e <em>Vigiar e Punir</em>, de Foucault (suas notas).</li>
+  </ul>
+</section>
+
+<section id="krenak-util">
+  <h2>5. A vida não é útil</h2>
+  <ul class="bullets">
+    <li><strong>Erosão da vida:</strong> crítica à lógica utilitarista. A vida é fruição, e não precisa servir para algo. “Civilizar-se” não é um destino.</li>
+    <li><strong>Educação:</strong> o modo de vida ocidental formata a criança com um roteiro pronto (ser engenheira, médica, arquiteta) para operar no mundo.</li>
+    <li><strong>Sustentabilidade:</strong> Krenak a ironiza. Numa entrevista, disse que vida sustentável é vaidade pessoal.</li>
+    <li><strong>Recursos são finitos, o desejo da humanidade não.</strong></li>
+    <li><strong>O futuro é ancestral:</strong> o apagamento da memória empobrece a vida.</li>
+    <li><strong>Existencialismo</strong> (suas notas): o ser humano é obrigado a dar sentido à vida. O fim do texto, com a imagem de um deserto que é preciso atravessar, é lido como existencialista.</li>
+  </ul>
+  <div class="quote"><p>Ideia central: a vida é fruição, uma dança cósmica. Querer reduzi-la a uma coreografia utilitária é ridículo.</p></div>
+  <p><strong>Comparação possível:</strong> o poema “Ao shopping center”, de José Paulo Paes (outra obra da lista de 2027), que critica o consumismo desenfreado que leva ao esgotamento dos recursos naturais.</p>
+</section>
+
+<section id="krenak-referencias">
+  <h2>Referências e termos</h2>
+  <dl class="chapters">
+    <dt>Cosmovisão</dt><dd>Modo como um povo enxerga o mundo. Na visão que Krenak apresenta, os humanos não estão separados dos outros seres.</dd>
+    <dt>Antropocentrismo</dt><dd>Visão que coloca o ser humano no centro de tudo. Krenak pede que seja abandonada.</dd>
+    <dt>Hipótese de Gaia</dt><dd>Formulada por James Lovelock nos anos 1970: a Terra como sistema vivo que se autorregula.</dd>
+    <dt>Existencialismo</dt><dd>Corrente filosófica do século XX (Sartre, Camus) para a qual o sentido da vida não vem pronto: a pessoa precisa criá-lo.</dd>
+    <dt><em>A Peste</em> (Camus, 1947)</dt><dd>Romance sobre uma epidemia numa cidade isolada.</dd>
+    <dt><em>Vigiar e Punir</em> (Foucault, 1975)</dt><dd>Estudo sobre a sociedade disciplinar, a vigilância e o controle dos corpos.</dd>
+    <dt>“Refazenda” (Gilberto Gil)</dt><dd>Canção citada por Krenak, ligada à ideia de refazer a relação com a terra.</dd>
+    <dt>Antropoceno</dt><dd>Nome dado à época em que o ser humano virou força geológica destrutiva: mineração, desmatamento, pandemias.</dd>
+    <dt>José Paulo Paes (1926–1998)</dt><dd>Poeta modernista. O livro <em>Prosas seguidas de odes mínimas</em> (1992) também está na lista de 2027, e o poema “Ao shopping center” (p. 73) critica o consumo.</dd>
+  </dl>
+</section>
+
+<section id="krenak-conexoes">
+  <h2>Conexões com outras leituras</h2>
+  <ul class="bullets">
+    <li><strong>Brás Cubas.</strong> O Humanitismo dá razão ao vencedor e justifica a exclusão em nome do progresso. Krenak também critica o progresso que cria uma sub-humanidade. Machado ironiza; Krenak argumenta e denuncia.</li>
+    <li><strong>Gonzaga de Sá.</strong> Lima Barreto critica a reforma de Pereira Passos, que embelezou o Rio sem resolver a pobreza. Krenak critica o desenvolvimento que acumula riqueza e esgota a Terra.</li>
+    <li><strong>Drummond e Paes.</strong> A alegria de estar aqui contra a fuga para outros mundos, e a crítica ao consumismo.</li>
+    <li><strong>Olhos d’água.</strong> “O futuro é ancestral” encontra o último conto de Conceição Evaristo, em que uma criança nascida pela mão das ancestrais devolve a esperança ao povo. E Cida, que para de correr para olhar o mar, vive na prática a vida como fruição, e não como utilidade.</li>
+  </ul>
+</section>
+
+<section id="krenak-treino">
+  <h2>Perguntas e respostas</h2>
+  <p class="lead">Tente responder antes de abrir.</p>
+  <div class="qa">
+    <details><summary>O que significa o título “A vida não é útil”?</summary><div class="answer">
+      <p>Significa recusar a ideia de que a vida só vale se servir para algo: produzir, acumular, render. Para Krenak, a vida é fruição, uma dança cósmica, e reduzi-la a uma coreografia utilitária é ridículo.</p>
+      <p>A crítica atinge a economia, a educação e o discurso da sustentabilidade, que tratam pessoas e natureza como recursos.</p></div></details>
+    <details><summary>Como Krenak critica a economia e a ideia de progresso?</summary><div class="answer">
+      <p>Lembra que não se come dinheiro: acumular riqueza não alimenta ninguém. Diz que estamos viciados em modernidade, o que nos desconecta da Terra.</p>
+      <p>Questiona a ideia de humanidade: ela seria um clube seleto, e os povos agarrados à Terra seriam tratados como sub-humanidade. Critica também o projeto de bilionários e da NASA de copiar a Terra em Marte. Contrapõe a isso o conhecimento ancestral indígena e a Terra como organismo vivo.</p></div></details>
+    <details><summary>Qual é o papel dos sonhos e da cosmovisão indígena no livro?</summary><div class="answer">
+      <p>O sonho funciona como aviso. Sibupá sonha com o espírito da caça bravo, anunciando que o homem branco destruiria os animais, e Krenak é alertado sobre a invasão dos brancos nas florestas do Norte.</p>
+      <p>A cosmovisão coloca os humanos junto dos outros seres, e não acima deles, e não separa o sonho da vida de vigília. Ouvir os sonhos é uma forma de adiar o fim do mundo.</p></div></details>
+    <details><summary>Como a pandemia aparece em “O amanhã não está à venda”?</summary><div class="answer">
+      <p>Como uma pausa que obriga a repensar a vida. Krenak volta à sua reserva, e a imagem da Mãe Terra dizendo “filho, silêncio” sugere que a humanidade precisava parar e ouvir.</p>
+      <p>Ele rejeita a volta ao normal, lembra que a economia é invenção humana e pede que se pare de vender o amanhã e se abandone o antropocentrismo.</p></div></details>
+    <details><summary>Compare Krenak e José Paulo Paes na crítica ao consumismo.</summary><div class="answer">
+      <p>Os dois criticam o consumismo desenfreado. Para Krenak, o desejo ilimitado esbarra em recursos finitos e reduz a vida a utilidade. O poema “Ao shopping center”, de Paes, mostra o consumo como um castigo sem saída, e a comparação das suas notas o liga ao esgotamento dos recursos naturais.</p>
+      <p>A diferença é de forma: Krenak argumenta num texto de tom ensaístico e oral, e Paes condensa a crítica num poema curto. Drummond reforça a ideia com a “alegria de estar aqui”, contra a fuga para outros mundos.</p></div></details>
+  </div>
+</section>
+
+<section id="krenak-conferir">
+  <h2>Para conferir no livro</h2>
+  <div class="panel"><ul class="bullets">
+    <li><strong>Hipótese de Gaia (resolvido).</strong> O material de estudo confirma a menção à teoria de Gaia, de James Lovelock, junto com Drummond e a canção “Refazenda”, de Gilberto Gil.</li>
+    <li><strong>Drummond (resolvido).</strong> O material confirma o poema “O homem; as viagens”, usado como chave para o “retorno a si” e para humanizar o humano.</li>
+    <li><strong>Foucault (resolvido).</strong> Krenak retoma Foucault para denunciar a lógica em que quem não produz é descartável, o que se agravou na pandemia, quando os grupos de risco viraram “dispensáveis”. <strong>Camus</strong> continua sem confirmação.</li>
+  </ul></div>
+</section>
+</main>
+<footer>Baseado nas suas anotações, conferidas e ampliadas.</footer>
+</article>
+<article class="book" data-book="evaristo">
+<header class="hero">
+  <p class="byline">Conceição Evaristo, 2014</p>
+  <h1>Olhos d’água</h1>
+  <p class="sub">Quinze contos de dor e afeto na vida de mulheres e homens negros da periferia.</p>
+  <figure class="epitaph">
+    <blockquote>A cor dos olhos de minha mãe era cor de olhos d’água.</blockquote>
+    <figcaption>Do conto que abre o livro: a narradora finalmente descobre a cor dos olhos da mãe.</figcaption>
+  </figure>
+</header>
+<nav class="toc" aria-label="Seções do livro"><ul><li><a class="back" href="#/" data-go="">&larr; Obras</a></li><li><a href="#/evaristo/ficha" data-go="evaristo/ficha">Ficha</a></li><li><a href="#/evaristo/escrevivencia" data-go="evaristo/escrevivencia">Escrevivência</a></li><li><a href="#/evaristo/estilo" data-go="evaristo/estilo">Estilo</a></li><li><a href="#/evaristo/temas" data-go="evaristo/temas">Temas</a></li><li><a href="#/evaristo/contos" data-go="evaristo/contos">Os 15 contos</a></li><li><a href="#/evaristo/desfechos" data-go="evaristo/desfechos">Desfechos</a></li><li><a href="#/evaristo/conexoes" data-go="evaristo/conexoes">Conexões</a></li><li><a href="#/evaristo/treino" data-go="evaristo/treino">Perguntas</a></li><li><a href="#/evaristo/conferir" data-go="evaristo/conferir">Conferir</a></li></ul></nav>
+<main>
+<section id="evaristo-ficha">
+  <h2>Ficha rápida</h2>
+  <dl class="ficha">
+    <dt>Autora</dt><dd>Conceição Evaristo (nascida em 1946, numa favela de Belo Horizonte). Trabalhou como empregada doméstica enquanto estudava, foi professora da rede pública no Rio, é mestre pela PUC-Rio e doutora pela UFF. Estreou em 1990 nos <em>Cadernos Negros</em>, do grupo Quilombhoje.</dd>
+    <dt>Publicação</dt><dd>2014, Editora Pallas. Muitos dos contos já tinham saído nos <em>Cadernos Negros</em>.</dd>
+    <dt>Prêmio</dt><dd>Jabuti de 2015, na categoria contos e crônicas.</dd>
+    <dt>Estrutura</dt><dd>15 contos curtos e independentes, sem personagens em comum.</dd>
+    <dt>Narradores</dt><dd>A maioria em 3ª pessoa, com narrador onisciente. Exceções: o primeiro conto, em 1ª pessoa (“eu”); o último, em 1ª pessoa do plural (“nós”); e “A gente combinamos de não morrer”, em que as vozes dos personagens tomam a narração.</dd>
+    <dt>Protagonistas</dt><dd>Pessoas negras e pobres, sobretudo mulheres e muitas delas mães. Elas têm voz própria e não são figurantes.</dd>
+    <dt>Espaço</dt><dd>Favelas, ruas, ônibus, trens e casas de patrões de cidades grandes, com lembranças do interior de Minas.</dd>
+    <dt>Tom</dt><dd>Lirismo e brutalidade lado a lado. A própria editora chama os textos de contos de “gozo-pranto”.</dd>
+  </dl>
+</section>
+
+<section id="evaristo-escrevivencia">
+  <h2>Escrevivência</h2>
+  <p>Palavra criada pela autora para nomear a própria escrita: <strong>escrever + viver</strong>, e também “escrever-se vendo”. Ela começou a usar o termo nos anos 1990, na dissertação de mestrado.</p>
+  <ul class="bullets">
+    <li><strong>Ficção a partir da vivência.</strong> Os contos não são autobiografia. Partem de situações reais, da vida dela ou da coletividade, sempre do ponto de vista de uma mulher negra no Brasil.</li>
+    <li><strong>Individual e coletiva.</strong> A experiência de uma personagem representa a de muitas.</li>
+    <li><strong>Raiz histórica.</strong> A autora liga o conceito à escravização e às mulheres africanas e suas descendentes. Ela diz que essa escrita não serve para adormecer os da casa-grande, e sim para acordá-los de seus sonos injustos.</li>
+    <li><strong>Escrevivência dentro do livro.</strong> Em “A gente combinamos de não morrer”, Bica escreve sobre a violência que vive. É o conceito encenado por uma personagem.</li>
+  </ul>
+</section>
+
+<section id="evaristo-estilo">
+  <h2>Como os contos são escritos</h2>
+  <ul class="bullets">
+    <li><strong>Começo no meio da ação</strong> (<em>in media res</em>) e lembranças em flashback.</li>
+    <li><strong>Discurso indireto livre:</strong> a voz do narrador se mistura aos pensamentos da personagem.</li>
+    <li><strong>Polifonia:</strong> várias vozes ao longo do livro e, em “A gente combinamos de não morrer”, dentro de um mesmo conto.</li>
+    <li><strong>Neologismos com hífen</strong>, porque uma palavra sozinha não dá conta: boneca-mãe, gozo-pranto, figurinha-flor, quarto-marquise, vida-estrada, borboleta-menina, e o verbo “milagrou”.</li>
+    <li><strong>Linguagem coloquial</strong>, como no título “A gente combinamos de não morrer”, que reproduz a fala da periferia.</li>
+    <li><strong>Nomes que significam:</strong> Luamanda (lua + manda), Querença, Bamidele (“esperança”) e Ayoluwa (“a alegria do nosso povo”).</li>
+    <li><strong>Cenas do cotidiano e desfechos trágicos.</strong> A maioria termina em morte violenta. Alguns quebram a expectativa com um final aberto ou de esperança.</li>
+    <li><strong>Religiosidade de matriz africana e sincretismo:</strong> Oxum e as Yabás (orixás femininas) em “Olhos d’água”, ao lado de Santa Bárbara; o Menino Jesus visto como Erê (entidade infantil) em “Lumbiá”.</li>
+    <li><strong>A versão da imprensa como contraponto.</strong> Em “Ana Davenga”, o noticiário lamenta só a morte de um policial. O conto mostra o outro lado.</li>
+  </ul>
+</section>
+
+<section id="evaristo-temas">
+  <h2>Temas e denúncia</h2>
+  <p>O livro denuncia o <strong>racismo</strong>, o <strong>machismo</strong> e a <strong>marginalização</strong> de quem vive na periferia, e trata de amor, ancestralidade, pobreza, desigualdade, relações de trabalho, família, maternidade e violência.</p>
+  <ul class="bullets">
+    <li><strong>Maternidade desmistificada.</strong> Ser mãe não aparece como destino feliz. Natalina tem quatro gestações e só quer um filho; Maria morre levando comida para os filhos; Benícia, mãe de Zaíta, está exausta e bate nas filhas. Há também mães que sustentam e protegem tudo, como a de “Olhos d’água”.</li>
+    <li><strong>Violência cíclica.</strong> É o que mais se repete. Passa de geração em geração e volta em cada conto: o irmão de Zaíta comanda o tiroteio que mata a irmã; o neto de Duzu morre aos 13 anos; Dorvi mata quem o traiu e espera ser morto; Ardoca nasceu e morre no trem.</li>
+    <li><strong>Trabalho explorado:</strong> domésticas, lavadeiras, faxineiro, vendedores de rua, a “barriga de aluguel” de Natalina.</li>
+    <li><strong>Corpo da mulher negra:</strong> estupro, exploração sexual (Duzu), agressão (Luamanda), mas também desejo e prazer vividos sem culpa (Luamanda, Salinda).</li>
+    <li><strong>Infância roubada:</strong> Zaíta, Di Lixão e Lumbiá.</li>
+    <li><strong>Ancestralidade e esperança</strong> como resistência: a mãe, a avó e o nascimento de Ayoluwa.</li>
+  </ul>
+  <div class="quote"><p>O livro começa e termina com dor e afeto: abre com uma filha procurando a mãe e fecha com o nascimento de uma criança. Passa do “eu” do primeiro conto ao “nós” do último.</p></div>
+</section>
+
+<section id="evaristo-contos">
+  <h2>Os 15 contos, na ordem do livro</h2>
+  <p class="lead">Quem narra, o que acontece e como termina.</p>
+
+  <article class="char"><h4>1. Olhos d’água</h4><p class="role">1ª pessoa. Ancestralidade, memória e afeto</p>
+    <p>A narradora, sem nome, acorda angustiada: não lembra a cor dos olhos da mãe. Recorda a infância pobre com a mãe lavadeira e passadeira e as seis filhas, ela a mais velha. Nos dias de fome, a mãe inventava brincadeiras: virava rainha num trono de banquinho, fingia colher algodão-doce nas nuvens. Nas tempestades, rezava para Santa Bárbara com medo de o barraco cair. A narradora volta à terra natal, olha a mãe e só vê lágrimas: os olhos são “cor de olhos d’água”, águas de Mamãe Oxum, rios calmos e profundos.</p>
+    <p>No presente, é a filha da narradora que pergunta qual é a cor tão úmida dos olhos dela. A herança passa por três gerações.</p>
+    <p>Oxum é a orixá das águas doces (rios e cachoeiras), ligada à força, à fertilidade e à sabedoria feminina.</p></article>
+
+  <article class="char"><h4>2. Ana Davenga</h4><p class="role">3ª pessoa. Amor, crime e violência policial</p>
+    <p>Ana vive com Davenga, chefe de um grupo do morro, num barraco que serve de quartel-general. Ouve o sinal de samba e se angustia, mas é uma festa-surpresa: o primeiro aniversário comemorado da vida dela. Davenga é ambíguo: mandou matar uma antiga amante que o rejeitou, mas chora no amor (“gozo-pranto”).</p>
+    <p>De madrugada a polícia invade. Davenga reage e os dois são metralhados. Ana estava grávida e morre protegendo a barriga, aos 27 anos. O jornal do dia seguinte lamenta apenas a morte de um policial.</p></article>
+
+  <article class="char"><h4>3. Duzu-Querença</h4><p class="role">3ª pessoa. Exploração sexual e esperança na neta</p>
+    <p>Duzu, velha, pede esmola na escadaria de uma igreja e delira de fome. Menina, saiu do interior com os pais para a cidade; o pai, pescador, queria que ela trabalhasse e estudasse. Ela foi deixada na casa de D. Esmeraldina, que era um prostíbulo, e explorada sexualmente ainda criança. Viveu anos de violência de cafetões e cafetinas e viu mulheres serem assassinadas.</p>
+    <p>Teve nove filhos. Dos netos, três lhe davam alegria: Angélico, Tático (morto aos 13 anos, envolvido com o crime) e Querença. Duzu morre no carnaval, fantasiada com papéis brilhantes, imaginando que voa. Querença, de 13 anos, estuda, ensina as crianças menores da favela e participa da associação de moradores: entende que é preciso reinventar a vida.</p></article>
+
+  <article class="char"><h4>4. Maria</h4><p class="role">3ª pessoa. Racismo e linchamento</p>
+    <p>Empregada doméstica e mãe de três meninos, Maria trabalhou num domingo na festa da patroa e cortou a mão com uma faca a laser. Volta de ônibus com sobras da festa (osso de pernil e frutas que os filhos nunca tinham provado) e a gorjeta para comprar xarope.</p>
+    <p>O ex-companheiro, pai do primeiro filho, senta ao lado dela, manda um recado carinhoso para o menino e anuncia um assalto com um comparsa. Maria é a única poupada. Os passageiros a acusam de cúmplice, a chamam de “negra safada” e a lincham. O motorista tenta defendê-la, sem sucesso. Ela morre sem entender, pensando no recado para o filho.</p></article>
+
+  <article class="char"><h4>5. Quantos filhos Natalina teve?</h4><p class="role">3ª pessoa. Maternidade desmistificada</p>
+    <p>Natalina está na quarta gravidez, mas é o primeiro filho que ela quer. As outras três:</p>
+    <ol class="bullets">
+      <li>Aos 14 anos, com o namorado Bilico. Foge de casa com medo de Sá Praxedes, parteira temida que fazia abortos, e dá o bebê a uma enfermeira do hospital.</li>
+      <li>Com Tonho, que quer formar família. Ela não quer, e ele volta para a terra dele levando o filho.</li>
+      <li>Como empregada, a pedido dos patrões: a patroa não podia ter filhos, e Natalina engravida do patrão para dar a criança ao casal. Depois é esquecida.</li>
+      <li>É sequestrada por dois homens que procuram um irmão que ela nem tem, e um deles a estupra. Quando ele dorme, ela pega a arma dele e o mata. Foge do comparsa, feliz com o filho que é “só seu”.</li>
+    </ol></article>
+
+  <article class="char"><h4>6. Beijo na face</h4><p class="role">3ª pessoa. Amor entre mulheres e controle masculino</p>
+    <p>Salinda é casada e mãe. Há quase um ano vive um amor secreto com outra mulher, nos encontros na casa da tia Vandu, que é cúmplice. O marido a vigia, contrata detetive e ameaça tirar as crianças, matá-la ou se matar. Ela se identifica com uma equilibrista de circo na corda bamba.</p>
+    <p>No fim, o marido diz que sabe de tudo e vai disputar a guarda dos filhos. Sozinha, Salinda olha o espelho e vê o rosto da amada: duas mulheres negras, parecidas, um “amor entre duas iguais”. Um simples beijo no rosto se eterniza.</p></article>
+
+  <article class="char"><h4>7. Luamanda</h4><p class="role">3ª pessoa. Sexualidade e maturidade</p>
+    <p>Mulher negra de quase 50 anos se olha no espelho e se acha inteira, apesar dos tombos da “vida-estrada”. Relembra os amores: um platônico aos 11, um garoto aos 13, o homem com quem teve cinco filhos, uma mulher, um jovem, um velho. Também a dor: um homem que não aceitou a separação a machucou, e ela precisou reaprender o prazer.</p>
+    <p>É avó, mãe, amiga e amante. Lembra o poema “Retrato”, de Cecília Meireles, mas, ao contrário do eu lírico, se reconhece no espelho. Sai ao encontro de mais um amor.</p></article>
+
+  <article class="char"><h4>8. O cooper de Cida</h4><p class="role">3ª pessoa. Pressa e quebra de expectativa</p>
+    <p>Cida, 29 anos, veio do interior aos 16 e vive correndo: cooper em Copacabana, leitura dinâmica, escada em vez de elevador. O cooper é metáfora da correria da cidade. Uma manhã, ela desacelera, pisa descalça na areia e olha o mar pela primeira vez. Pensa nos ricos que nadam em dia útil e nos mendigos que cruzam seu caminho.</p>
+    <p>Diz a Pedro, que a esperava de carro, que esqueceu das horas e não vai trabalhar: vai dar um tempo para ela. É um dos poucos finais felizes do livro.</p></article>
+
+  <article class="char"><h4>9. Zaíta esqueceu de guardar os brinquedos</h4><p class="role">3ª pessoa. Infância e tiroteio</p>
+    <p>Zaíta procura a figurinha mais bonita, a de uma menina com flores, e acha que a gêmea Naíta a pegou. A mãe, Benícia, 34 anos e quatro filhos, chega cansada do supermercado, encontra os brinquedos espalhados e destrói a boneca. Um irmão está no exército; o outro chefia o grupo mais armado da favela.</p>
+    <p>Zaíta sai à procura da irmã e da figurinha e é morta num tiroteio, com balas que “desabrochavam como flores malditas”. Naíta grita a frase do título: as palavras não alcançam a violência.</p></article>
+
+  <article class="char"><h4>10. Di Lixão</h4><p class="role">3ª pessoa. Menino de rua</p>
+    <p>Di Lixão, 15 anos, dorme sob uma marquise. Acorda com dor de dente e um tumor na boca, briga com o menino que divide o lugar e leva um chute. Lembra a mãe, prostituta assassinada na zona onde moravam. Urina sangue e morre sozinho. Às nove da manhã, o rabecão da polícia recolhe o corpo. O apelido vinha da mania de chutar latas de lixo.</p></article>
+
+  <article class="char"><h4>11. Lumbiá</h4><p class="role">3ª pessoa. Natal e trabalho infantil</p>
+    <p>Lumbiá vende amendoim, chicletes e flores na rua e inventa histórias tristes para vender mais. Ama o Natal por causa do presépio: o Menino Jesus é pobre como ele, só faltava ser negro. Uma loja proíbe a entrada de crianças sozinhas. No dia 23 de dezembro, com febre e debaixo de chuva, ele entra, pega o Menino Jesus nos braços (vê nele um Erê, nu e com frio) e foge. É atropelado: os dois se quebram.</p></article>
+
+  <article class="char"><h4>12. Os amores de Kimbá</h4><p class="role">3ª pessoa. Raça, classe e desejo</p>
+    <p>Zezinho ganhou o apelido Kimbá de Gustavo, amigo rico. Vem de uma família de mulheres trabalhadoras (a avó descendente de escravizados, a mãe e as tias domésticas) e trabalha na faxina de um supermercado. Vive um triângulo amoroso com Gustavo, que o ama, e com Beth, prima dele, que o quer só para si. Os dois são ricos e brancos.</p>
+    <p>O triângulo não se sustenta, e os três fazem um pacto: a morte selaria o amor entre eles. Kimbá sobe ao apartamento, os copos já estão preparados, e os três esperam a morte juntos.</p></article>
+
+  <article class="char"><h4>13. Ei, Ardoca</h4><p class="role">3ª pessoa. Trabalho, trem e suicídio</p>
+    <p>Ardoca, trabalhador negro e pobre, cresceu no trem do subúrbio (já chutava na barriga da mãe com os solavancos) e nunca se acostumou ao barulho nem à violência que viu nos vagões. Num sábado, já tendo tomado veneno, desliza até o chão de um vagão lotado. Uns acham que está bêbado, crentes cantam hinos, um camelô pula por cima dele, uma mulher lhe dá água.</p>
+    <p>Um homem entra gritando “Ei, Ardoca!”, como quem o conhece, carrega-o até um banco da estação e leva o dinheiro, os sapatos e o relógio. Ardoca morre. Ironia: quem chama pelo nome é quem o rouba.</p></article>
+
+  <article class="char"><h4>14. A gente combinamos de não morrer</h4><p class="role">Narrador em 3ª pessoa e as vozes de Dorvi, Bica e Dona Esterlinda</p>
+    <p>O conto mais longo. Dorvi, traficante, foi traído por quem ficou com parte da mercadoria e agora deve ao fornecedor; mata o traidor, Neo, e some. Bica, sua companheira, tem um filho recém-nascido, escreve desde a escola e amamenta filhos de outras mães. O irmão dela, Idago, foi morto como delator. Dona Esterlinda, mãe de Bica, assiste novela para escapar da realidade.</p>
+    <p>Na infância, os meninos combinaram de não morrer. Para Bica, não morrer nem sempre é viver. Ela retoma um verso, “escrever é uma maneira de sangrar”, e escreve para contagiar outras bocas de esperança. É a escrevivência encenada no conto e prepara o último.</p></article>
+
+  <article class="char"><h4>15. Ayoluwa, a alegria do nosso povo</h4><p class="role">1ª pessoa do plural. Esperança coletiva</p>
+    <p>Narrado por um “nós”, como uma história oral. O povoado perdeu a esperança: os velhos pediam a morte, os moços se matavam e nenhuma criança nascia. Até que Bamidele, “a esperança”, anuncia que vai ter um filho. Omolara, a parteira, recebe a menina, e todos sentem o parto no próprio ventre, até os homens.</p>
+    <p>O mundo não se conserta, mas o povo volta a tomar a vida nas mãos. Retoma a esperança do conto anterior e fecha o livro.</p></article>
+</section>
+
+<section id="evaristo-desfechos">
+  <h2>Como cada conto termina</h2>
+  <p class="lead">Bom para revisar na véspera.</p>
+  <div class="tablewrap"><table class="cmp">
+    <thead><tr><th>Conto</th><th>Desfecho</th></tr></thead>
+    <tbody>
+      <tr><th>Olhos d’água</th><td>Descobre a cor dos olhos da mãe; a filha faz a mesma pergunta a ela</td></tr>
+      <tr><th>Ana Davenga</th><td>Ana, grávida, e Davenga mortos pela polícia</td></tr>
+      <tr><th>Duzu-Querença</th><td>Duzu morre no carnaval; a neta segue com esperança</td></tr>
+      <tr><th>Maria</th><td>Linchada no ônibus</td></tr>
+      <tr><th>Natalina</th><td>Foge grávida do filho que quer</td></tr>
+      <tr><th>Beijo na face</th><td>Marido descobre; final aberto</td></tr>
+      <tr><th>Luamanda</th><td>Sai ao encontro de um novo amor</td></tr>
+      <tr><th>O cooper de Cida</th><td>Para de correr e tira o dia para si</td></tr>
+      <tr><th>Zaíta</th><td>Morta num tiroteio</td></tr>
+      <tr><th>Di Lixão</th><td>Morre sozinho sob a marquise</td></tr>
+      <tr><th>Lumbiá</th><td>Atropelado com o Menino Jesus</td></tr>
+      <tr><th>Kimbá</th><td>Pacto de morte dos três</td></tr>
+      <tr><th>Ei, Ardoca</th><td>Morre envenenado e é roubado</td></tr>
+      <tr><th>A gente combinamos…</th><td>Dorvi some; Bica escreve</td></tr>
+      <tr><th>Ayoluwa</th><td>Nasce a criança; volta a esperança</td></tr>
+    </tbody></table></div>
+</section>
+
+<section id="evaristo-conexoes">
+  <h2>Conexões com outras leituras</h2>
+  <ul class="bullets">
+    <li><strong>Brás Cubas.</strong> Em Machado, Prudêncio e Dona Plácida são figurantes vistos pelo olhar de um narrador da elite. Em Evaristo, gente na mesma posição social é protagonista e tem voz. Prudêncio passa adiante as pancadas que recebeu: é a mesma lógica da violência cíclica dos contos. Maria, a doméstica, também pode ser lida ao lado de Dona Plácida.</li>
+    <li><strong>Gonzaga de Sá.</strong> Lima Barreto, autor negro, critica a reforma de Pereira Passos, que embelezou o Rio e expulsou os pobres dos cortiços. Os contos mostram para onde essa população foi: favelas, marquises e trens do subúrbio. Em “O cooper de Cida”, Copacabana aparece do ponto de vista de uma trabalhadora.</li>
+    <li><strong>Krenak.</strong> Ancestralidade como caminho (“o futuro é ancestral”) e a vida como fruição, e não utilidade: Cida para de correr para olhar o mar.</li>
+    <li><strong>Morangos mofados.</strong> “Beijo na face” e “Aqueles dois”, de Caio Fernando Abreu: dois amores entre iguais vigiados e punidos pelo ambiente ao redor.</li>
+    <li><strong>No seu pescoço.</strong> Chimamanda Adichie também dá protagonismo a mulheres negras. A violência policial de “Cela um” e de “A embaixada americana” conversa com “Ana Davenga”.</li>
+  </ul>
+</section>
+
+<section id="evaristo-treino">
+  <h2>Perguntas e respostas</h2>
+  <p class="lead">Tente responder antes de abrir.</p>
+  <div class="qa">
+    <details><summary>O que é escrevivência e onde ela aparece dentro do livro?</summary><div class="answer">
+      <p>É o termo criado por Conceição Evaristo para uma escrita ligada à vivência: ficção feita a partir de experiências reais, dela ou da coletividade, do ponto de vista de uma mulher negra. Não é autobiografia, e a experiência individual representa a de muitos.</p>
+      <p>Em “A gente combinamos de não morrer”, Bica escreve sobre a violência que vive e diz que escrever é uma maneira de sangrar. A personagem pratica o que a autora defende: quem foi excluído tem o direito de escrever a própria história.</p></div></details>
+    <details><summary>Por que “Olhos d’água” abre o livro e “Ayoluwa” o fecha?</summary><div class="answer">
+      <p>Os dois funcionam como moldura. O primeiro, em 1ª pessoa, trata da memória da mãe e da ancestralidade: a narradora se reconhece na mãe e é reconhecida pela filha. O último, em 1ª pessoa do plural, celebra um nascimento que devolve a esperança a todo um povo.</p>
+      <p>O livro vai do “eu” ao “nós” e começa e termina com dor e afeto. Entre os dois, a violência domina, mas a moldura mostra que ela não tem a última palavra.</p></div></details>
+    <details><summary>Em que sentido o livro “desmistifica” a maternidade?</summary><div class="answer">
+      <p>Ser mãe não aparece como realização garantida. Natalina tem quatro gestações, uma delas a pedido dos patrões e outra fruto de estupro, e só deseja um filho. Maria morre tentando levar comida e remédio aos filhos. Benícia, cansada e sem dinheiro, castiga as filhas, e Ana Davenga morre protegendo a barriga.</p>
+      <p>Ao mesmo tempo, a mãe de “Olhos d’água” inventa brincadeiras para disfarçar a fome. A maternidade aparece com amor, peso, violência e escolha.</p></div></details>
+    <details><summary>Por que se diz que a violência no livro é cíclica?</summary><div class="answer">
+      <p>Porque ela se repete entre gerações e entre contos. O irmão de Zaíta comanda o tiroteio que mata a irmã. O neto de Duzu morre aos 13 anos no crime. Dorvi mata o traidor sabendo que também será morto. Ardoca nasce e morre no trem violento do subúrbio.</p>
+      <p>A causa não é individual: vem da pobreza, do racismo e da exclusão, que vêm da escravização e não foram resolvidos. Mesmo assim, contos como “Duzu-Querença” e “Ayoluwa” mostram tentativas de romper o ciclo.</p></div></details>
+    <details><summary>Como o racismo aparece no conto “Maria”?</summary><div class="answer">
+      <p>Maria é a única poupada no assalto, e os passageiros concluem que ela é cúmplice. A suspeita recai sobre ela por ser negra, como mostra o xingamento “negra safada”. Ela é linchada por pessoas tão pobres quanto ela, e a voz do motorista, que a conhece de vista, é ignorada.</p>
+      <p>A ironia é que ela estava voltando do trabalho para sustentar os filhos. A faca a laser que cortou a mão dela na casa da patroa vira imagem da violência que “corta até a vida”.</p></div></details>
+    <details><summary>Por que “O cooper de Cida” quebra a expectativa do leitor?</summary><div class="answer">
+      <p>Depois de uma sequência de mortes, o leitor espera outra tragédia. Cida, porém, só para de correr: tira os sapatos, olha o mar e decide não trabalhar naquele dia.</p>
+      <p>O cooper é metáfora da correria imposta pela cidade e pelo trabalho. O final mostra uma pequena liberdade: viver o tempo do próprio jeito. Dá para ligar com Krenak e a ideia de que a vida não precisa ser útil.</p></div></details>
+    <details><summary>Compare “Beijo na face” e “Aqueles dois”, de Caio Fernando Abreu.</summary><div class="answer">
+      <p>Nos dois contos, um amor entre pessoas do mesmo sexo é vigiado e punido pelo ambiente: em Evaristo, pelo marido de Salinda, que ameaça e quer a guarda dos filhos; em Caio, pela repartição, onde cartas anônimas fazem Raul e Saul serem demitidos.</p>
+      <p>A diferença é que Evaristo soma raça e gênero: Salinda e a amada são mulheres negras, “duas iguais”, e o controle vem de um homem dentro de casa.</p></div></details>
+  </div>
+</section>
+
+<section id="evaristo-conferir">
+  <h2>Para conferir no livro</h2>
+  <div class="panel"><ul class="bullets">
+    <li><strong>Duzu “gostava de ler”.</strong> Os resumos que li dizem que o pai queria que ela estudasse, e que quem estuda é a neta, Querença. Não achei menção a Duzu lendo. Confirme.</li>
+    <li><strong>Os amores de Kimbá.</strong> Suas notas dizem que Kimbá envenena os outros. Os resumos descrevem um pacto de morte dos três, com os copos já preparados quando ele chega. Ajustei para o pacto.</li>
+    <li><strong>Ei, Ardoca.</strong> Suas notas falam de um amigo que reconhece Ardoca. O homem chama pelo nome, mas o que ele faz é roubar dinheiro, sapatos e relógio. O texto deixa no ar se ele conhecia Ardoca de verdade.</li>
+    <li><strong>O melão em “Maria”.</strong> Os resumos falam em frutas que os filhos nunca tinham comido. A pergunta sobre o melão vem das suas notas e vale conferir a frase exata.</li>
+    <li><strong>Oxum filha de Iemanjá.</strong> Isso varia entre as tradições e não está no conto. Na prova, basta dizer que Oxum é a orixá das águas doces, ligada à força e à sabedoria da mulher.</li>
+    <li><strong>Numeração das suas notas.</strong> Faltavam números para “Zaíta” e “A gente combinamos de não morrer”. Com eles, “Ayoluwa” é o 15º conto.</li>
+  </ul></div>
+</section>
+</main>
+<footer>Baseado nas suas anotações, conferidas e ampliadas.</footer>
+</article>
+<article class="book" data-book="caio">
+<header class="hero">
+  <p class="byline">Caio Fernando Abreu, 1982</p>
+  <h1>Morangos mofados</h1>
+  <p class="sub">Seis contos sobre solidão, desejo e repressão no fim da ditadura.</p>
+  <figure class="epitaph">
+    <blockquote>Quanto a escrever, mais vale um cachorro vivo.</blockquote>
+    <figcaption>Epígrafe de abertura do livro, tirada de <em>A hora da estrela</em>, de Clarice Lispector.</figcaption>
+  </figure>
+</header>
+<nav class="toc" aria-label="Seções do livro"><ul><li><a class="back" href="#/" data-go="">&larr; Obras</a></li><li><a href="#/caio/ficha" data-go="caio/ficha">Ficha</a></li><li><a href="#/caio/contexto" data-go="caio/contexto">Contexto</a></li><li><a href="#/caio/estrutura" data-go="caio/estrutura">Estrutura</a></li><li><a href="#/caio/estilo" data-go="caio/estilo">Estilo</a></li><li><a href="#/caio/contos" data-go="caio/contos">Os 6 contos</a></li><li><a href="#/caio/quadro" data-go="caio/quadro">Quadro</a></li><li><a href="#/caio/conexoes" data-go="caio/conexoes">Conexões</a></li><li><a href="#/caio/treino" data-go="caio/treino">Perguntas</a></li><li><a href="#/caio/conferir" data-go="caio/conferir">Conferir</a></li></ul></nav>
+<main>
+<section id="caio-ficha">
+  <h2>Ficha rápida</h2>
+  <dl class="ficha">
+    <dt>Autor</dt><dd>Caio Fernando Abreu (1948–1996), nascido em Santiago, no Rio Grande do Sul. Jornalista e escritor, foi perseguido pelo DOPS durante a ditadura e viveu um período na Europa. Um dos primeiros escritores brasileiros a tratar abertamente do desejo entre homens e, depois, da aids, que o matou em 1996.</dd>
+    <dt>Publicação</dt><dd>1982, durante a abertura política. Foi o livro que deu a ele sucesso nacional.</dd>
+    <dt>Estrutura</dt><dd>18 contos em três partes: “O mofo” (9 contos), “Os morangos” (8) e “Morangos mofados” (1, o conto que dá nome ao livro).</dd>
+    <dt>Para a Unicamp</dt><dd>Só seis contos são cobrados, três de cada uma das duas primeiras partes. O conto final, “Morangos mofados”, não está na lista.</dd>
+    <dt>Os seis contos</dt><dd>Do “Mofo”: Diálogo, Além do ponto e Terça-feira gorda. Dos “Morangos”: Pera, uva ou maçã?, O dia em que Júpiter encontrou Saturno e Aqueles dois.</dd>
+    <dt>Movimento</dt><dd>Literatura contemporânea (às vezes chamada de pós-moderna).</dd>
+    <dt>Temas</dt><dd>Isolamento, homoerotismo, repressão política, violência, conservadorismo, incomunicabilidade, morte, a dificuldade de ser e estar nas grandes cidades.</dd>
+  </dl>
+</section>
+
+<section id="caio-contexto">
+  <h2>Contexto histórico</h2>
+  <ul class="bullets">
+    <li><strong>Anos 1960 e 1970:</strong> ditadura militar (1964–1985). O AI-5, de 1968, endureceu a censura e a perseguição a artistas, intelectuais e opositores.</li>
+    <li><strong>Fim dos anos 1970:</strong> começa a abertura. O AI-5 deixa de valer no início de 1979, e no mesmo ano o presidente João Figueiredo assina a Lei da Anistia.</li>
+    <li><strong>1982:</strong> o livro sai nesse clima de transição. A repressão ainda pesa, mas já dá para falar dela.</li>
+    <li><strong>Contracultura:</strong> rock, astrologia, drogas, liberdade sexual e terapia aparecem como marcas de uma geração que sonhou com outra vida e se frustrou. O “mofo” é também o que sobrou desses sonhos.</li>
+  </ul>
+  <p>Na literatura, isso vira crise existencial, rejeição social, angústia e solidão, mesmo no meio da multidão da cidade grande.</p>
+</section>
+
+<section id="caio-estrutura">
+  <h2>As três partes e o título</h2>
+  <dl class="chapters">
+    <dt>O mofo</dt><dd>Contos mais ligados ao peso da ditadura, ao medo, à violência e à morte. Costuma ser lido como pulsão de morte.</dd>
+    <dt>Os morangos</dt><dd>Contos voltados às transformações interiores, ao desejo e às tentativas de encontro. Costuma ser lido como pulsão de vida.</dd>
+    <dt>Morangos mofados</dt><dd>O conto final junta as duas coisas.</dd>
+  </dl>
+  <div class="quote"><p>O título junta uma fruta ligada ao amor e ao prazer a um fungo que cresce em lugares fechados. É a metáfora do livro: afeto apodrecido pela falta de comunicação, pelos traumas, pelo preconceito e pela violência.</p></div>
+  <p>Cada parte e muitos contos abrem com epígrafes. As das duas primeiras partes são de Henrique do Valle; a do livro é de Clarice Lispector.</p>
+</section>
+
+<section id="caio-estilo">
+  <h2>Características da escrita</h2>
+  <ul class="bullets">
+    <li><strong>Linguagem coloquial, crua e às vezes vulgar.</strong> Fala de rua, gíria, palavrão.</li>
+    <li><strong>Fluxo de consciência:</strong> frases longas, sem pausa, seguindo o pensamento. “Além do ponto” é quase todo assim.</li>
+    <li><strong>Inovação na pontuação e fragmentação:</strong> travessões, diálogos que parecem não fazer sentido, cenas cortadas.</li>
+    <li><strong>Hibridismo de gêneros:</strong> mistura narrativo, lírico (prosa poética) e dramático. “Diálogo” parece uma peça de teatro, com falas de A e B.</li>
+    <li><strong>Intertextualidade com a cultura pop e erudita:</strong> Beatles e John Lennon, Caetano Veloso, Angela Ro Ro, Erik Satie, Fernando Pessoa, Clarice Lispector, boleros.</li>
+    <li><strong>Personagens sem nome</strong> (A e B, “ele”, “ela”), isolados, com destinos frustrados ou interrompidos. Lembra o spleen romântico, o tédio e a melancolia.</li>
+    <li><strong>Morte como leitmotiv</strong>, isto é, tema que volta o tempo todo: o caixão em “Pera, uva ou maçã?”, os tiros em Lennon, a violência em “Terça-feira gorda”.</li>
+    <li><strong>Esoterismo e espiritualidade:</strong> astrologia (Júpiter, Saturno, signos) e menções a orixás e outras divindades.</li>
+    <li><strong>Finais abertos.</strong> Quase nada se resolve.</li>
+  </ul>
+</section>
+
+<section id="caio-contos">
+  <h2>Os seis contos cobrados</h2>
+  <p class="lead">Na ordem do livro.</p>
+
+  <h3 class="group">Parte 1: O mofo</h3>
+
+  <article class="char"><h4>Diálogo</h4><p class="role">Abre o livro. Duas vozes, A e B</p>
+    <p>Só falas, como num texto de teatro. A diz a B: “você é meu companheiro”. B repete, pergunta, devolve, e os dois giram em torno da mesma palavra sem se entender. Termina com a indicação <em>ad infinitum</em>: a conversa nunca acaba.</p>
+    <p>“Companheiro” tem dois sentidos: o político, de militância contra a ditadura (externo), e o amoroso ou afetivo (interno). Querem ser companheiros e não conseguem. É a incomunicabilidade que atravessa o livro.</p></article>
+
+  <article class="char"><h4>Além do ponto</h4><p class="role">1ª pessoa. Fluxo de consciência</p>
+    <p>O narrador caminha debaixo de muita chuva, sem guarda-chuva, com uma garrafa de conhaque barato apertada no peito, para encontrar “ele”. No caminho, se suja, se molha e se preocupa com o que o outro vai pensar dele.</p>
+    <p>Chega e bate na porta, que não abre. Continua batendo, confuso, exausto, “depois do ponto”. Uma leitura possível: o outro nem existe, é uma criação do protagonista de tão sozinho que ele está. O título brinca com o ponto de ônibus e com o limite ultrapassado.</p></article>
+
+  <article class="char"><h4>Terça-feira gorda</h4><p class="role">1ª pessoa. Desejo e homofobia</p>
+    <p>Num baile de carnaval, o narrador e outro homem se olham, dançam e se desejam. Alguém comenta em falsete “ai-ai, olha as loucas” e os outros encaram. Os dois saem para a praia e ficam juntos na areia. São descobertos por um grupo de homens, que os cerca repetindo o mesmo grito de deboche. O narrador consegue fugir, sozinho e nu pela areia; o outro fica no chão, espancado.</p>
+    <p>Antes do ataque, o narrador lembra que a dor é a única emoção que não usa máscara, e percebe que os dois estão sem máscara, algo perigoso no carnaval. A máscara é a imagem central: a festa permite fantasias, mas não a verdade do desejo.</p>
+    <p>O carnaval, festa da liberdade e da fantasia, não protege quem é diferente. O conto mostra a violência e o preconceito de uma sociedade conservadora.</p></article>
+
+  <h3 class="group">Parte 2: Os morangos</h3>
+
+  <article class="char"><h4>Pera, uva ou maçã?</h4><p class="role">1ª pessoa. Quem narra é o terapeuta</p>
+    <p>Uma paciente chega à sessão roendo as unhas. No caminho, comprou ameixas, foi comendo e, ao dobrar a esquina, tropeçou num caixão que saía de um sobrado. As ameixas caíram na sarjeta. Na sessão, ela repara que o terapeuta está com as meias trocadas e se recusa a discutir o significado disso.</p>
+    <p>Ela lembra a brincadeira de infância: com os olhos vendados, a pessoa escolhe pera, uva (um abraço) ou maçã (um beijo na boca). Agora adulta, não quer nenhuma das opções prontas: aposta nas ameixas. Ao sair, deixa uma para ele. O terapeuta fica abalado e precisa olhar a cor das próprias meias. Final aberto.</p>
+    <p>Leitura: as frutas da brincadeira são escolhas predeterminadas; a ameixa é um caminho próprio, diferente e saboroso. O caixão traz a morte para o meio da vida, e a escolha da ameixa pode ser lida como abandono do passado.</p></article>
+
+  <article class="char"><h4>O dia em que Júpiter encontrou Saturno</h4><p class="role">Narrador em 3ª pessoa, alternando o olhar dele e o dela</p>
+    <p>Numa festa em São Paulo, um homem e uma mulher se conhecem. Conversam por frases curtas sobre música, astrologia e a lua. Ela conta que no dia seguinte Júpiter e Saturno entram em conjunção, encontro que só se repete a cada vinte anos. Na festa toca Beatles e ecoam os cinco tiros que mataram John Lennon (dezembro de 1980).</p>
+    <p>A conjunção personifica o encontro dos dois: raro, intenso e passageiro. Uma das falas finais pergunta se tudo aquilo foi um encontro ou uma despedida. Temas: solidão urbana, a fugacidade dos laços e o fim do sonho dos anos 1960. Prosa poética.</p></article>
+
+  <article class="char"><h4>Aqueles dois</h4><p class="role">3ª pessoa. Subtítulo: “história de aparente mediocridade e repressão”</p>
+    <p>Raul e Saul passam no mesmo concurso e vão trabalhar na mesma repartição, um “deserto de almas”. Raul veio do Norte, tem 31 anos, saiu de um casamento fracassado e gosta de música. Saul veio do Sul, tem 29, saiu de um noivado longo e gosta de desenho. Dois homens fechados que, devagar, contra suas próprias couraças, se aproximam: cinema, conversas, um violão, um bolero.</p>
+    <p>Os colegas desconfiam. O chefe recebe cartas anônimas e demite os dois por uma relação considerada “anormal e ostensiva”, sem que nada explícito tenha acontecido. Eles saem juntos. O narrador termina dizendo que quem ficou na repartição, os fiscais da vida alheia, é que seguiu infeliz.</p></article>
+</section>
+
+<section id="caio-quadro">
+  <h2>Quadro para revisar</h2>
+  <div class="tablewrap"><table class="cmp">
+    <thead><tr><th>Conto</th><th>Narrador</th><th>Ideia central</th></tr></thead>
+    <tbody>
+      <tr><th>Diálogo</th><td>Só falas (A e B)</td><td>Companheiros que não se entendem</td></tr>
+      <tr><th>Além do ponto</th><td>1ª pessoa</td><td>Solidão, a porta que não abre</td></tr>
+      <tr><th>Terça-feira gorda</th><td>1ª pessoa</td><td>Desejo punido com violência</td></tr>
+      <tr><th>Pera, uva ou maçã?</th><td>1ª pessoa, o terapeuta</td><td>Recusar as escolhas prontas</td></tr>
+      <tr><th>Júpiter e Saturno</th><td>3ª pessoa, dois olhares</td><td>Encontro raro e passageiro</td></tr>
+      <tr><th>Aqueles dois</th><td>3ª pessoa</td><td>Amizade e amor vigiados e punidos</td></tr>
+    </tbody></table></div>
+</section>
+
+<section id="caio-conexoes">
+  <h2>Conexões com outras leituras</h2>
+  <ul class="bullets">
+    <li><strong>Olhos d’água.</strong> Os dois usam a literatura como resistência e para mostrar a violência. “Aqueles dois” e “Beijo na face” tratam de amores entre iguais vigiados e punidos; “Terça-feira gorda” e “Maria” terminam em violência coletiva contra quem é visto como diferente. Os dois livros também trazem divindades e espiritualidade (orixás, astrologia).</li>
+    <li><strong>Gonzaga de Sá.</strong> A burocracia aparece nos dois: em Lima Barreto, ridícula; em “Aqueles dois”, a repartição é o espaço que vigia e pune.</li>
+    <li><strong>Brás Cubas.</strong> Narradores e personagens que se analisam e conversam com o leitor, e uma forma fragmentada que rompe com a narrativa tradicional.</li>
+    <li><strong>Krenak.</strong> A recusa das escolhas prontas em “Pera, uva ou maçã?” lembra a crítica de Krenak ao roteiro de vida imposto às crianças.</li>
+  </ul>
+</section>
+
+<section id="caio-treino">
+  <h2>Perguntas e respostas</h2>
+  <p class="lead">Tente responder antes de abrir.</p>
+  <div class="qa">
+    <details><summary>O que significa o título “Morangos mofados”?</summary><div class="answer">
+      <p>Junta o morango, fruta ligada ao amor, ao prazer e à juventude, ao mofo, fungo que cresce em lugares fechados e estraga a fruta. É a imagem de afetos e sonhos que apodreceram.</p>
+      <p>O mofo vem da repressão política, do preconceito, da violência e da falta de comunicação. As partes do livro reforçam isso: “O mofo” pesa para a morte, “Os morangos” para a vida, e o conto final junta as duas.</p></div></details>
+    <details><summary>Como o contexto da ditadura aparece em “Diálogo”?</summary><div class="answer">
+      <p>Pela palavra “companheiro”, que na época era usada pela militância de esquerda contra a ditadura. Ela também tem sentido amoroso.</p>
+      <p>A e B querem ser companheiros, mas repetem a palavra sem chegar a lugar nenhum, <em>ad infinitum</em>. O conto mostra a dificuldade de se unir, tanto na política quanto no afeto, num tempo de medo e desconfiança.</p></div></details>
+    <details><summary>Compare “Terça-feira gorda” e “Aqueles dois” no tratamento da homofobia.</summary><div class="answer">
+      <p>Nos dois, um afeto entre homens é punido pelo grupo. Em “Terça-feira gorda”, a punição é física e imediata: os dois são atacados na praia, depois de um carnaval que parecia permitir tudo. Em “Aqueles dois”, é silenciosa e burocrática: cartas anônimas e demissão, sem que nada explícito tenha acontecido.</p>
+      <p>Muda também o narrador: em “Terça-feira gorda”, quem sofre conta em 1ª pessoa; em “Aqueles dois”, um narrador em 3ª pessoa ironiza os colegas, que terminam infelizes.</p></div></details>
+    <details><summary>Qual é o sentido das ameixas em “Pera, uva ou maçã?”?</summary><div class="answer">
+      <p>Na brincadeira de infância, só existem três frutas, cada uma ligada a um tipo de contato. São escolhas prontas. A paciente, adulta, diz que aposta nas ameixas: prefere uma opção fora do jogo.</p>
+      <p>Isso pode ser lido como recusa dos papéis impostos e como abandono do passado. O conto inverte o esperado: quem narra é o terapeuta, e ele sai da sessão mais abalado que a paciente.</p></div></details>
+    <details><summary>Por que a conjunção de Júpiter e Saturno é importante no conto?</summary><div class="answer">
+      <p>É um encontro raro, que só se repete a cada vinte anos. Funciona como metáfora do encontro entre o homem e a mulher na festa: intenso, especial e passageiro.</p>
+      <p>A morte de John Lennon, lembrada no conto, marca o fim dos sonhos da geração dos anos 1960. O encontro fica entre a esperança e a despedida, sem final definido.</p></div></details>
+    <details><summary>Que recursos de linguagem tornam o livro inovador?</summary><div class="answer">
+      <p>Fluxo de consciência (“Além do ponto”), diálogo em forma de teatro (“Diálogo”), mistura de narrativo, lírico e dramático, pontuação incomum, fragmentação e linguagem coloquial e crua.</p>
+      <p>Somam-se a intertextualidade com música, literatura e cinema e os finais abertos. A forma quebrada acompanha o conteúdo: personagens também quebrados, que não conseguem se comunicar.</p></div></details>
+  </div>
+</section>
+
+<section id="caio-conferir">
+  <h2>Para conferir no livro</h2>
+  <div class="panel"><ul class="bullets">
+    <li><strong>Censura em 1979.</strong> Suas notas dizem que Figueiredo aboliu a censura junto com a anistia. A anistia é de 1979, mas a censura foi diminuindo aos poucos e só acabou oficialmente com a Constituição de 1988. Ajustei o texto.</li>
+    <li><strong>Quem narra “Pera, uva ou maçã?”.</strong> Suas notas tratam a paciente como protagonista. Ela é a personagem central, mas o narrador em 1ª pessoa é o terapeuta. Na prova, isso faz diferença.</li>
+    <li><strong>“Ai-ai, olha as loucas”.</strong> A frase é de “Terça-feira gorda”. Suas notas também a colocam em “Aqueles dois”, onde não achei. Confirme.</li>
+    <li><strong>Fim de “Terça-feira gorda” (resolvido).</strong> O material de estudo confirma: o narrador foge e o companheiro fica no chão, sendo espancado.</li>
+    <li><strong>Apartamento em “Júpiter”.</strong> Suas notas dizem que os dois vão ao apartamento da mulher. Não achei confirmação nas fontes.</li>
+  </ul></div>
+</section>
+</main>
+<footer>Baseado nas suas anotações, conferidas e ampliadas.</footer>
+</article>
+<article class="book" data-book="paes">
+<header class="hero">
+  <p class="byline">José Paulo Paes, 1992</p>
+  <h1>Prosas seguidas de odes mínimas</h1>
+  <p class="sub">Poemas curtos sobre a família, a morte, o próprio corpo e os objetos de todo dia.</p>
+  <figure class="epitaph">
+    <blockquote>Vendam logo esta casa, ela está cheia de fantasmas.</blockquote>
+    <figcaption>Primeiro verso de “A casa”, poema sobre a casa onde o poeta nasceu.</figcaption>
+  </figure>
+</header>
+<nav class="toc" aria-label="Seções do livro"><ul><li><a class="back" href="#/" data-go="">&larr; Obras</a></li><li><a href="#/paes/ficha" data-go="paes/ficha">Ficha</a></li><li><a href="#/paes/estilo" data-go="paes/estilo">Estilo</a></li><li><a href="#/paes/concretismo" data-go="paes/concretismo">Concretismo</a></li><li><a href="#/paes/estrutura" data-go="paes/estrutura">Estrutura</a></li><li><a href="#/paes/prosas" data-go="paes/prosas">Prosas</a></li><li><a href="#/paes/odes" data-go="paes/odes">Odes mínimas</a></li><li><a href="#/paes/conexoes" data-go="paes/conexoes">Conexões</a></li><li><a href="#/paes/treino" data-go="paes/treino">Perguntas</a></li><li><a href="#/paes/conferir" data-go="paes/conferir">Conferir</a></li></ul></nav>
+<main>
+<section id="paes-ficha">
+  <h2>Ficha rápida</h2>
+  <dl class="ficha">
+    <dt>Autor</dt><dd>José Paulo Paes (1926–1998), nascido em Taquaritinga (SP). Estudou química industrial em Curitiba, onde começou na literatura, e se mudou para São Paulo em 1949. Trabalhou em laboratório farmacêutico e depois como editor da Cultrix, até se aposentar em 1981. Foi também tradutor, crítico e autor de poesia infantil. Casado com Dora a vida toda.</dd>
+    <dt>Publicação</dt><dd>1992. É uma obra da maturidade: ele tinha 66 anos.</dd>
+    <dt>Época</dt><dd>Estreou em 1947, no pós-guerra, e se considerava um poeta do pós-guerra. O livro é lido como literatura contemporânea; alguns manuais o colocam no fim do Modernismo (3º tempo).</dd>
+    <dt>Gênero</dt><dd>Poesia lírica, de caráter memorialista e autobiográfico, intimista.</dd>
+    <dt>Estrutura</dt><dd>Duas partes: “Prosas” (20 textos) e “Odes mínimas” (13 poemas).</dd>
+    <dt>Moldura</dt><dd>O livro começa falando de morte (“Escolha de túmulo”) e termina falando de nascimento (“A um recém-nascido”).</dd>
+    <dt>Dedicatória</dt><dd>À memória de Fernando Góes, que chamou de poesias um livro de crônicas. Paes faz o inverso: chama de prosas um livro de poemas.</dd>
+  </dl>
+</section>
+
+<section id="paes-estilo">
+  <h2>Características</h2>
+  <ul class="bullets">
+    <li><strong>Concisão:</strong> poemas curtos, palavras contadas, nada sobrando.</li>
+    <li><strong>Ironia e humor</strong> ao tratar do cotidiano e até de assuntos dolorosos, como a amputação da própria perna.</li>
+    <li><strong>Recusa do sentimentalismo.</strong> Fala de pais, amigos mortos e doença sem autopiedade nem desespero. Mas também não cai na frieza de puro jogo de linguagem.</li>
+    <li><strong>Mistura de linguagem coloquial e culta.</strong></li>
+    <li><strong>Memória e intimidade:</strong> infância e velhice, vida e morte. A morte é o tema mais recorrente.</li>
+    <li><strong>Epigrama:</strong> poema breve, de tom satírico ou irônico, que fecha com uma tirada. É a forma preferida do autor.</li>
+    <li><strong>Formas da lírica tradicional nos títulos</strong> (canção, noturno, balada, ode), usadas muitas vezes com ironia.</li>
+    <li><strong>Antíteses e paradoxos:</strong> junta contrários, como o próprio título “odes mínimas”.</li>
+    <li><strong>Influências:</strong> Oswald de Andrade (paródia, humor, poema sintético), Drummond (o tom desajeitado e o desencanto que não vira niilismo), Manuel Bandeira (a memória afetiva da família) e João Cabral (linguagem enxuta, sem adjetivos sobrando).</li>
+  </ul>
+</section>
+
+<section id="paes-concretismo">
+  <h2>Concretismo (importante para a prova)</h2>
+  <p>O Concretismo surgiu em São Paulo nos anos 1950, com Augusto e Haroldo de Campos e Décio Pignatari. Valoriza o <strong>aspecto visual do poema</strong>: a palavra vale também pela forma que ocupa na página, e não só pelo que significa. O verso tradicional é desmontado.</p>
+  <p>A lógica lembra a do Cubismo na pintura: desmontar a forma para mostrar o objeto de outro jeito.</p>
+  <p>Paes não foi um poeta concreto, mas usa o recurso. Augusto de Campos, um dos criadores do Concretismo, disse que alguns poemas dele podem ser considerados concretos pelo radicalismo, sem que ele estivesse preso à ortodoxia do grupo: Paes usou o recurso para fazer uma “poesia-minuto”, concisa e bem-humorada, herdeira de Oswald. O exemplo do livro é <strong>“À minha perna esquerda”</strong>: num dos poemas da sequência, as palavras “esquerda” e “direita” se alternam como passos e depois só “direita” se repete. A página desenha o andar de quem perdeu a perna esquerda.</p>
+</section>
+
+<section id="paes-estrutura">
+  <h2>As duas partes</h2>
+  <dl class="chapters">
+    <dt>1. Prosas (20 textos)</dt>
+    <dd>Não leve o nome ao pé da letra: a maioria é poema em versos, e alguns são prosa poética, como “A casa”. “Prosa” sugere conversa com o leitor ou um monólogo do autor. Os temas são as lembranças de família e amigos, os lugares e a morte.</dd>
+    <dt>2. Odes mínimas (13 poemas)</dt>
+    <dd>Olham o mundo e as coisas em volta. Tirando o primeiro (“À minha perna esquerda”) e o último (“A um recém-nascido”), cada ode é dedicada a um objeto comum: bengala, óculos, tinta de escrever, espelho, alfinete, o shopping center. Os poemas são curtos, com exceção de “À minha perna esquerda”.</dd>
+  </dl>
+  <div class="quote"><p>Ode é o poema de exaltação, solene e grandioso. “Ode mínima” é um paradoxo: o poeta engrandece coisas pequenas. Às vezes a homenagem é sincera (a bengala); às vezes é irônica e crítica (o shopping center).</p></div>
+</section>
+
+<section id="paes-prosas">
+  <h2>Prosas: pessoas e lugares</h2>
+  <p class="lead">As pessoas que aparecem: a esposa Dora, o pai (Paulo Artur Paes da Silva), o avô português que tinha uma livraria, a avó e seu horror à morte, uma filha que morreu antes de ser batizada e os amigos Oswald de Andrade e Osman Lins. Os lugares: a livraria do avô, a casa onde o poeta nasceu em Taquaritinga e o Café Belas Artes, em Curitiba.</p>
+
+  <article class="char"><h4>Escolha de túmulo</h4><p class="role">Abre o livro. A morte como novo voo</p>
+    <p>O poeta escolhe onde quer ser enterrado: no quintal da casa onde nasceu. Ali, um voo termina e outro começa. A morte aparece como renascimento, passagem para a eternidade, e não como fim. Começar um livro pela própria morte lembra Brás Cubas.</p></article>
+
+  <article class="char"><h4>Um retrato</h4><p class="role">O pai e a saudade</p>
+    <p>Reflexão sobre a morte do pai. Diante do retrato dele na parede, o filho lembra de ter sentido nas mãos o peso do corpo do pai, que era o peso do mundo, e conclui: “Sei agora, pai, o que é estar vivo.” A morte do outro ensina o que é viver.</p>
+    <p>Lembra “Confidência do itabirano”, de Drummond, que também termina com uma fotografia na parede e a dor da lembrança. Aqui não há exagero nem ironia.</p></article>
+
+  <article class="char"><h4>Nana para Glaura</h4><p class="role">Canção de ninar que é canto fúnebre</p>
+    <p>Homenagem à filha que morreu antes de ser batizada. A forma é a de uma cantiga de ninar, mas o sono é o da morte. Junto com “Um retrato”, é dos poucos poemas sem ironia: a dor aparece direta, mas contida.</p></article>
+
+  <article class="char"><h4>A casa</h4><p class="role">Prosa poética. Memória, morte e sonho</p>
+    <p>“Vendam logo esta casa, ela está cheia de fantasmas.” Cada cômodo da casa de infância tem um parente morto: o avô na livraria fazendo cartões de boas-festas, um tio imprimindo avisos fúnebres, o pai lendo romances policiais, a mãe sempre parindo a última filha, uma tia lustrando o próprio caixão, a avó contando histórias do outro mundo. No telhado, um menino medroso, o próprio poeta, ainda vivo, levado até ali pelo “pássaro dos sonhos”.</p>
+    <p>O poema pede que vendam a casa antes que o menino acorde e se descubra morto também. Quase toda imagem lembra a morte. O sonho e a prosa poética retomam o Simbolismo (e há quem veja traços surrealistas).</p></article>
+
+  <article class="char"><h4>Outros poemas da primeira parte</h4><p class="role">Para reconhecer na prova</p>
+    <p><strong>Canção de exílio:</strong> nova leitura do poema de Gonçalves Dias. <strong>Reencontro:</strong> em sonho, o poeta reencontra o amigo Osman Lins, escritor já morto. <strong>Balada do Belas-Artes:</strong> o café de Curitiba da juventude. <strong>Outro retrato:</strong> o laço de fita no cabelo de uma moça num retrato parece uma borboleta que poderia voar para outra vida.</p></article>
+</section>
+
+<section id="paes-odes">
+  <h2>Odes mínimas: o corpo e os objetos</h2>
+
+  <article class="char"><h4>À minha perna esquerda</h4><p class="role">Abre a segunda parte. A amputação sem autopiedade</p>
+    <p>Sequência de sete poemas curtos, de tom epigramático, sobre a perna que o poeta teve de amputar. É um diálogo irônico, às vezes sombrio, com a própria perna: ele pergunta para que quer pernas se já não vai dançar nem ir a lugar algum. Num trecho, pergunta à perna por que o deixou, em eco do lamento de Cristo na cruz e do “grande sertão” de Guimarães Rosa.</p>
+    <p>Um dos poemas é visual: “esquerda” e “direita” se alternam como passos e depois só sobra “direita”. É o exemplo de recurso concretista do livro.</p></article>
+
+  <article class="char"><h4>À bengala</h4><p class="role">Homenagem a um objeto de apoio</p>
+    <p>Ode que enaltece a bengala, o instrumento que passou a ajudar o poeta a andar depois da amputação. É curtíssima: com a bengala, o poeta se torna pastor dos próprios passos. Aqui a ode é sincera e valoriza um objeto simples do cotidiano dele.</p>
+    <p>A imagem do pastor e do cajado lembra Alberto Caeiro, heterônimo de Fernando Pessoa, autor de <em>O guardador de rebanhos</em>.</p></article>
+
+  <article class="char"><h4>Ao shopping center</h4><p class="role">Ode irônica. Crítica ao consumismo</p>
+    <p>O shopping é comparado ao Inferno de Dante, na <em>Divina Comédia</em>: os consumidores vagam pelos círculos como almas penadas. Cada loja é mais um prego na cruz, e por mais que se compre, todos continuam nus. A ode, que deveria exaltar, condena.</p>
+    <p>Dialoga com Krenak, <em>A vida não é útil</em>, na crítica ao consumo sem limite.</p></article>
+
+  <article class="char"><h4>Outras odes a objetos</h4><p class="role">O mínimo engrandecido</p>
+    <p><strong>Aos óculos, Ao espelho, Ao alfinete, À tinta de escrever, À televisão.</strong> A ode à televisão fala com o aparelho em 2ª pessoa e mostra a solidão diante da sociedade do espetáculo. Em “À tinta de escrever”, a tinta sonha com obras duradouras, mas é usada para bilhetes e promissórias: num mundo que nem espera a tinta do jornal secar, tudo é passageiro. Antonio Candido via em Paes uma predileção pelo pequeno que o leva a alcançar o grande.</p></article>
+
+  <article class="char"><h4>A um recém-nascido</h4><p class="role">Fecha o livro</p>
+    <p>Depois de abrir com a escolha do túmulo, o livro termina com um nascimento. Vida e morte formam um ciclo.</p></article>
+</section>
+
+<section id="paes-conexoes">
+  <h2>Conexões com outras leituras</h2>
+  <ul class="bullets">
+    <li><strong>Krenak.</strong> “Ao shopping center” e <em>A vida não é útil</em> criticam o consumismo: num poema irônico de poucos versos e num ensaio de tom oral.</li>
+    <li><strong>Brás Cubas.</strong> Os dois livros começam pela morte do autor ou do eu lírico e tratam dela com humor. Brás é cínico; Paes é irônico, mas afetuoso.</li>
+    <li><strong>Olhos d’água.</strong> Os dois livros abrem com a memória da família e fecham com um nascimento. Em Evaristo, a criança devolve a esperança a um povo; em Paes, fecha o ciclo da vida.</li>
+    <li><strong>Morangos mofados.</strong> Caio Fernando Abreu também mistura gêneros (prosa e poesia) e tem a morte como tema recorrente, mas com linguagem crua e personagens jovens e desesperados. Paes fala da morte com a calma da velhice.</li>
+    <li><strong>Drummond e Gonçalves Dias.</strong> “Um retrato” dialoga com “Confidência do itabirano”, e “Canção de exílio” relê o poema romântico.</li>
+  </ul>
+</section>
+
+<section id="paes-treino">
+  <h2>Perguntas e respostas</h2>
+  <p class="lead">Tente responder antes de abrir.</p>
+  <div class="qa">
+    <details><summary>Por que o livro se chama “Prosas” se a primeira parte é feita de poemas?</summary><div class="answer">
+      <p>É ironia. O livro é dedicado a Fernando Góes, que chamou de poesias um livro de crônicas, e Paes faz o inverso: chama de prosas o que é poesia.</p>
+      <p>O nome também sugere o tom de conversa com o leitor, sem a solenidade da poesia tradicional. E há textos em prosa poética, como “A casa”.</p></div></details>
+    <details><summary>O que é uma “ode mínima” e por que o termo é irônico?</summary><div class="answer">
+      <p>A ode é um poema de exaltação, solene, feito para celebrar algo grandioso. Paes dedica odes curtas a objetos pequenos e comuns: bengala, óculos, alfinete, tinta. O próprio nome é um paradoxo.</p>
+      <p>Às vezes a exaltação é sincera e valoriza o simples (“À bengala”); às vezes é irônica e vira crítica (“Ao shopping center”).</p></div></details>
+    <details><summary>Como “À minha perna esquerda” trata a amputação?</summary><div class="answer">
+      <p>Com ironia e humor sombrio, sem autopiedade. O poeta conversa com a perna, pergunta para que quer duas se já não vai dançar e transforma a perda em reflexão sobre o corpo e a morte.</p>
+      <p>Um dos poemas é visual, à maneira concretista: “esquerda” e “direita” se alternam como passos até sobrar só “direita”. A forma na página mostra o andar mutilado.</p></div></details>
+    <details><summary>Qual é a crítica de “Ao shopping center”?</summary><div class="answer">
+      <p>Crítica ao consumismo desenfreado. O shopping é comparado ao Inferno da <em>Divina Comédia</em>: as pessoas giram pelos círculos como almas penadas, cada loja é um prego na cruz e, por mais que comprem, continuam nuas, isto é, vazias.</p>
+      <p>A forma de ode, que deveria louvar, reforça a ironia. Dá para comparar com Krenak e a crítica ao consumo que esgota a Terra.</p></div></details>
+    <details><summary>Como a morte aparece no livro?</summary><div class="answer">
+      <p>É o tema mais recorrente. Em “Escolha de túmulo”, é um novo voo, um renascimento. Em “Um retrato” e “Nana para Glaura”, aparece como luto pelo pai e pela filha. Em “A casa”, a infância está cheia de parentes mortos. Em “À minha perna esquerda”, a perda de parte do corpo antecipa a morte.</p>
+      <p>A estrutura do livro responde a isso: começa com um túmulo e termina com um recém-nascido.</p></div></details>
+    <details><summary>Compare “Um retrato” com “Confidência do itabirano”, de Drummond.</summary><div class="answer">
+      <p>Nos dois, o eu lírico olha para um retrato na parede e sente a dor da lembrança. Em Drummond, a fotografia é de Itabira, a cidade natal. Em Paes, é o pai morto.</p>
+      <p>Paes vai além da dor: a morte do pai o faz entender o que é estar vivo. Sem ironia, o poema mostra a contenção do autor diante do sofrimento.</p></div></details>
+  </div>
+</section>
+
+<section id="paes-conferir">
+  <h2>Para conferir no livro</h2>
+  <div class="panel"><ul class="bullets">
+    <li><strong>Nome do poema do pai.</strong> Suas notas dizem “O retrato”. As fontes trazem “Um retrato” e “Outro retrato”. Confirme qual tem o verso sobre estar vivo (tudo indica que é “Um retrato”).</li>
+    <li><strong>“À bengala” (resolvido).</strong> O material de estudo confirma que é um poema curtíssimo, praticamente uma frase. A ode longa é “À minha perna esquerda”.</li>
+    <li><strong>Oswald de Andrade.</strong> O material confirma que Paes foi amigo de Oswald e aprendeu com ele a condensar muito no mínimo (os “poemas-pílula” e “poemas-piada”). Falta ver em qual poema ele aparece.</li>
+    <li><strong>Glaura.</strong> A informação de que era a filha que morreu antes do batismo vem das suas notas. Não achei confirmação nas fontes.</li>
+    <li><strong>Concretismo e Cubismo.</strong> A comparação é uma imagem de aula. Na prova, explique o Concretismo pelo uso visual da palavra na página.</li>
+  </ul></div>
+</section>
+</main>
+<footer>Baseado nas suas anotações, conferidas e ampliadas.</footer>
+</article>
+<article class="book" data-book="pcp">
+<header class="hero">
+  <p class="byline">Paulo César Pinheiro, anos 1960 a 1990</p>
+  <h1>Canções escolhidas</h1>
+  <p class="sub">Catorze letras de canção sobre o Brasil: o povo, a ditadura, o amor, a arte e o tempo.</p>
+</header>
+<nav class="toc" aria-label="Seções da obra"><ul><li><a class="back" href="#/" data-go="">&larr; Obras</a></li><li><a href="#/pcp/ficha" data-go="pcp/ficha">Ficha</a></li><li><a href="#/pcp/cancao" data-go="pcp/cancao">Ler canção</a></li><li><a href="#/pcp/temas" data-go="pcp/temas">5 temas</a></li><li><a href="#/pcp/cancoes" data-go="pcp/cancoes">As 14 canções</a></li><li><a href="#/pcp/lista" data-go="pcp/lista">Quadro</a></li><li><a href="#/pcp/conexoes" data-go="pcp/conexoes">Conexões</a></li><li><a href="#/pcp/treino" data-go="pcp/treino">Perguntas</a></li><li><a href="#/pcp/conferir" data-go="pcp/conferir">Conferir</a></li></ul></nav>
+<main>
+<section id="pcp-ficha">
+  <h2>Ficha rápida</h2>
+  <dl class="ficha">
+    <dt>Autor</dt><dd>Paulo César Pinheiro (nascido em 1949, no Rio de Janeiro). Letrista e compositor, também poeta e escritor. Virou letrista profissional aos 14 anos, com “Viagem”. Aos 19, ganhou projeção nacional com “Lapinha” (música de Baden Powell), vencedora da 1ª Bienal do Samba, em 1968, na voz de Elis Regina. São mais de 2 mil canções, com cerca de 120 parceiros.</dd>
+    <dt>Clara Nunes</dt><dd>Foi casado com a cantora de 1975 até a morte dela, em 1983. Ela gravou “Canto das três raças” em 1976.</dd>
+    <dt>Gênero</dt><dd>MPB, sobretudo samba, mas também valsa, toada e outros ritmos.</dd>
+    <dt>A seleção</dt><dd>14 canções escritas entre os anos 1960 e 1990, oito delas da época da ditadura militar. Todas são parcerias: ele faz a letra e o parceiro, a música.</dd>
+    <dt>Marcas</dt><dd>Brasilidade, cultura afro-brasileira, resistência política, mística sertaneja, imagens da natureza (vento, árvore, mar, estrela) como alegoria dos sentimentos e da história.</dd>
+  </dl>
+</section>
+
+<section id="pcp-cancao">
+  <h2>Como ler uma canção na prova</h2>
+  <p>A prova cobra a letra, mas lembre que canção é letra mais música. Observe:</p>
+  <ul class="bullets">
+    <li><strong>Quem fala e com quem:</strong> o eu lírico (às vezes um “nós”, o povo) e o interlocutor (o “você”).</li>
+    <li><strong>Contexto:</strong> uma letra dos anos 1970 precisa falar por metáforas para passar pela censura.</li>
+    <li><strong>Forma:</strong> refrão, repetição (anáfora), rimas, tamanho das estrofes, ritmo (samba, valsa).</li>
+    <li><strong>Figuras:</strong> antítese e paradoxo, personificação, natureza como símbolo.</li>
+    <li><strong>Diálogo com a literatura:</strong> Romantismo, Simbolismo, Modernismo, Barroco, temas bíblicos e mitológicos.</li>
+  </ul>
+</section>
+
+<section id="pcp-temas">
+  <h2>Os cinco grandes temas</h2>
+  <dl class="chapters">
+    <dt>1. Étnico-religioso: a identidade brasileira</dt>
+    <dd>O Brasil formado por três povos: indígena, negro e português, e a história de violência dessa formação. Retoma a ideia da 1ª fase modernista de uma identidade nacional própria. Canções: “Canto das três raças”, “Vento bravo”, “Estrela da terra”.</dd>
+    <dt>2. Crítica sociopolítica: resistência à ditadura</dt>
+    <dd>O povo, os artistas e o coletivo contra o regime e contra quem detém o poder. Canções: “Pesadelo”, “Mordaça”, “Cordilheira”, “O dia em que o morro descer e não for carnaval”.</dd>
+    <dt>3. Metalinguagem: a arte falando de si</dt>
+    <dd>A canção fala da própria poesia. Canção-chave: “Viagem” (e trechos de “Vontade de chorar” e “Navio fantasma”).</dd>
+    <dt>4. Lirismo amoroso</dt>
+    <dd>Sofrimento exagerado diante da perda de um amor, à maneira romântica. Canções: “Vontade de chorar”, “Navio fantasma”, “Velho arvoredo”.</dd>
+    <dt>5. Condição humana: tempo, vida e morte</dt>
+    <dd>Visão filosófica da finitude, do tempo que gira e volta, da viagem e do retorno. Canções: “Evangelho”, “Na volta que o mundo dá”, “Desenredo”.</dd>
+  </dl>
+</section>
+
+<section id="pcp-cancoes">
+  <h2>As 14 canções</h2>
+  <p class="lead">Agrupadas por tema. Entre parênteses, o parceiro que fez a música.</p>
+
+  <h3 class="group">Identidade e história</h3>
+  <article class="char"><h4>Canto das três raças</h4><p class="role">Com Mauro Duarte. Gravada por Clara Nunes em 1976</p>
+    <p>Desmonta o mito da democracia racial, a ideia de que as três raças se misturaram em harmonia. O canto que deveria ser de alegria vira lamento. A letra encadeia lutas históricas: o índio levado ao cativeiro, o negro que canta revolta no Quilombo dos Palmares, os Inconfidentes que lutaram em vão. E chega ao trabalhador de hoje, cujo canto de agonia é ensurdecedor.</p>
+    <p>O sofrimento aparece como a espinha dorsal da identidade nacional. Cantar deixa de ser festa e vira protesto contra a dominação.</p></article>
+
+  <article class="char"><h4>Vento bravo</h4><p class="role">Com Edu Lobo</p>
+    <p>Alegoria da escravidão e da libertação. O começo descreve a ordem escravocrata sob a lei da Coroa Imperial, com seus instrumentos de tortura (argola, ferro, chibata), numa “calmaria” que lembra um pântano: paz aparente, sufocante, feita de medo e silêncio.</p>
+    <p>O tempo vira e chega o vento bravo: a revolta popular, um sangue novo, um grito no ar de quem foi silenciado. O vento vem sem raça e sem cor, o que universaliza a luta. Como a correnteza de um rio, a mudança não volta atrás, mas tem custo: o verde da palmeira fica vermelho de sangue. A repetição final insiste na resistência contínua.</p></article>
+
+  <article class="char"><h4>Estrela da terra</h4><p class="role">Com Dori Caymmi</p>
+    <p>Esperança e messianismo popular. Por mais que haja dor e treva, existe uma luz que guia sobre a Terra da Promissão. A estrela aparece em vários momentos (do dia, da tarde, da noite, cadente), numa trajetória de libertação em que a perseverança coletiva vence a dor.</p>
+    <p>Dialoga com as revoltas messiânicas do sertão e com a resistência velada aos períodos autoritários. Mistura sagrado, profano, político e mítico.</p></article>
+
+  <h3 class="group">Resistência à ditadura</h3>
+  <article class="char"><h4>Pesadelo</h4><p class="role">Com Maurício Tapajós. Lançada pelo MPB4 em 1972</p>
+    <p>Surpreendentemente liberada pela censura, virou um marco da música de protesto. O eu lírico é um “nós”: o povo, os artistas, a resistência. O “você” é o regime. A letra se constrói com oposições: o muro é a censura e a divisão; a ponte é a união e a travessia para a liberdade.</p>
+    <p>Para cada repressão há uma resposta: se o censor corta um verso, o poeta escreve outro; se o artista é preso ou morto, a obra escapa e continua circulando. O pesadelo do título não é do povo, é dos governantes, que temem a reação popular.</p></article>
+
+  <article class="char"><h4>Mordaça</h4><p class="role">Com Eduardo Gudin</p>
+    <p>O título é a censura: o instrumento que cala a boca. A letra mostra o colapso, com a mesma força que unia as pessoas agora separando-as e o que foi construído desabando sob o poder. Mas a resistência volta: a revolta interior faz a força crescer.</p>
+    <p>No fim, há uma inversão: a mordaça, instrumento da repressão, passa a ser a da felicidade, que deve calar a dor de séculos. A anáfora que impõe condições mostra que a liberdade exige que a vida corra solta. Une denúncia política e reflexão existencial.</p></article>
+
+  <article class="char"><h4>Cordilheira</h4><p class="role">Com Sueli Costa</p>
+    <p>O eu lírico assume, com ironia amarga, a voz da própria tirania. A anáfora “Eu quero” expõe desejos monstruosos de controle e destruição: montanhas desabando sobre flores rasteiras (o poder esmagando os indefesos), uma procissão de suicidas, Judas Iscariotes em ascensão, um Jesus crucificado em cada poste, uma frase escrita pelo deus Marte, da guerra.</p>
+    <p>Evangelhos e comandantes aparecem juntos para denunciar o uso da religião e do militarismo para manter a dominação, sacrificando a juventude. Os verbos no gerúndio dão ideia de ação sem fim: a violência não é um episódio, é estrutural e cíclica. É um contraponto às narrativas ufanistas da ditadura.</p></article>
+
+  <article class="char"><h4>O dia em que o morro descer e não for carnaval</h4><p class="role">Com Wilson das Neves</p>
+    <p>Usa a linguagem do desfile de escola de samba para imaginar um levante. O morro desce para o asfalto todo ano, no carnaval, para divertir a cidade. A canção imagina o dia em que ele descer para cobrar o que lhe devem, e ninguém vai ficar para assistir.</p>
+    <p>Opõe a miséria real à fantasia que sai no jornal, criticando o espetáculo que mascara a pobreza. Dialoga com a ideia de “cidade partida”, de Zuenir Ventura: o Rio dividido entre morro abandonado e asfalto privilegiado. A alegria aparece como direito do povo. É manifesto, profecia e ultimato.</p></article>
+
+  <h3 class="group">Arte e amor</h3>
+  <article class="char"><h4>Viagem</h4><p class="role">Com João de Aquino. Primeira letra do autor, aos 14 anos</p>
+    <p>Não é samba, é valsa. O eu lírico se despede da tristeza porque a poesia veio ao seu encontro, e os dois partem juntos numa viagem espiritual e poética. É metalinguagem: a poesia vira personagem e companheira.</p>
+    <p>A travessia é suave: o vento ganha adjetivos afetivos, há cavalo e raio de luar, e a volta acontece à noite, sob a lua, sem tristeza. A personificação da natureza e da poesia dá tom lúdico e afetuoso. Foi gravada por mais de dez artistas, como Maysa e Nelson Gonçalves.</p></article>
+
+  <article class="char"><h4>Vontade de chorar</h4><p class="role">Com Ivor Lancellotti</p>
+    <p>Retoma o Romantismo: tristeza exagerada diante da perda de um amor, a chamada dor de cotovelo. As lembranças e o amor viram folhas secas espalhadas pelo vento, imagem do fim definitivo.</p>
+    <p>Também tem metalinguagem: os versos tristes são a tradução direta da dor do coração.</p></article>
+
+  <article class="char"><h4>Navio fantasma</h4><p class="role">Com Francis Hime</p>
+    <p>Elegia ultrarromântica da desilusão amorosa e da solidão. O eu lírico é um navio fantasma, e as imagens do mar espelham a alma: marés de saudade em praias vazias, o coração partido nos rochedos, sem porto seguro. Os dias ainda se suportam, mas as noites trazem insônia; o tormento atravessa noite, madrugada, aurora e dia, sem fim.</p>
+    <p>A própria canção nasce da dor, como veneno. Os contrastes (sol nos olhos do outro, lua nos do eu lírico; ouro e prata) aproximam o texto do Romantismo e do Simbolismo.</p></article>
+
+  <article class="char"><h4>Velho arvoredo</h4><p class="role">Com Hélio Delmiro</p>
+    <p>O eu lírico se compara a uma árvore velha que o vento não derrubou. Depois de perder a ilusão e o amor, endurece para resistir: o tronco vira rochedo. Mas não perde a sensibilidade: a pedra vira flor.</p>
+    <p>No fim, a árvore já não serve ao tempo nem ao lenhador, e o vento a abandona: um isolamento digno, sem vitória. A dor é íntima e silenciosa. Natureza como alegoria dos estados da alma.</p></article>
+
+  <h3 class="group">Tempo e condição humana</h3>
+  <article class="char"><h4>Evangelho</h4><p class="role">Com Dori Caymmi</p>
+    <p>Evangelho quer dizer “boa nova”, mas a canção não anuncia salvação: é uma crônica da finitude e do desamparo. O mundo não tem destino; quanto mais cresce, mais se arruína; quanto mais quer servir, mais domina. Esses paradoxos expõem as contradições humanas, numa visão próxima do Barroco e do existencialismo.</p>
+    <p>A interjeição “Eta”, que abre várias estrofes, dá um tom coloquial e sertanejo, de cantiga de cego, que contrasta com a profundidade das ideias.</p></article>
+
+  <article class="char"><h4>Na volta que o mundo dá</h4><p class="role">Com Vicente Barreto</p>
+    <p>Viagem existencial do migrante. O eu lírico sai da beira do rio para o mar e para terras estrangeiras, atravessa cordilheiras, geleiras e desertos, ama muitas moças e faz muitas canções. Mas as experiências não preenchem o vazio, e ele percebe que a essência continua presa à origem.</p>
+    <p>O título tem duplo sentido: a volta que o planeta dá e o regresso do viajante ao ponto de partida.</p></article>
+
+  <article class="char"><h4>Desenredo</h4><p class="role">Com Dori Caymmi</p>
+    <p>Travessia do eu lírico por um Brasil profundo e desolado, no contexto das grandes migrações internas. Ele vê vida e morte trocando de lugar e o homem se vendendo pelo seu preço (crítica à mercantilização). Mas, quando chega, se enrosca nos cabelos da amada, ligada a Minas Gerais.</p>
+    <p>O título joga com a ideia: enquanto tenta desatar os nós do mundo e do destino (desenredar), ele se enreda nos afetos e na memória da terra.</p></article>
+</section>
+
+<section id="pcp-lista">
+  <h2>Quadro das 14 canções</h2>
+  <div class="tablewrap"><table class="cmp">
+    <thead><tr><th>Canção</th><th>Parceiro</th><th>Ideia central</th></tr></thead>
+    <tbody>
+      <tr><th>Canto das três raças</th><td>Mauro Duarte</td><td>A formação do Brasil como dor, não harmonia</td></tr>
+      <tr><th>Vento bravo</th><td>Edu Lobo</td><td>Escravidão e revolta como vento</td></tr>
+      <tr><th>Estrela da terra</th><td>Dori Caymmi</td><td>Esperança messiânica apesar da dor</td></tr>
+      <tr><th>Pesadelo</th><td>Maurício Tapajós</td><td>Nós contra você: a arte vence a censura</td></tr>
+      <tr><th>Mordaça</th><td>Eduardo Gudin</td><td>Censura e a felicidade que cala a dor</td></tr>
+      <tr><th>Cordilheira</th><td>Sueli Costa</td><td>Voz irônica da tirania; violência cíclica</td></tr>
+      <tr><th>O dia em que o morro descer…</th><td>Wilson das Neves</td><td>Carnaval vira levante social</td></tr>
+      <tr><th>Viagem</th><td>João de Aquino</td><td>Viajar com a poesia (metalinguagem)</td></tr>
+      <tr><th>Vontade de chorar</th><td>Ivor Lancellotti</td><td>Dor de amor romântica</td></tr>
+      <tr><th>Navio fantasma</th><td>Francis Hime</td><td>Desilusão ultrarromântica, imagens do mar</td></tr>
+      <tr><th>Velho arvoredo</th><td>Hélio Delmiro</td><td>Árvore que resiste: rochedo e flor</td></tr>
+      <tr><th>Evangelho</th><td>Dori Caymmi</td><td>“Boa nova” invertida: finitude</td></tr>
+      <tr><th>Na volta que o mundo dá</th><td>Vicente Barreto</td><td>O viajante que volta às origens</td></tr>
+      <tr><th>Desenredo</th><td>Dori Caymmi</td><td>Desatar o mundo e se enredar no afeto</td></tr>
+    </tbody></table></div>
+</section>
+
+<section id="pcp-conexoes">
+  <h2>Conexões com outras leituras</h2>
+  <ul class="bullets">
+    <li><strong>Olhos d’água.</strong> “Canto das três raças” e Conceição Evaristo dão voz a quem a história silenciou e mostram a violência que se repete desde a escravidão. A violência cíclica de “Cordilheira” é a mesma ideia-chave dos contos.</li>
+    <li><strong>Brás Cubas.</strong> O lamento do negro e a chibata de “Vento bravo” são o outro lado do que Machado mostra com Prudêncio e Cotrim: a escravidão vista de quem sofreu.</li>
+    <li><strong>Gonzaga de Sá.</strong> A reforma de Pereira Passos empurrou os pobres para os morros. “O dia em que o morro descer” imagina esse povo voltando para cobrar.</li>
+    <li><strong>Morangos mofados.</strong> Os dois falam da ditadura. Em “Diálogo”, “companheiro” é palavra da militância; em “Pesadelo”, o “nós” enfrenta o “você” do regime.</li>
+    <li><strong>Krenak.</strong> O indígena aparece em “Canto das três raças” como um dos povos que formaram o Brasil pela violência; Krenak fala dessa história do lado de dentro.</li>
+    <li><strong>José Paulo Paes.</strong> “Evangelho” e os poemas de Paes refletem sobre a finitude; “Na volta que o mundo dá” e “Escolha de túmulo” falam da volta à origem.</li>
+  </ul>
+</section>
+
+<section id="pcp-treino">
+  <h2>Perguntas e respostas</h2>
+  <p class="lead">Tente responder antes de abrir.</p>
+  <div class="qa">
+    <details><summary>Por que “Canto das três raças” não é uma celebração da mestiçagem?</summary><div class="answer">
+      <p>Porque mostra a formação do povo brasileiro pela violência. O canto que deveria ser de alegria é de dor: o índio, o negro em Palmares, os Inconfidentes e, por fim, o trabalhador.</p>
+      <p>Retoma a ideia modernista de uma identidade brasileira própria, mas recusa o mito da democracia racial e dá voz ao lamento dos silenciados.</p></div></details>
+    <details><summary>Quem é o “nós” e quem é o “você” em “Pesadelo”? De quem é o pesadelo?</summary><div class="answer">
+      <p>O “nós” é o povo, os artistas, a resistência. O “você” é o regime militar. A cada repressão, uma resposta: o verso cortado é reescrito, e o artista preso ou morto continua vivo na obra.</p>
+      <p>O pesadelo é dos governantes, que temem a reação do povo. Lançada em 1972, em plena repressão, a canção foi liberada pela censura.</p></div></details>
+    <details><summary>Que ironia existe em “Cordilheira”?</summary><div class="answer">
+      <p>O eu lírico fala como se fosse o tirano, repetindo “Eu quero” diante de imagens de destruição: montanhas sobre flores, suicidas em procissão, Judas em ascensão, Cristo crucificado em cada poste, o deus da guerra. Ele não deseja isso de verdade: expõe a lógica da opressão para denunciá-la.</p>
+      <p>A religião e o militarismo aparecem juntos como ferramentas de dominação, e a violência surge como algo estrutural, que se repete.</p></div></details>
+    <details><summary>O que a “calmaria” e o vento significam em “Vento bravo”?</summary><div class="answer">
+      <p>A calmaria, comparada a um pântano, é a paz aparente da ordem escravocrata, sustentada pela tortura e pelo silêncio. O vento bravo é a revolta popular que rompe essa estagnação.</p>
+      <p>O vento vem sem raça e sem cor, o que amplia a luta, e é irreversível como a correnteza. A palmeira verde que fica vermelha mostra o sangue que a libertação custa.</p></div></details>
+    <details><summary>Que inversão acontece no fim de “Mordaça”?</summary><div class="answer">
+      <p>A mordaça, símbolo da censura que cala o povo, passa a ser a mordaça da felicidade, que deve calar a dor acumulada ao longo dos séculos. O instrumento da repressão é ressignificado como esperança.</p></div></details>
+    <details><summary>O que muda no carnaval em “O dia em que o morro descer e não for carnaval”?</summary><div class="answer">
+      <p>No carnaval, o morro desce para entreter a cidade. A canção imagina o dia em que ele desce para cobrar seus direitos. A “evolução” do desfile vira mobilização social, e a fantasia do jornal é confrontada com a miséria real.</p>
+      <p>É a “cidade partida” de Zuenir Ventura: o morro abandonado contra o asfalto privilegiado.</p></div></details>
+    <details><summary>Como “Viagem” trabalha a metalinguagem?</summary><div class="answer">
+      <p>A canção fala da própria arte: o eu lírico deixa a tristeza porque a poesia veio ao seu encontro, e os dois viajam juntos. A poesia vira personagem e companheira, e a natureza é personificada com afeto.</p></div></details>
+    <details><summary>Compare “Velho arvoredo” e “Navio fantasma”.</summary><div class="answer">
+      <p>Nas duas, a natureza vira alegoria da dor amorosa. Em “Navio fantasma”, o mar expressa o desespero ultrarromântico, sem porto e sem descanso. Em “Velho arvoredo”, a árvore endurece como pedra para resistir, mas guarda a sensibilidade (a pedra vira flor).</p>
+      <p>Uma canção é excesso e tormento; a outra, resistência silenciosa.</p></div></details>
+    <details><summary>Por que o título “Evangelho” é irônico?</summary><div class="answer">
+      <p>Evangelho significa “boa nova”, mas a canção anuncia a finitude e o desamparo humano. Os paradoxos (crescer e se arruinar, servir e dominar) mostram um mundo sem finalidade.</p></div></details>
+  </div>
+</section>
+
+<section id="pcp-conferir">
+  <h2>Para conferir</h2>
+  <div class="panel"><ul class="bullets">
+    <li><strong>Ano de “Viagem”.</strong> O material de estudo confirma que foi a primeira letra do autor, aos 14 anos, o que dá cerca de 1964. O 1969 das suas notas deve ser o ano de alguma gravação.</li>
+    <li><strong>Anos de “Cordilheira” (1979) e “Vontade de chorar” (1981).</strong> Vêm das suas notas. O material não traz as datas.</li>
+    <li><strong>Oito canções na ditadura.</strong> O número é das suas notas. A ditadura vai de 1964 a 1985.</li>
+    <li><strong>Escute as canções.</strong> As análises das oito canções que faltavam vêm do material de estudo que você enviou. Ouvir cada uma ajuda a lembrar o tom.</li>
+  </ul></div>
+</section>
+</main>
+<footer>Baseado nas suas anotações e no material de estudo, conferidos e ampliados.</footer>
+</article>
+<article class="book" data-book="adichie">
+<header class="hero">
+  <p class="byline">Chimamanda Ngozi Adichie, 2009 (no Brasil, 2017)</p>
+  <h1>No seu pescoço</h1>
+  <p class="sub">Doze contos entre a Nigéria e os Estados Unidos, quase todos contados por mulheres.</p>
+</header>
+<nav class="toc" aria-label="Seções do livro"><ul><li><a class="back" href="#/" data-go="">&larr; Obras</a></li><li><a href="#/adichie/ficha" data-go="adichie/ficha">Ficha</a></li><li><a href="#/adichie/contexto" data-go="adichie/contexto">Nigéria</a></li><li><a href="#/adichie/estilo" data-go="adichie/estilo">Características</a></li><li><a href="#/adichie/contos" data-go="adichie/contos">Os 12 contos</a></li><li><a href="#/adichie/quadro" data-go="adichie/quadro">Quadro</a></li><li><a href="#/adichie/conexoes" data-go="adichie/conexoes">Conexões</a></li><li><a href="#/adichie/treino" data-go="adichie/treino">Perguntas</a></li><li><a href="#/adichie/conferir" data-go="adichie/conferir">Conferir</a></li></ul></nav>
+<main>
+<section id="adichie-ficha">
+  <h2>Ficha rápida</h2>
+  <dl class="ficha">
+    <dt>Autora</dt><dd>Chimamanda Ngozi Adichie (nascida em 1977, em Enugu, Nigéria), do povo igbo. Cresceu em Nsukka, cidade da Universidade da Nigéria, onde começou a estudar medicina. Aos 19 anos foi para os Estados Unidos estudar comunicação e ciência política. Também é autora de <em>Americanah</em> e da palestra <em>Sejamos todos feministas</em>.</dd>
+    <dt>Publicação</dt><dd>2009 em inglês (<em>The Thing Around Your Neck</em>). No Brasil, Companhia das Letras, 2017, tradução de Julia Romeu.</dd>
+    <dt>Estrutura</dt><dd>12 contos independentes.</dd>
+    <dt>Temas</dt><dd>Imigração, choque cultural, conflitos religiosos e políticos, preconceito racial, relações familiares e amorosas, gênero.</dd>
+    <dt>Título</dt><dd>A “coisa em volta do pescoço” é a sensação de sufoco da protagonista do conto-título, longe de casa. Resume o livro: a angústia e a tensão no limite.</dd>
+    <dt>Movimento</dt><dd>Literatura contemporânea (fim do século XX, início do XXI).</dd>
+  </dl>
+</section>
+
+<section id="adichie-contexto">
+  <h2>Contexto: a Nigéria</h2>
+  <ul class="bullets">
+    <li><strong>Povos:</strong> o norte é majoritariamente hausa e muçulmano; o sudeste, igbo e cristão; o sudoeste, iorubá. Os conflitos entre eles aparecem nos contos.</li>
+    <li><strong>Colonização:</strong> tráfico de escravizados (séculos XVI a XIX) e colonização britânica (séculos XIX e XX).</li>
+    <li><strong>1960:</strong> independência.</li>
+    <li><strong>1966:</strong> golpes militares.</li>
+    <li><strong>1967 a 1970:</strong> os igbos declaram a independência da República de Biafra, e começa a guerra civil. Biafra é derrotada. A guerra aparece em “Fantasmas”.</li>
+    <li><strong>Anos 1980 e 1990:</strong> golpes e ditaduras. Em 1993, a eleição é anulada e começa a ditadura do general Sani Abacha (até 1998), pano de fundo de “A embaixada americana”.</li>
+    <li><strong>1999:</strong> volta da democracia. Hoje é uma república federal presidencialista.</li>
+  </ul>
+</section>
+
+<section id="adichie-estilo">
+  <h2>Características da obra</h2>
+  <ul class="bullets">
+    <li><strong>Protagonismo feminino.</strong> Onze contos têm protagonista mulher; só “Fantasmas” tem um homem. Muitas narradoras falam em 1ª pessoa.</li>
+    <li><strong>Ótica feminista:</strong> feminista é quem defende a igualdade social, política e econômica entre os sexos. Os contos mostram casamentos arranjados, assédio, silenciamento e mulheres que tomam decisões.</li>
+    <li><strong>Diáspora africana:</strong> dispersão dos africanos pelo mundo, primeiro pelo tráfico de escravizados, depois pela imigração no século XX.</li>
+    <li><strong>O cabelo como identidade</strong> da mulher africana: alisar, trançar ou cortar é uma escolha cultural e política.</li>
+    <li><strong>Alteridade:</strong> o exercício de se colocar no lugar do outro, central em “Uma experiência privada”.</li>
+    <li><strong>Cultura igbo</strong> e as incertezas da condição de imigrante.</li>
+    <li><strong>Personagens comuns:</strong> estudantes, professores, babás, empregadas domésticas, donas de casa.</li>
+    <li><strong>Narração variada:</strong> 1ª pessoa, 3ª pessoa e até 2ª pessoa (“você”) no conto-título.</li>
+    <li><strong>Harmatã:</strong> vento quente e seco que sopra do Saara na África Ocidental, citado nos contos.</li>
+  </ul>
+</section>
+
+<section id="adichie-contos">
+  <h2>Os 12 contos, na ordem do livro</h2>
+
+  <article class="char"><h4>1. Cela um</h4><p class="role">1ª pessoa, a irmã. Violência policial</p>
+    <p>Família nigeriana de classe média que mora no campus universitário de Nsukka. A narradora conta a história do irmão, Nnamabia, o preferido da mãe e o filho de pele mais clara. Os feirantes perguntavam por que a mãe tinha “desperdiçado” a pele clara num menino e deixado a menina tão escura: é colorismo, a preferência pela pele mais clara.</p>
+    <p>Nnamabia é inconsequente e se envolve com as “seitas”, gangues de estudantes. É preso em Enugu sem provas. Na prisão, defende um velho maltratado pelos policiais e, por não se calar, é jogado na Cela Um, onde presos são espancados até a morte. O sofrimento o faz amadurecer.</p></article>
+
+  <article class="char"><h4>2. Réplica</h4><p class="role">3ª pessoa. Imigração e choque cultural</p>
+    <p>Nkem vive com os filhos uma vida confortável nos Estados Unidos. O marido, Obiora, passa a maior parte do tempo em Lagos. Uma amiga, Ijemamaka, liga e conta que ele tem uma amante na casa deles em Lagos.</p>
+    <p>Obiora traz réplicas de máscaras e esculturas africanas para enfeitar a casa americana. Nkem percebe que ela mesma virou uma réplica: a comida, o jeito de viver e de falar são os americanos, escolhidos pelo marido. Ela corta o cabelo curto e anuncia que vão voltar para Lagos. É a primeira vez que ele a ouve tomar uma decisão.</p></article>
+
+  <article class="char"><h4>3. Uma experiência privada</h4><p class="role">3ª pessoa. Conflito religioso e alteridade</p>
+    <p>No norte da Nigéria, durante um conflito entre muçulmanos e cristãos, duas mulheres se escondem numa loja abandonada. Uma é igbo e cristã, estudante de medicina, que se perdeu da irmã na confusão. A outra é hausa e muçulmana, uma vendedora pobre que também procura a filha.</p>
+    <p>Apesar das diferenças de povo, religião e classe, elas se ajudam e se cuidam a noite inteira. É o conto da alteridade: lá fora, os grupos se matam; dentro da loja, duas pessoas se reconhecem.</p></article>
+
+  <article class="char"><h4>4. Fantasmas</h4><p class="role">1ª pessoa. O único narrador homem</p>
+    <p>Um professor de matemática aposentado, de 71 anos, reencontra em Nsukka um antigo colega, Ikenna, que ele julgava morto na guerra de Biafra, em 1967. Os fantasmas são as lembranças da guerra e as “visitas” da esposa, Ebere, morta há três anos. A filha, Nkiru, é médica nos Estados Unidos.</p>
+    <p>O conto se passa no ambiente universitário e mostra a decadência da universidade e do país depois da guerra.</p></article>
+
+  <article class="char"><h4>5. Na segunda-feira da semana passada</h4><p class="role">3ª pessoa. Desejo e estranhamento cultural</p>
+    <p>Kamara, nigeriana instruída, trabalha como babá de Josh nos Estados Unidos. Estranha os hábitos da família americana e se sente atraída por Tracy, a mãe do menino, que é artista plástica. Desde que Tracy a elogiou, Kamara passa a se olhar no espelho e a imaginar o toque dela. O conto fala de solidão, de um casamento que esfriou e de um desejo que não tem para onde ir.</p></article>
+
+  <article class="char"><h4>6. Jumping Monkey Hill</h4><p class="role">3ª pessoa, com trechos em 1ª. Metalinguagem</p>
+    <p>Ujunwa, nigeriana, participa de uma oficina para escritores africanos num resort na Cidade do Cabo, na África do Sul. Ali, cada participante deve escrever um conto para uma revista. O evento é organizado por Edward Campbell, um britânico que trata a literatura africana como causa pessoal.</p>
+    <p>Edward acha que sabe mais sobre a África do que os próprios africanos: rejeita uma história homossexual por não ser “África de verdade” e diz que o conto de Ujunwa não é verossímil. Ele também faz comentários machistas e insinuações às escritoras. O conto de Ujunwa, sobre uma moça assediada num emprego de banco, aparece em trechos dentro do conto. É metalinguagem: discute quem decide o que é verossímil e o que é “africano” na literatura.</p></article>
+
+  <article class="char"><h4>7. No seu pescoço</h4><p class="role">2ª pessoa (“você”). A imigrante</p>
+    <p>Akunna ganha o visto americano. Nos Estados Unidos, o tio que a recebe tenta abusar dela, e ela foge. Trabalha num restaurante ganhando menos que os outros e ouve comentários e ofensas racistas. Sente algo apertando o pescoço: o sufoco da solidão. Só alivia quando conhece um rapaz branco de família liberal que não repete os estereótipos, mas o casal inter-racial é olhado com estranheza.</p>
+    <p>A narradora chama a personagem de “você”, o que a transforma em muitas jovens imigrantes ao mesmo tempo. Akunna é a personificação dos percalços de uma mulher negra imigrante. Com o tempo, o namorado também incomoda: parece se encantar com a pobreza alheia, e ela não quer que a Nigéria vire mais um item da coleção turística dele. Quando o pai morre, ela volta à Nigéria, mesmo já tendo o <em>green card</em>. Ele pergunta se ela vai voltar, e ela não responde; no aeroporto, ela o abraça longamente e depois solta. O final fica aberto.</p></article>
+
+  <article class="char"><h4>8. A embaixada americana</h4><p class="role">3ª pessoa. Enredo não linear e ditadura</p>
+    <p>Uma mulher espera na fila da embaixada americana em Lagos para pedir asilo. Duas linhas narrativas se cruzam: a espera na fila e as lembranças. O marido, jornalista, publicou uma reportagem contra a ditadura de Abacha e fugiu escondido no porta-malas do carro. Homens armados invadiram a casa e mataram o filho pequeno, e ela pulou da varanda para se salvar.</p>
+    <p>Na entrevista, percebe que, para conseguir o visto, teria de usar a morte do filho como prova. Recusa-se e sai da fila. Prefere o luto a transformar a dor em documento.</p></article>
+
+  <article class="char"><h4>9. O tremor</h4><p class="role">3ª pessoa. Fé e identidade</p>
+    <p>Em Princeton, nos Estados Unidos, dois nigerianos se conhecem depois das notícias de um desastre de avião na Nigéria e da morte da primeira-dama: Ukamaka, católica, e Chinedu, que frequenta uma igreja evangélica. Ele bate à porta dela para rezarem juntos, e começa uma amizade. Aos poucos, Chinedu revela segredos que questionam o que Ukamaka pensava dele.</p></article>
+
+  <article class="char"><h4>10. Os casamenteiros</h4><p class="role">1ª pessoa. Casamento arranjado</p>
+    <p>Chinaza chega aos Estados Unidos casada, por arranjo dos tios, com Ofodile, um médico que ela mal conhece. Ele muda de nome para soar americano e a proíbe de falar igbo e de cozinhar comida nigeriana. Chinaza descobre que ele tinha se casado antes com uma americana para conseguir o <em>green card</em>. Uma vizinha, Nia, mostra que ela pode escolher outro caminho.</p></article>
+
+  <article class="char"><h4>11. Amanhã é tarde demais</h4><p class="role">Lembrança da infância e culpa</p>
+    <p>Dezoito anos depois, a narradora lembra o último verão que passou na Nigéria, na casa da avó paterna, com o irmão Nonso e o primo Dozie, quando os pais estavam se divorciando. O quintal cheio de árvores frutíferas é o cenário. A avó sempre preferiu o neto homem, e a lembrança daquele verão de infância e da morte dele carrega ciúme e culpa.</p></article>
+
+  <article class="char"><h4>12. A historiadora obstinada</h4><p class="role">3ª pessoa. Colonização em três gerações</p>
+    <p>Nwamgba, mulher igbo de língua afiada, casa-se por amor com Obierika. Depois de muitos abortos, tem um filho, Anikwenwa, e o marido morre. Ela desconfia que os primos invejosos do marido querem tomar as terras dela e do filho. Uma amiga conta que dois homens disputaram terras no tribunal dos brancos e venceu o mentiroso que falava inglês, não o verdadeiro dono. Por isso Nwamgba manda o filho à escola dos missionários.</p>
+    <p>O filho assimila a língua inglesa e o cristianismo, troca de nome e se afasta da mãe. A neta, batizada Grace, mas chamada pela avó de Afamefuna, vira historiadora, recupera a identidade igbo e retoma o nome africano. O conto começa e termina com uma mulher igbo: enredo cíclico. Os nomes Obierika e a crítica à visão colonial dialogam com <em>O mundo se despedaça</em>, de Chinua Achebe.</p></article>
+</section>
+
+<section id="adichie-quadro">
+  <h2>Quadro para revisar</h2>
+  <div class="tablewrap"><table class="cmp">
+    <thead><tr><th>Conto</th><th>Onde</th><th>Ideia central</th></tr></thead>
+    <tbody>
+      <tr><th>Cela um</th><td>Nigéria</td><td>Violência policial, colorismo</td></tr>
+      <tr><th>Réplica</th><td>EUA</td><td>A mulher que deixa de ser cópia</td></tr>
+      <tr><th>Uma experiência privada</th><td>Nigéria (norte)</td><td>Alteridade no conflito religioso</td></tr>
+      <tr><th>Fantasmas</th><td>Nigéria</td><td>Memória da guerra de Biafra</td></tr>
+      <tr><th>Na segunda-feira…</th><td>EUA</td><td>Desejo e estranhamento</td></tr>
+      <tr><th>Jumping Monkey Hill</th><td>África do Sul</td><td>Quem define a “África verdadeira”</td></tr>
+      <tr><th>No seu pescoço</th><td>EUA</td><td>O sufoco da imigrante</td></tr>
+      <tr><th>A embaixada americana</th><td>Nigéria</td><td>Ditadura e luto</td></tr>
+      <tr><th>O tremor</th><td>EUA</td><td>Fé e segredos</td></tr>
+      <tr><th>Os casamenteiros</th><td>EUA</td><td>Casamento arranjado e apagamento</td></tr>
+      <tr><th>Amanhã é tarde demais</th><td>Nigéria</td><td>Culpa e preferência pelo neto homem</td></tr>
+      <tr><th>A historiadora obstinada</th><td>Nigéria</td><td>Colonização e retomada da identidade</td></tr>
+    </tbody></table></div>
+</section>
+
+<section id="adichie-conexoes">
+  <h2>Conexões com outras leituras</h2>
+  <ul class="bullets">
+    <li><strong>Olhos d’água.</strong> Duas autoras negras que dão protagonismo a mulheres. A violência policial de “Cela um” e de “A embaixada americana” encontra “Ana Davenga”; a maternidade ferida, “Maria” e Natalina.</li>
+    <li><strong>Krenak.</strong> “A historiadora obstinada” mostra o que Krenak denuncia: a colonização que apaga línguas, nomes e saberes, e o caminho de volta pela ancestralidade.</li>
+    <li><strong>Morangos mofados.</strong> Edward rejeita uma história homossexual em “Jumping Monkey Hill”; Raul e Saul são demitidos em “Aqueles dois”. Nos dois, o desejo entre iguais é silenciado.</li>
+    <li><strong>Canções escolhidas.</strong> “Pesadelo” e “A embaixada americana” falam de ditadura, de quem enfrenta o regime e do preço disso.</li>
+    <li><strong>Os funerais da Mamãe Grande.</strong> Os dois livros mostram países ex-colônias marcados por guerras civis, golpes e violência do Estado.</li>
+  </ul>
+</section>
+
+<section id="adichie-treino">
+  <h2>Perguntas e respostas</h2>
+  <p class="lead">Tente responder antes de abrir.</p>
+  <div class="qa">
+    <details><summary>Questão da Unicamp 2026 (1ª fase): o que vive a protagonista de “Réplica”?</summary><div class="answer">
+      <p>Resposta: o choque cultural causado pelas diásporas africanas contemporâneas, reelaborado pelas observações de Nkem (alternativa A).</p>
+      <p>Nkem vive nos Estados Unidos uma vida decidida pelo marido. As réplicas de arte africana que ele traz a fazem perceber que ela também virou cópia. As alternativas erradas falavam de negócios ilícitos de Obiora, de falência da sororidade e de saudade nacionalista dos vizinhos brancos.</p></div></details>
+    <details><summary>O que significa o título “No seu pescoço”?</summary><div class="answer">
+      <p>É a sensação de algo apertando o pescoço de Akunna: o sufoco da solidão, do racismo e da distância de casa. Ela só alivia quando a personagem encontra afeto.</p>
+      <p>O uso da 2ª pessoa (“você”) faz a experiência valer para muitas jovens imigrantes, não só para ela.</p></div></details>
+    <details><summary>Como a alteridade aparece em “Uma experiência privada”?</summary><div class="answer">
+      <p>Durante um conflito religioso, uma igbo cristã e uma hausa muçulmana se escondem juntas. Em vez de inimigas, como os grupos lá fora, elas se ajudam, conversam e se cuidam.</p>
+      <p>Alteridade é se colocar no lugar do outro. O conto mostra que a violência é coletiva e abstrata, mas o encontro entre duas pessoas é concreto e humano.</p></div></details>
+    <details><summary>Por que “Jumping Monkey Hill” é um conto metalinguístico?</summary><div class="answer">
+      <p>Porque fala da própria literatura: escritores africanos numa oficina, trechos do conto que Ujunwa escreve aparecendo dentro do conto, e a discussão sobre o que é verossímil.</p>
+      <p>A crítica é ao europeu que se acha dono da “África verdadeira” e rejeita histórias que fogem do estereótipo. Ujunwa reage ao perceber que a história “inverossímil” é a sua própria experiência.</p></div></details>
+    <details><summary>Como o enredo não linear de “A embaixada americana” constrói o sentido do conto?</summary><div class="answer">
+      <p>A espera na fila, no presente, se alterna com as lembranças da fuga do marido e do assassinato do filho. O leitor descobre a tragédia aos poucos, enquanto a fila anda.</p>
+      <p>No fim, a mulher se recusa a usar a morte do filho como argumento para o visto. A ditadura de Abacha aparece pelo seu custo íntimo.</p></div></details>
+    <details><summary>O que “A historiadora obstinada” mostra sobre a colonização?</summary><div class="answer">
+      <p>Que ela se impõe pela lei, pela língua e pela religião. No tribunal dos brancos, vence quem fala inglês. Para defender as terras, Nwamgba manda o filho à escola missionária, e ele se afasta da cultura igbo.</p>
+      <p>A neta, historiadora, faz o caminho de volta: retoma o nome africano e reescreve a história do seu povo. O ciclo se fecha com uma mulher igbo, como começou.</p></div></details>
+  </div>
+</section>
+
+<section id="adichie-conferir">
+  <h2>Para conferir</h2>
+  <div class="panel"><ul class="bullets">
+    <li><strong>Nnamabia “branco”.</strong> Suas notas dizem que ele era branco e a irmã negra. Os dois são negros: ele tem a pele mais clara, cor de mel, e ela, mais escura. É colorismo, não diferença de raça.</li>
+    <li><strong>Igbos no sudoeste.</strong> A apostila diz que os igbos ficam no sudoeste e que Abba já foi capital de Biafra. Os igbos ficam no sudeste, e a capital de Biafra era Enugu. Ajustei no texto.</li>
+    <li><strong>Eleições de 1998.</strong> A apostila diz que Obasanjo venceu em 1998. As eleições foram no início de 1999, depois da morte de Abacha.</li>
+    <li><strong>O abraço no aeroporto (resolvido).</strong> O material de estudo mostra que o final é aberto: ele pergunta se ela vai voltar, ela não responde, abraça-o longamente e solta.</li>
+    <li><strong>Narrador de “Amanhã é tarde demais”.</strong> O material descreve uma narradora que relembra a própria infância, 18 anos depois. Confira no livro o uso da pessoa verbal.</li>
+  </ul></div>
+</section>
+</main>
+<footer>Baseado nas suas anotações e na apostila, conferidas e ampliadas.</footer>
+</article>
+<article class="book" data-book="ggm">
+<header class="hero">
+  <p class="byline">Gabriel García Márquez, 1962</p>
+  <h1>Os funerais da Mamãe Grande</h1>
+  <p class="sub">Oito contos de realismo mágico sobre violência, poder e solidão num povoado colombiano.</p>
+</header>
+<nav class="toc" aria-label="Seções do livro"><ul><li><a class="back" href="#/" data-go="">&larr; Obras</a></li><li><a href="#/ggm/ficha" data-go="ggm/ficha">Ficha</a></li><li><a href="#/ggm/contexto" data-go="ggm/contexto">Colômbia</a></li><li><a href="#/ggm/estilo" data-go="ggm/estilo">Realismo mágico</a></li><li><a href="#/ggm/contos" data-go="ggm/contos">Os 8 contos</a></li><li><a href="#/ggm/quadro" data-go="ggm/quadro">Quadro</a></li><li><a href="#/ggm/conexoes" data-go="ggm/conexoes">Conexões</a></li><li><a href="#/ggm/treino" data-go="ggm/treino">Perguntas</a></li><li><a href="#/ggm/conferir" data-go="ggm/conferir">Conferir</a></li></ul></nav>
+<main>
+<section id="ggm-ficha">
+  <h2>Ficha rápida</h2>
+  <dl class="ficha">
+    <dt>Autor</dt><dd>Gabriel García Márquez (1927–2014), colombiano, nascido em Aracataca. Jornalista e escritor, Prêmio Nobel de Literatura em 1982. Autor de <em>Cem anos de solidão</em> (1967), que tornou famosa a cidade fictícia de Macondo.</dd>
+    <dt>Publicação</dt><dd>1962, cinco anos antes de <em>Cem anos de solidão</em>.</dd>
+    <dt>Estrutura</dt><dd>8 contos, que se passam em Macondo ou num povoado parecido, com personagens que voltam de um conto para outro.</dd>
+    <dt>Movimento</dt><dd>Realismo mágico, ligado ao boom da literatura latino-americana. Na lista, representa a literatura latino-americana.</dd>
+    <dt>Temas</dt><dd>Violência civil e política, racismo e preconceito, hipocrisia religiosa, poder político sem limites, solidão.</dd>
+  </dl>
+</section>
+
+<section id="ggm-contexto">
+  <h2>Contexto: a Colômbia</h2>
+  <ul class="bullets">
+    <li><strong>Colônia espanhola</strong> desde o século XVI. Independência em 1819, com Simón Bolívar.</li>
+    <li><strong>Depois da independência:</strong> instabilidade sem fim. Suas notas contam oito guerras civis nacionais, catorze locais, duas guerras contra o Equador e três golpes de Estado, quase sempre entre conservadores e liberais.</li>
+    <li><strong>1899 a 1902:</strong> Guerra dos Mil Dias, entre os dois partidos.</li>
+    <li><strong>1948:</strong> o líder liberal Jorge Eliécer Gaitán, candidato à presidência, é assassinado. A revolta popular em Bogotá fica conhecida como <em>Bogotazo</em>.</li>
+    <li><strong>A partir de 1948:</strong> <em>La Violencia</em>, o período mais violento da história do país, com perseguições nos povoados. É o pano de fundo dos contos.</li>
+    <li><strong>1953 a 1957:</strong> ditadura. <strong>1958:</strong> conservadores e liberais dividem o poder. <strong>Anos 1960 e 1970:</strong> surgem as guerrilhas.</li>
+  </ul>
+</section>
+
+<section id="ggm-estilo">
+  <h2>Características: o realismo mágico</h2>
+  <ul class="bullets">
+    <li><strong>Realismo mágico:</strong> o fantástico e o sobrenatural misturados ao cotidiano, como se fossem normais. Pássaros que caem mortos do céu, um velho que viu o diabo, um funeral com o papa.</li>
+    <li><strong>Normalização do insólito:</strong> o narrador conta o absurdo com objetividade, sem espanto. É isso que gera a ambiguidade.</li>
+    <li><strong>Tempo e espaço</strong> cíclicos ou distorcidos.</li>
+    <li><strong>Mitos, lendas e oralidade:</strong> o narrador às vezes fala como um contador de histórias do povo.</li>
+    <li><strong>Hipérbole:</strong> exagero que vira crítica, sobretudo em “Os funerais da Mamãe Grande”.</li>
+    <li><strong>Crítica social e política:</strong> desigualdade, violência policial, colonialismo, Igreja aliada ao poder.</li>
+    <li><strong>Identidade latino-americana:</strong> mistura das culturas indígena, africana e europeia.</li>
+    <li><strong>O conto:</strong> poucos personagens, tempo e espaço reduzidos, uma situação central. Muitas vezes o essencial fica subentendido (a “teoria do iceberg”: só a ponta aparece).</li>
+    <li><strong>Intertextualidade com <em>Cem anos de solidão</em>:</strong> Macondo, o coronel Aureliano Buendía e outros nomes reaparecem.</li>
+    <li><strong>Personagens que passam de um conto a outro:</strong> a viúva Rebeca, que mata Carlos Centeno em “A sesta da terça-feira”, reaparece em “Um dia depois do sábado”; o padre Antonio Isabel está neste conto e no da Mamãe Grande; José Montiel aparece em “Baltazar” e em “A viúva Montiel”. O livro funciona como um retrato do mesmo lugar.</li>
+  </ul>
+  <h3>Epistemologia decolonial</h3>
+  <p>Corrente de pensamento que questiona a validade universal do conhecimento europeu (eurocêntrico) e propõe valorizar os saberes dos povos marginalizados pelo colonialismo. Serve de chave para ler o livro: o narrador conta a história do ponto de vista do povo, e não da história oficial. Também liga a obra a Krenak e a “A historiadora obstinada”, de Adichie.</p>
+</section>
+
+<section id="ggm-contos">
+  <h2>Os 8 contos, na ordem do livro</h2>
+
+  <article class="char"><h4>1. A sesta da terça-feira</h4><p class="role">Pobreza, preconceito e dignidade. Sesta é o cochilo depois do almoço</p>
+    <p>Uma mulher pobre e a filha de 12 anos, de luto, chegam de trem ao povoado na hora da sesta para levar flores ao túmulo do filho, Carlos Centeno. Ele foi morto na semana anterior por Rebeca, uma viúva solitária que, de madrugada, ouviu alguém forçando a porta e atirou no escuro, com um revólver antigo dos tempos do coronel Aureliano Buendía.</p>
+    <p>No trem, a mãe dá ordens à filha: pentear-se, calçar os sapatos, não beber água e, acima de tudo, não chorar. Ao morrer, o rapaz só disse “Ai, minha mãe”, e ninguém no povoado o conhecia. A mãe pede ao padre a chave do cemitério e defende o filho com dignidade, sem chorar. Enquanto isso, o povoado se junta nas janelas para olhar a mãe do “ladrão”. Carlos Centeno foi morto como ladrão, sem julgamento: o medo da viúva, a solidão e o preconceito contra os pobres produziram uma morte. Rebeca vai reaparecer em “Um dia depois do sábado”.</p></article>
+
+  <article class="char"><h4>2. Um dia destes</h4><p class="role">O conto mais curto. Violência política</p>
+    <p>O dentista Aurelio Escovar, sem diploma e bom madrugador, ouve do filho que o alcaide (prefeito e chefe militar), com dor de dente há dias, quer ser atendido. Se não for, vai levar um tiro. O dentista o atende, mas arranca o dente do siso sem anestesia, dizendo que assim ele paga pelos mortos.</p>
+    <p>No fim, o dentista pergunta se manda a conta para ele ou para a prefeitura, e o alcaide responde que dá na mesma. A frase revela a corrupção: o homem e o poder público se confundem. É a vingança possível de quem não tem armas.</p></article>
+
+  <article class="char"><h4>3. Nesta terra não há ladrões</h4><p class="role">Injustiça e racismo</p>
+    <p>Dámaso, jovem desempregado casado com Ana, que está grávida, rouba as bolas de bilhar do salão, uma das poucas diversões do povoado. A cidade conclui que o ladrão foi um forasteiro negro, que acaba preso pela polícia.</p>
+    <p>Sabendo da injustiça, Dámaso tenta devolver as bolas, mas é pego em flagrante pelo dono, que o entrega ao alcaide. Mostra o roubo por necessidade, a injustiça e o preconceito racial que escolhe o culpado pela cor.</p></article>
+
+  <article class="char"><h4>4. A prodigiosa tarde de Baltazar</h4><p class="role">A arte contra o poder do dinheiro</p>
+    <p>Baltazar, carpinteiro de 30 anos, passa duas semanas construindo uma gaiola extraordinária, encomendada por Pepe, filho de 12 anos de José Montiel, o homem mais rico do povoado. O médico, Dr. Giraldo, tenta comprá-la para a esposa, mas Baltazar recusa: a gaiola é do menino.</p>
+    <p>Montiel se nega a pagar, dizendo que não fez encomenda nenhuma. Baltazar dá a gaiola de presente a Pepe. Aclamado pelos vizinhos, comemora pela primeira vez na vida e termina a noite bêbado na rua. É uma vitória simbólica da arte e da generosidade sobre o poder econômico.</p></article>
+
+  <article class="char"><h4>5. A viúva Montiel</h4><p class="role">Solidão e futilidade da riqueza</p>
+    <p>José Montiel (Dom Chepe), o homem mais rico, temido e corrupto do povoado, morre. A cidade comemora ou fica indiferente. Ele enriqueceu ajudando o alcaide a perseguir os opositores e comprando as terras deles barato.</p>
+    <p>A viúva viveu a vida toda à sombra do marido autoritário. Os filhos, que moram na Europa, não voltam, e ela definha sozinha na mansão.</p></article>
+
+  <article class="char"><h4>6. Um dia depois do sábado</h4><p class="role">3ª pessoa onisciente. Solidão e o insólito</p>
+    <p>Num julho de calor sufocante, pássaros começam a cair mortos por todo o povoado, num clima de fim de mundo. O padre Antonio Isabel, de 94 anos, considerado meio caduco, diz ter visto o diabo três vezes, e ninguém acredita nele. A viúva Rebeca, a mesma que matou Carlos Centeno em “A sesta da terça-feira”, vai ao escritório do alcaide reclamar das crianças do povoado e também vê os pássaros mortos. Um rapaz forasteiro desce do trem para comer, perde o trem e fica.</p>
+    <p>Tema: a solidão. O padre está isolado, porque ninguém mais ouve os sermões; Rebeca vive reclusa e só sabe das coisas pelas fofocas da empregada, Argénida; o forasteiro está longe da família.</p></article>
+
+  <article class="char"><h4>7. As rosas artificiais</h4><p class="role">O não dito</p>
+    <p>Mina faz rosas artificiais de papel e arame para a igreja. Numa sexta-feira, diz que não foi à missa porque a avó não preparou sua roupa. A avó é cega, mas percebe tudo: sabe que a neta mente e que ela jogou umas cartas na privada.</p>
+    <p>As pistas (as cartas, o nervosismo) apontam para um amor escondido. Mais tarde, fazendo rosas para uma grande encomenda de Páscoa, Mina conta baixinho à amiga Trinidad que o homem com quem se correspondia foi embora: por isso rasgou as cartas. É o exemplo da teoria do iceberg. Quando a avó insinua, Mina responde com grosseria, e as duas ficam em suspenso.</p></article>
+
+  <article class="char"><h4>8. Os funerais da Mamãe Grande</h4><p class="role">Narrador oral. Hipérbole e crítica ao poder</p>
+    <p>O narrador, como um contador de histórias, diz que vai contar a verdadeira história da Mamãe Grande, antes que os historiadores cheguem para contar a versão deles: María del Rosario Castañeda y Montero, soberana absoluta de Macondo por quase um século. Todos acreditavam que ela era dona de tudo: das águas, dos caminhos, dos postes do telégrafo e até do calor. Sem filhos, controlava a família por casamentos entre parentes, para o patrimônio não sair de casa. Só uma sobrinha, Madalena, escapou, ao virar freira.</p>
+    <p>Ela morre aos 92 anos, depois de se confessar ao padre Antonio Isabel, e os funerais viram um exagero: o presidente da República decreta luto e até o papa viaja para a cerimônia. A Igreja ao lado do poder lembra a colonização. A leitura de aula é uma metáfora latino-americana: a Mamãe Grande representa o poder europeu colonizador, dono de tudo, e a Igreja ao lado dela lembra o papel da Igreja Católica na colonização. Sua morte simboliza o fim desse poder colonial e oligárquico. Por isso o conto é contado do ponto de vista do povo, e não da história oficial, e termina com os varredores limpando o lixo do funeral.</p></article>
+</section>
+
+<section id="ggm-quadro">
+  <h2>Quadro para revisar</h2>
+  <div class="tablewrap"><table class="cmp">
+    <thead><tr><th>Conto</th><th>Ideia central</th></tr></thead>
+    <tbody>
+      <tr><th>A sesta da terça-feira</th><td>Mãe pobre e digna diante do povoado que julga</td></tr>
+      <tr><th>Um dia destes</th><td>Dente arrancado sem anestesia: vingança contra o poder</td></tr>
+      <tr><th>Nesta terra não há ladrões</th><td>O negro preso pelo roubo que não fez</td></tr>
+      <tr><th>A prodigiosa tarde de Baltazar</th><td>A arte vence o dinheiro</td></tr>
+      <tr><th>A viúva Montiel</th><td>Riqueza que termina em solidão</td></tr>
+      <tr><th>Um dia depois do sábado</th><td>Pássaros mortos e solidões</td></tr>
+      <tr><th>As rosas artificiais</th><td>O segredo que não se confirma</td></tr>
+      <tr><th>Os funerais da Mamãe Grande</th><td>Hipérbole: o fim do poder absoluto</td></tr>
+    </tbody></table></div>
+</section>
+
+<section id="ggm-conexoes">
+  <h2>Conexões com outras leituras</h2>
+  <ul class="bullets">
+    <li><strong>Gonzaga de Sá.</strong> Lima Barreto ri das cerimônias oficiais (os 17 tiros e meio do bispo); García Márquez exagera os funerais da Mamãe Grande até o absurdo. Nos dois, a pompa do poder vira sátira.</li>
+    <li><strong>Brás Cubas.</strong> A Mamãe Grande e Brás representam elites que se acham donas de tudo. As duas obras zombam delas depois da morte.</li>
+    <li><strong>Olhos d’água.</strong> O forasteiro negro preso em “Nesta terra não há ladrões” e Maria linchada no ônibus: o racismo escolhe o culpado.</li>
+    <li><strong>No seu pescoço.</strong> Colômbia e Nigéria: ex-colônias marcadas por guerras civis, golpes e violência de Estado (“Um dia destes” e “A embaixada americana”).</li>
+    <li><strong>Canções escolhidas.</strong> A identidade latino-americana mistura indígenas, africanos e europeus, como o Brasil do “Canto das três raças”.</li>
+    <li><strong>Krenak e “A historiadora obstinada”.</strong> Os três questionam a história contada pelo colonizador e dão valor ao saber dos povos dominados: é a epistemologia decolonial.</li>
+  </ul>
+</section>
+
+<section id="ggm-treino">
+  <h2>Perguntas e respostas</h2>
+  <p class="lead">Tente responder antes de abrir.</p>
+  <div class="qa">
+    <details><summary>O que é realismo mágico? Dê um exemplo do livro.</summary><div class="answer">
+      <p>É a mistura do fantástico com o cotidiano, narrada com naturalidade, sem que o narrador ou os personagens se espantem. O insólito vira normal.</p>
+      <p>Em “Um dia depois do sábado”, pássaros caem mortos pelo povoado e o padre diz ter visto o diabo. Em “Os funerais da Mamãe Grande”, o papa viaja até Macondo para o enterro.</p></div></details>
+    <details><summary>Que crítica “Um dia destes” faz ao poder?</summary><div class="answer">
+      <p>O alcaide é a autoridade armada de um povoado marcado pela violência política. O dentista o atende sob ameaça, mas arranca o dente sem anestesia, uma forma de cobrar pelos mortos.</p>
+      <p>A última fala, de que tanto faz cobrar dele ou da prefeitura, mostra que o poder público é tratado como propriedade pessoal: corrupção.</p></div></details>
+    <details><summary>Como “Nesta terra não há ladrões” mostra o preconceito?</summary><div class="answer">
+      <p>O povoado culpa um forasteiro negro pelo roubo das bolas de bilhar, sem prova, e a polícia o prende. O verdadeiro ladrão é Dámaso, um rapaz do lugar.</p>
+      <p>O conto expõe o racismo que define o suspeito pela cor e pela condição de estrangeiro, além do roubo por necessidade.</p></div></details>
+    <details><summary>Por que a vitória de Baltazar é “simbólica”?</summary><div class="answer">
+      <p>Montiel, o rico, não paga pela gaiola. Baltazar não ganha dinheiro, mas dá a gaiola ao menino e é festejado pelos vizinhos.</p>
+      <p>A arte e a generosidade vencem o poder econômico, mas só simbolicamente: na prática, ele termina a noite bêbado e sem o pagamento.</p></div></details>
+    <details><summary>O que a morte da Mamãe Grande simboliza?</summary><div class="answer">
+      <p>O fim de um poder absoluto e de origem colonial: uma família dona de tudo há dois séculos, mantida por casamentos entre parentes e pelo apoio da Igreja.</p>
+      <p>O narrador oral conta a história do ponto de vista do povo, não da história oficial. O exagero dos funerais é a crítica: até o papa e o presidente se curvam a ela. No fim, os varredores limpam o lixo.</p></div></details>
+    <details><summary>O que é epistemologia decolonial e como ela ajuda a ler “Os funerais da Mamãe Grande”?</summary><div class="answer">
+      <p>É uma corrente que questiona o conhecimento europeu como verdade universal e valoriza os saberes dos povos colonizados.</p>
+      <p>No conto, o narrador recusa a história oficial e conta a sua versão, a do povo, como numa conversa de porta de casa. A Mamãe Grande, dona de tudo e apoiada pela Igreja, lembra o colonizador europeu; sua morte e o lixo varrido no fim sugerem o fim desse poder. A mesma ideia aparece em Krenak e em “A historiadora obstinada”.</p></div></details>
+    <details><summary>O que é a teoria do iceberg e onde ela aparece?</summary><div class="answer">
+      <p>É a técnica de mostrar só uma pequena parte da história e deixar o essencial subentendido, como o iceberg, que esconde a maior parte debaixo d’água.</p>
+      <p>Em “As rosas artificiais”, o amor secreto de Mina aparece por pistas (as cartas jogadas fora, a mentira sobre a missa) e só se revela num cochicho com a amiga. O conflito nunca é explicado por inteiro.</p></div></details>
+  </div>
+</section>
+
+<section id="ggm-conferir">
+  <h2>Para conferir</h2>
+  <div class="panel"><ul class="bullets">
+    <li><strong>Macondo ou “o povoado”.</strong> A apostila diz que todos os contos se passam em Macondo. Em vários deles a cidade não tem nome. Veja onde Macondo aparece explicitamente.</li>
+    <li><strong>Datas de <em>La Violencia</em>.</strong> A apostila diz 1948 a 1953. Muitos historiadores estendem até 1958. Na prova, “a partir de 1948” é seguro.</li>
+    <li><strong>“As rosas artificiais”.</strong> O material de estudo confirma o romance secreto de Mina: ela conta a Trinidad que o homem foi embora. Confira no livro a ordem das cenas.</li>
+  </ul></div>
+</section>
+</main>
+<footer>Baseado na apostila e nas suas anotações, conferidas e ampliadas.</footer>
+</article>
+<script>
+(function () {
+  var root = document.documentElement;
+  root.classList.add('js');
+  var books = document.querySelectorAll('.book');
+  function show(book, sec) {
+    var found = false;
+    books.forEach(function (b) {
+      var on = b.getAttribute('data-book') === book;
+      b.classList.toggle('active', on);
+      if (on) found = true;
+    });
+    root.classList.toggle('in-book', found);
+    var target = found && sec ? document.getElementById(book + '-' + sec) : null;
+    if (target) { target.scrollIntoView(); } else { window.scrollTo(0, 0); }
+    try { history.replaceState(null, '', '#/' + (found ? book + (sec ? '/' + sec : '') : '')); } catch (e) {}
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-go]');
+    if (!a) return;
+    e.preventDefault();
+    var p = a.getAttribute('data-go').split('/');
+    show(p[0], p[1]);
+  });
+  var h = (location.hash || '').replace(/^#\/?/, '').split('/');
+  show(h[0] || '', h[1]);
+})();
+</script>
+<div style="position:fixed;left:max(12px,env(safe-area-inset-left));bottom:max(12px,env(safe-area-inset-bottom));z-index:9999;display:flex;gap:6px;font:600 13px/1 system-ui,sans-serif"><a href="../index.html" style="background:#14213d;color:#fff;padding:9px 13px;border-radius:20px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.3)">← Revisões WhiiTz</a></div></body>
+</html>
